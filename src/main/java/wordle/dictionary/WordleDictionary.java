@@ -4,23 +4,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WordleDictionary {
 
     private final Set<String> words;
 
     public WordleDictionary() {
-
-        words = new HashSet<>();
         InputStream dictionaryFile = getClass().getResourceAsStream("/dictionary/dictionary.txt");
+        assert dictionaryFile != null;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(dictionaryFile))) {
-            while(reader.ready()) {
-                words.add(reader.readLine().toUpperCase());
-            }
+            words = reader.lines().map(String::toUpperCase).collect(Collectors.toSet());
         } catch (IOException e) {
-            throw new IllegalStateException("No dictionary found: " + e.getMessage(), e);
+            throw new IllegalStateException("Dictionary could not be loaded: " + e.getMessage(), e);
         }
     }
 
