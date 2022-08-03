@@ -22,6 +22,16 @@ Feature: Playing Wordle
       Then the squares should be colored as follows:
         | * | - | * | - | + |
 
+    Scenario Outline: Letters that do not form valid words should be rejected
+      When the player attempts to enter the following letters:
+        | <Letter 1> | <Letter 2> | <Letter 3> | <Letter 4> | <Letter 5> |
+      Then the attempt should be rejected
+      Examples:
+        | Letter 1 | Letter 2 | Letter 3 | Letter 4 | Letter 5 | Reason         |
+        | T        | O        |          |          |          | Word too short |
+        | A        | B        | C        | D        | E        | Not a word     |
+        | F        | A        | S        | T        | !        | Not a word     |
+
   Rule: Repeated letters in the wrong spot appear in grey
     Scenario: Two incorrectly placed letters
       Given the target word is:
@@ -33,7 +43,6 @@ Feature: Playing Wordle
 
 
   Rule: The player wins when they find the right word in 6 or less tries
-
     Scenario: Player guesses the right word
       Given the target word is:
         | B | L | A | N | D |
