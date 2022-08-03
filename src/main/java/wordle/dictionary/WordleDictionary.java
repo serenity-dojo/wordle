@@ -1,21 +1,26 @@
 package wordle.dictionary;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WordleDictionary {
 
     private final Set<String> words;
 
     public WordleDictionary() {
-        String dictionaryPath = getClass().getClassLoader().getResource("dictionary.txt").getPath();
-        try {
-            words = Files.lines(Paths.get(dictionaryPath)).map(String::toUpperCase).collect(Collectors.toSet());
+
+        words = new HashSet<>();
+        InputStream dictionaryFile = getClass().getResourceAsStream("/dictionary/dictionary.txt");
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(dictionaryFile))) {
+            while(reader.ready()) {
+                words.add(reader.readLine().toUpperCase());
+            }
         } catch (IOException e) {
-            throw new IllegalStateException("No dictionary found: " + e.getMessage());
+            throw new IllegalStateException("No dictionary found: " + e.getMessage(), e);
         }
     }
 
