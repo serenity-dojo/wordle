@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="0" name="wordle.microservice.WhenCheckingTheServiceStatus" skipped="0" tests="1" time="3.17" timestamp="2022-08-06 12:43:38"><testcase classname="wordle.microservice.WhenCheckingTheServiceStatus" name="Check status"/></testsuite>

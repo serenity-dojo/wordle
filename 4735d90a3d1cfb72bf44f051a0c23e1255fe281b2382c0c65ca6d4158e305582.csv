@@ -1,7 +1,0 @@
-"Story","Title","Result","Date","Stability","Duration (s)"
-"When checking the service status","Check status","SUCCESS","2022-08-06T12:43:38.396840429Z[Etc/UTC]","0.0","3.17"
-"When playing the game via the API","Fetching game history","SUCCESS","2022-08-06T12:43:42.716950288Z[Etc/UTC]","0.0","0.31"
-"When playing the game via the API","Playing a game with one try","SUCCESS","2022-08-06T12:43:43.03912679Z[Etc/UTC]","0.0","0.07"
-"When playing the game via the API","Creating a new game should return a unique id","SUCCESS","2022-08-06T12:43:43.114880514Z[Etc/UTC]","0.0","0.05"
-"When playing the game via the API","Trying to reveal the answer too soon","SUCCESS","2022-08-06T12:43:43.16424795Z[Etc/UTC]","0.0","0.07"
-"When playing the game via the API","Fetching the game state","SUCCESS","2022-08-06T12:43:43.237310845Z[Etc/UTC]","0.0","0.06"
