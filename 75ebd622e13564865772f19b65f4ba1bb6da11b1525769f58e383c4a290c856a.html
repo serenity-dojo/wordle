@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Creating a new game should return a unique id</title>
+    <title>We make a move by posting a word to the with the /api/game/{id}/word end-point</title>
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
@@ -124,7 +124,7 @@
             > <a href="5b0b500db2dfd98ccb3584eed6275bc7ba4d506665983d1b8fc2e8acb36c8678.html">Api</a>
  <!-- inflection.of(breadcrumb.displayName).asATitle()-->
             > <a href="f33ff07c6c51e0f60d78b677193e1ab9ee534ad74afa891ebc0c1b3e161657b1.html">When playing the game via the API</a>
-        > Creating a new game should return a unique id
+        > We make a move by posting a word to the with the /api/game/{id}/word end-point
         </span>
         </div>
         <div class="rightbg"></div>
@@ -148,7 +148,7 @@
             <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 06-08-2022 13:02</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 06-08-2022 18:43</span>
     <br style="clear:left"/>
 </div>
     <div class="clr"></div>
@@ -183,7 +183,7 @@
                             <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon fa-2x' title='SUCCESS'></i></a></span>
                             <span class="test-case-title">
                                 <span class="success-color">
-                                    Creating a new game should return a unique id
+                                    We make a move by posting a word to the with the /api/game/{id}/word end-point
                                         <span class="related-issue-title"></span>
                                 </span>
                             </span>
@@ -225,39 +225,71 @@
 
                     <td width="50" class="step-icon">
                         <a name="0"></a>
-                            <span style="margin-left: 20px;"
-                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection0')"
+                               style="display:block">
+                                <i class="bi bi-plus-square imgstepSection0 success-icon"
+                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
+                            </a>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection0')"
+                               style="display:block;">
+                                <span class="top-level-step">
+                                                Play the word 'FEAST'
+                                        </span>
+                            </a>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
+                    <td width="100"><span class="top-level-step">114ms</span></td>
+                </tr>
+                    <tr>
+                        <td colspan="5">
+                            <table id="stepSection0" class="step-table-nested" style="display:none;">
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="0-0"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                 </span>
                     </td>
 
                     <td class="step-description-column">
                         <div class="step-description">
-                                <span class="top-level-step">
-                                                POST http://localhost:9000/api/game
+                                <span class="nested-group-step">
+                                                POST http://localhost:9000/api/game/1/word
                                         </span>
                             <span class="evidence">
                                         <span class="piece-of-evidence">
                 <span>
                         <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-1">
+                                data-target="#restModal-REST-2">
                             REST Query
                         </button>
                     </span>
                 <!-- Modal -->
                 <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-1">
+                    <div class="collapse multi-collapse" id="restModal-REST-2">
                         <div class="card">
                             <div class="card-body">
                                 <h4>Response</h4>
-                                    <p>URL: http://localhost:9000/api/game</p>
-                                    <p>Status code: 200</p>
-                                    <p>Content Type: application/x-www-form-urlencoded</p>
+                                    <p>URL: http://localhost:9000/api/game/1/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
                                     <h4>Request Headers</h4>
-                                    <pre>Accept=*/*<br>Content-Type=application/x-www-form-urlencoded; charset=ISO-8859-1</pre>
+                                    <pre>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>FEAST</pre>
                                     <h4>Response Headers</h4>
-                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 06 Aug 2022 13:02:16 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 06 Aug 2022 18:43:14 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
                                 <h4>Response Body</h4>
-                                    <pre>4</pre>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ]<br>]</pre>
                             </div>
                         </div>
                     </div>
@@ -267,13 +299,17 @@
                         </div>
                     </td>
 
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step"></span></td>
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step"></span></td>
                 </tr>
+
+                            </table>
+                        </td>
+                    </tr>
             <tr class="test-SUCCESS">
                     <td colspan="2"></td>
                 <td width="130"><span class="top-level-step"><em>SUCCESS</em></span></td>
-                <td width="100"><span class="top-level-step"><em>0.03s</em></span></td>
+                <td width="100"><span class="top-level-step"><em>0.29s</em></span></td>
             </tr>
 
         </table>
