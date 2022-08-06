@@ -2,6 +2,7 @@ package wordle.microservices.game;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import wordle.model.CellColor;
 import wordle.model.GameResult;
@@ -29,6 +30,7 @@ public class GameController {
 
     @RequestMapping(value = "/api/game/{id}/word", method = POST)
     @Operation(description = "Attempt a new word")
+    @ResponseStatus(HttpStatus.CREATED)
     public List<List<CellColor>> play(@PathVariable long id, @RequestBody String word) {
         gameService.play(id, word);
         return gameService.getHistory(id);

@@ -105,7 +105,7 @@
         </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-screenplay-webdriver</artifactId>
+            <artifactId>serenity-screenplay-rest</artifactId>
             <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>

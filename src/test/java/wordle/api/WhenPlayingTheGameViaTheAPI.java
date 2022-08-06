@@ -3,6 +3,10 @@ package wordle.api;
 import io.restassured.RestAssured;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.rest.SerenityRest;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Title;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,78 +21,52 @@ public class WhenPlayingTheGameViaTheAPI {
 
     String id;
 
+    @Steps
+    GameAPIFacade gameAPI;
+
     @Before
     public void newGame() {
-        RestAssured.reset();
         RestAssured.baseURI = "http://localhost:9000";
-        id = RestAssured.when().post("/api/game").body().asString();
+        id = gameAPI.newGame();
     }
 
     @Test
-    public void creatingANewGameShouldReturnAUniqueId() {
-        String id = SerenityRest.when()
-                .post("/api/game")
-                .then()
-                .statusCode(200)
-                .extract().asString();
-
+    @Title("We create a new game with the /api/game end-point")
+    public void creatingANewGame() {
+        String id = gameAPI.newGame();
         assertThat(id).isNotEmpty();
     }
 
     @Test
-    public void playingAGameWithOneTry() {
-        SerenityRest.given()
-                .pathParam("id", id)
-                .body("FEAST")
-                .when()
-                .post("/api/game/{id}/word");
-
-
-        List<List<String>> gameState = (List<List<String>>) SerenityRest.get("/api/game/{id}/history", id)
-                .then()
-                .statusCode(200)
-                .extract().as(List.class);
-
-        assertThat(gameState).hasSize(1);
-        assertThat(gameState.get(0))
-                .hasSize(5)
-                .allMatch(
-                        cell -> cell.equals("GRAY") || cell.equals("GREEN") || cell.equals("YELLOW")
-                );
+    @Title("We make a move by posting a word to the with the /api/game/{id}/word end-point")
+    public void makingAMove() {
+        assertThat(gameAPI.playWord(id, "FEAST").statusCode()).isEqualTo(201);
     }
 
     @Test
-    public void fetchingGameHistory() {
+    @Title("At any time we can check the current state of the game by sending a GET to /api/game/{id}/history")
+    public void checkingTheStateOfTheGame() {
+        gameAPI.playWord(id, "FEAST");
+        gameAPI.playWord(id, "BEAST");
 
-        RestAssured.given().pathParam("id", id).body("FEAST").post("/api/game/{id}/word");
-        RestAssured.given().pathParam("id", id).body("BEAST").post("/api/game/{id}/word");
+        assertThat(gameAPI.gameHistory(id))
+                .hasSize(2)
+                .allMatch(row -> row.stream().allMatch(this::isAValidCellValue));
+    }
 
-        List<List<String>> gameState = (List<List<String>>) SerenityRest
-                .given().pathParam("id", id)
-                .get("/api/game/{id}/history")
-                .then()
-                .statusCode(200)
-                .extract().as(List.class);
-
-        assertThat(gameState).hasSize(2);
+    private boolean isAValidCellValue(String cell) {
+        return cell.equals("GRAY") || cell.equals("GREEN") || cell.equals("YELLOW");
     }
 
     @Test
+    @Title("We can get the current game result by sending a GET to /api/game/{id}/result")
     public void fetchingTheGameState() {
-        GameResult result = SerenityRest
-                .get("/api/game/{id}/result", id)
-                .then()
-                .extract().as(GameResult.class);
-
-        assertThat(result).isEqualTo(GameResult.IN_PROGRESS);
+        assertThat(gameAPI.resultFor(id)).isEqualTo(GameResult.IN_PROGRESS);
     }
 
     @Test
+    @Title("We can try to ask for the answer by sending a GET to /api/game/{id}/answer")
     public void tryingToRevealTheAnswerTooSoon() {
-        SerenityRest
-                .get("/api/game/{id}/answer", id)
-                .then()
-                .statusCode(403);
+        assertThat(gameAPI.requestAnswer(id).statusCode()).isEqualTo(403);
     }
-
 }

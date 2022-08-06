@@ -116,6 +116,4 @@ class WhenPlayingTheGame {
             game.play(word);
         }
     }
-
-
 }
