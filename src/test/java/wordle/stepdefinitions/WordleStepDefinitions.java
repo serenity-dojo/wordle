@@ -1,10 +1,13 @@
-package wordle;
+package wordle.stepdefinitions;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import wordle.WordleGame;
+import wordle.dictionary.WordleDictionary;
 import wordle.model.CellColor;
+import wordle.model.GameResult;
 
 import java.util.List;
 
@@ -13,11 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WordleStepDefinitions {
 
     WordleGame wordleGame;
+    WordleDictionary dictionary = new WordleDictionary();
 
     @Given("the target word is:")
     public void the_target_word_is(DataTable targetWord) {
         String target = String.join("", targetWord.asLists().get(0));
-        this.wordleGame = new WordleGame(target);
+        this.wordleGame = new WordleGame(target, dictionary);
     }
 
     @When("the player enters the following letters:")
@@ -51,5 +55,10 @@ public class WordleStepDefinitions {
     @Then("the squares should be colored as follows:")
     public void the_squares_should_be_colored_as_follows(List<List<CellColor>> renderedRows) {
         assertThat(wordleGame.getRenderedCells()).isEqualTo(renderedRows);
+    }
+
+    @Then("the player should {gameResult} the game")
+    public void playerShould(GameResult gameResult) {
+        assertThat(wordleGame.getResult()).isEqualTo(gameResult);
     }
 }
