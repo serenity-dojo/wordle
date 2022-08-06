@@ -1,4 +1,4 @@
-package wordle.microservice;
+package wordle.microservices;
 
 import com.github.lalyos.jfiglet.FigletFont;
 import org.springframework.boot.CommandLineRunner;

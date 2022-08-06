@@ -1,4 +1,4 @@
-package wordle.microservice;
+package wordle.api;
 
 import io.restassured.RestAssured;
 import net.serenitybdd.junit.runners.SerenityRunner;

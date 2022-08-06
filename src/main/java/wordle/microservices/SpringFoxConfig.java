@@ -1,4 +1,4 @@
-package wordle.microservice;
+package wordle.microservices;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

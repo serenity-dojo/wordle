@@ -1,4 +1,4 @@
-package wordle.microservice.game;
+package wordle.microservices.game;
 
 import org.springframework.stereotype.Service;
 import wordle.WordleGame;

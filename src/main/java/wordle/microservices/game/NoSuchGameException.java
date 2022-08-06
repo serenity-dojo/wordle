@@ -1,4 +1,4 @@
-package wordle.microservice.game;
+package wordle.microservices.game;
 
 public class NoSuchGameException extends RuntimeException {
     public NoSuchGameException(String message) {

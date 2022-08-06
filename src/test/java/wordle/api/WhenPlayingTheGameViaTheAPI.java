@@ -1,4 +1,4 @@
-package wordle.microservice;
+package wordle.api;
 
 import io.restassured.RestAssured;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -75,7 +75,6 @@ public class WhenPlayingTheGameViaTheAPI {
 
     @Test
     public void fetchingTheGameState() {
-
         GameResult result = SerenityRest
                 .get("/api/game/{id}/result", id)
                 .then()

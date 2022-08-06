@@ -1,10 +1,8 @@
-package wordle.microservice.game;
+package wordle.microservices.game;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import wordle.WordleGame;
-import wordle.dictionary.WordleDictionary;
 import wordle.model.CellColor;
 import wordle.model.GameResult;
 

@@ -93,7 +93,7 @@
         </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-junit</artifactId>
+            <artifactId>serenity-junit5</artifactId>
             <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>
@@ -199,7 +199,7 @@
                         <include>**/When*.java</include>
                     </includes>
                     <excludes>
-                        <exclude>**/microservice/*.java</exclude>
+                        <exclude>**/api/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -208,7 +208,7 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <includes>
-                        <include>**/microservice/*.java</include>
+                        <include>**/api/*.java</include>
                         <include>**/*TestSuite.java</include>
                     </includes>
                     <parallel>all</parallel>
