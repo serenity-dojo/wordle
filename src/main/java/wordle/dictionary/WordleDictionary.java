@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/**
+ * The collection of all valid words
+ */
 public class WordleDictionary {
 
     private final List<String> words;
