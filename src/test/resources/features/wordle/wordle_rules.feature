@@ -1,4 +1,4 @@
-Feature: Playing Wordle
+Feature: Wordle Rules
 
   Players have to guess a five-letter word.
   - Correctly placed letters are shown as green (*)
