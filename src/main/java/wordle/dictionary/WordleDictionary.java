@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * A very precise set of definitions.
+ * The collection of all valid words
  */
 public class WordleDictionary {
 
