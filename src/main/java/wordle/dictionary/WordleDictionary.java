@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/**
+ * A very precise set of definitions.
+ */
 public class WordleDictionary {
 
     private final List<String> words;
