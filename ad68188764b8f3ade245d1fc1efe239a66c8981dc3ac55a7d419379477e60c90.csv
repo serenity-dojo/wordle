@@ -1,2 +1,2 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"When playing the game via the API","We make a move by posting a word to the with the /api/game/{id}/word end-point","SUCCESS","2022-09-07T12:06:39.165068421Z[Etc/UTC]","0.0","2.65"
+"When playing the game via the API","We make a move by posting a word to the with the /api/game/{id}/word end-point","SUCCESS","2022-09-07T12:09:36.909237748Z[Etc/UTC]","0.0","2.55"
