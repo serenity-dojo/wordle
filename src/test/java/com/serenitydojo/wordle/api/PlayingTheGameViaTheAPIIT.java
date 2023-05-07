@@ -2,6 +2,7 @@ package com.serenitydojo.wordle.api;
 
 import io.restassured.RestAssured;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 @DisplayName("Wordle API Specs")
-@Tag("integration")
-class WhenPlayingTheGameViaTheAPI {
+class PlayingTheGameViaTheAPIIT {
 
     String id;
 
@@ -27,6 +27,14 @@ class WhenPlayingTheGameViaTheAPI {
     void newGame() {
         RestAssured.baseURI = "http://localhost:9000";
         id = gameAPI.newGame();
+    }
+
+    @Test
+    @DisplayName("We can check the status of the Wordle service hy sending a GET to /api/service")
+    public void checkStatus() {
+        SerenityRest.get("/api/status")
+                .then()
+                .statusCode(200);
     }
 
     @Test
