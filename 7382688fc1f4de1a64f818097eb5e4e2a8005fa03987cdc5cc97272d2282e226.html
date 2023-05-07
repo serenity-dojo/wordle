@@ -22,15 +22,16 @@
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="bootstrap-icons/font/bootstrap-icons.css"><!-- JQuery -->
+<link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
+<!-- JQuery -->
 <script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><!-- Required Stylesheets -->
 <link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 
 <!-- Required Javascript -->
 <script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.11.3/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.11.3/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.11.3/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -70,9 +71,9 @@
 <!-- JQuery-UI -->
 <link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
 <script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.11.3/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.11.3/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.11.3/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -106,14 +107,23 @@
 
         $(document).ready(function () {
 
-            var scenarioTable = $('.scenario-result-table').DataTable({
-
-                "order": [],
+            $("#scenario-results").DataTable({
+                "order": [[0, "asc",], [3, "asc",]],
                 "language": {
                     searchPlaceholder: "Filter",
                     search: ""
-                }
-            });
+                },
+                columnDefs: [
+                    {type: 'time-elapsed-dhms', targets: 4}
+                ]
+            })
+            $("#manual-scenario-results").DataTable({
+                "order": [[0, "asc",], [1, "asc",]],
+                "language": {
+                    searchPlaceholder: "Filter",
+                    search: ""
+                },
+            })
 
             $('.example-table table').DataTable({
                 searching: false,
@@ -279,6 +289,77 @@
 
                                                 <div id="tree"></div>
 
+                                                <!-- STATS -->
+    <div>
+        <h3><i class="bi bi-speedometer2"></i> Key Statistics</h3>
+        <div>
+            <table class="table table-striped table-hover">
+                <tbody>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-card-checklist"></i> Number of Scenarios
+                    </td>
+                    <td>0</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-caret-right"></i> Total Number of Test Cases
+                    </td>
+                    <td>0</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-flag-fill"></i> Tests Started
+                    </td>
+                    <td></td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-stop-circle"></i> Tests
+                        Finished
+                    </td>
+                    <td></td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-stopwatch"></i> Total
+                        Duration
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-trophy"></i> Fastest Test
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-skip-start"></i> Slowest
+                        Test
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-stopwatch"></i> Average
+                        Execution Time
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-stopwatch-fill"></i> Total
+                        Execution Time
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+                                                <!-- END STATS -->
+
                                             </div>
                                         </div>
                                     </div>
@@ -312,6 +393,71 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-sm-12">
+    <div>
+        <h3><i class="bi bi-speedometer2"></i> Key Statistics</h3>
+        <div>
+            <table class="table table-striped table-hover">
+                <tbody>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-card-checklist"></i> Number of Scenarios
+                    </td>
+                    <td>0</td>
+                    <td>
+                        <i class="bi bi-stopwatch"></i> Total
+                        Duration
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-caret-right"></i> Total Number of Test Cases
+                    </td>
+                    <td>0</td>
+                    <td>
+                        <i class="bi bi-trophy"></i> Fastest Test
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-person"></i> Number of Manual Test Cases
+                    </td>
+                    <td>0</td>
+                    <td>
+                        <i class="bi bi-skip-start"></i> Slowest
+                        Test
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-flag-fill"></i> Tests Started
+                    </td>
+                    <td></td>
+                    <td>
+                        <i class="bi bi-stopwatch"></i> Average
+                        Execution Time
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                <tr scope="row">
+                    <td>
+                        <i class="bi bi-stop-circle"></i> Tests
+                        Finished
+                    </td>
+                    <td></td>
+                    <td>
+                        <i class="bi bi-stopwatch-fill"></i> Total
+                        Execution Time
+                    </td>
+                    <td>0ms</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
                                                 <h3><i class="bi bi-gear"></i> Automated Tests</h3>
 
                                                     No automated tests were executed
@@ -339,7 +485,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="version">Serenity BDD version 3.3.1</span>
+                    <span class="version">Serenity BDD version 3.7.1</span>
                 </div>
             </div>
         </div>
@@ -354,17 +500,17 @@
 
         // Options define for display value on top of bars
         const outcomeDetailsReports = [
-            { title: 'Passing Scenarios', link: "2515c1122c7042b7277763adabbdd0175d643dcd470231958ce4e75720fba533.html" },
-            { title: 'Pending Scenarios', link: "f9c881c73632f062887fba751f6e004a7ce891e05c342753c93c4bf57df6398b.html" },
-            { title: 'Ignored Scenarios', link: "4ece522bb38f77c776137840ff228426a9bb499c9560f1b04c700e5945d58cb8.html" },
-            { title: 'Skipped Scenarios', link: "ae2904475418830cf36b197bd5d3b059517a42882113d943c093f38504f5cd94.html" },
-            { title: 'Aborted Scenarios',  link: "8424bf86b269c50641906cd8ab710bff7b55e1e7bd77d048e3907967a87e50a2.html"},
-            { title: 'Failed Scenarios', link: "859810f8746d15c568c2d59d1ec364ecaa6c058f95a61dcd6d64dcfc95349b04.html"  },
-            { title: 'Broken Scenarios', link: "455af49ed0bac4411411d77b1a519f2751f0bd3b585ce7ed5fcf39560571da6c.html"    },
-            { title: 'Compromised Scenarios',  link: "e05ba733ef96296c1f4356900c0f35d41d305acc3c260ab247aa805635e71a85.html" },
+            { title: 'Passing Test Cases', link: "2515c1122c7042b7277763adabbdd0175d643dcd470231958ce4e75720fba533.html" },
+            { title: 'Pending Test Cases', link: "f9c881c73632f062887fba751f6e004a7ce891e05c342753c93c4bf57df6398b.html" },
+            { title: 'Ignored Test Cases', link: "4ece522bb38f77c776137840ff228426a9bb499c9560f1b04c700e5945d58cb8.html" },
+            { title: 'Skipped Test Cases', link: "ae2904475418830cf36b197bd5d3b059517a42882113d943c093f38504f5cd94.html" },
+            { title: 'Aborted Test Cases',  link: "8424bf86b269c50641906cd8ab710bff7b55e1e7bd77d048e3907967a87e50a2.html"},
+            { title: 'Failed Test Cases', link: "859810f8746d15c568c2d59d1ec364ecaa6c058f95a61dcd6d64dcfc95349b04.html"  },
+            { title: 'Broken Test Cases', link: "455af49ed0bac4411411d77b1a519f2751f0bd3b585ce7ed5fcf39560571da6c.html"    },
+            { title: 'Compromised Test Cases',  link: "e05ba733ef96296c1f4356900c0f35d41d305acc3c260ab247aa805635e71a85.html" },
         ]
         const outcomeData = {
-            labels: ['Passing Scenarios', 'Pending Scenarios', 'Ignored Scenarios', 'Skipped Scenarios', 'Aborted Scenarios', 'Failed Scenarios', 'Broken Scenarios', 'Compromised Scenarios','Undefined Scenarios'],
+            labels: ['Passing Test Cases', 'Pending Test Cases', 'Ignored Test Cases', 'Skipped Test Cases', 'Aborted Test Cases', 'Failed Test Cases', 'Broken Test Cases', 'Compromised Test Cases','Undefined Test Cases'],
             datasets: [{
                 label: 'Test Results',
                 fill: false,
@@ -448,18 +594,18 @@
 
         // Options define for display value on top of bars
         const requirementsOutcomeDetailsReports = [
-            { title: 'Passing Scenarios', link: "2515c1122c7042b7277763adabbdd0175d643dcd470231958ce4e75720fba533.html" },
-            { title: 'Pending Scenarios', link: "f9c881c73632f062887fba751f6e004a7ce891e05c342753c93c4bf57df6398b.html" },
-            { title: 'Ignored Scenarios', link: "4ece522bb38f77c776137840ff228426a9bb499c9560f1b04c700e5945d58cb8.html" },
-            { title: 'Skipped Scenarios', link: "ae2904475418830cf36b197bd5d3b059517a42882113d943c093f38504f5cd94.html" },
-            { title: 'Aborted Scenarios',  link: "8424bf86b269c50641906cd8ab710bff7b55e1e7bd77d048e3907967a87e50a2.html"},
-            { title: 'Failed Scenarios', link: "859810f8746d15c568c2d59d1ec364ecaa6c058f95a61dcd6d64dcfc95349b04.html"  },
-            { title: 'Broken Scenarios', link: "455af49ed0bac4411411d77b1a519f2751f0bd3b585ce7ed5fcf39560571da6c.html"    },
-            { title: 'Compromised Scenarios',  link: "e05ba733ef96296c1f4356900c0f35d41d305acc3c260ab247aa805635e71a85.html" },
-            { title: 'Undefined Scenarios',  link: "" },
+            { title: 'Passing Test Cases', link: "2515c1122c7042b7277763adabbdd0175d643dcd470231958ce4e75720fba533.html" },
+            { title: 'Pending Test Cases', link: "f9c881c73632f062887fba751f6e004a7ce891e05c342753c93c4bf57df6398b.html" },
+            { title: 'Ignored Test Cases', link: "4ece522bb38f77c776137840ff228426a9bb499c9560f1b04c700e5945d58cb8.html" },
+            { title: 'Skipped Test Cases', link: "ae2904475418830cf36b197bd5d3b059517a42882113d943c093f38504f5cd94.html" },
+            { title: 'Aborted Test Cases',  link: "8424bf86b269c50641906cd8ab710bff7b55e1e7bd77d048e3907967a87e50a2.html"},
+            { title: 'Failed Test Cases', link: "859810f8746d15c568c2d59d1ec364ecaa6c058f95a61dcd6d64dcfc95349b04.html"  },
+            { title: 'Broken Test Cases', link: "455af49ed0bac4411411d77b1a519f2751f0bd3b585ce7ed5fcf39560571da6c.html"    },
+            { title: 'Compromised Test Cases',  link: "e05ba733ef96296c1f4356900c0f35d41d305acc3c260ab247aa805635e71a85.html" },
+            { title: 'Undefined Test Cases',  link: "" },
         ]
         const requirementsOutcomeData = {
-            labels: ['Passing Scenarios', 'Pending Scenarios', 'Ignored Scenarios', 'Skipped Scenarios', 'Aborted Scenarios', 'Failed Scenarios', 'Broken Scenarios', 'Compromised Scenarios','Undefined Scenarios'],
+            labels: ['Passing Test Cases', 'Pending Test Cases', 'Ignored Test Cases', 'Skipped Test Cases', 'Aborted Test Cases', 'Failed Test Cases', 'Broken Test Cases', 'Compromised Test Cases','Undefined Test Cases'],
             datasets: [{
                 label: 'Feature Coverage',
                 fill: false,

@@ -1,5 +1,0 @@
-"Story","Title","Result","Date","Stability","Duration (s)"
-"When playing the game via the API","We create a new game with the /api/game end-point","SUCCESS","2022-09-07T12:09:39.586423638Z[Etc/UTC]","0.0","0.07"
-"When playing the game via the API","We can try to ask for the answer by sending a GET to /api/game/{id}/answer","SUCCESS","2022-09-07T12:09:39.667110403Z[Etc/UTC]","0.0","0.09"
-"When playing the game via the API","We can get the current game result by sending a GET to /api/game/{id}/result","SUCCESS","2022-09-07T12:09:39.768678091Z[Etc/UTC]","0.0","0.28"
-"When playing the game via the API","At any time we can check the current state of the game by sending a GET to /api/game/{id}/history","SUCCESS","2022-09-07T12:09:40.053532574Z[Etc/UTC]","0.0","0.13"

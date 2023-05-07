@@ -1,7 +1,0 @@
-"Story","Title","Result","Date","Stability","Duration (s)"
-"Wordle Rules","Correctly placed letters","SUCCESS","2022-09-07T12:09:34.145270728Z[Etc/UTC]","0.0","0.22"
-"Wordle Rules","Letters that are present but not in the right place","SUCCESS","2022-09-07T12:09:34.383662783Z[Etc/UTC]","0.0","0.01"
-"Wordle Rules","Letters that do not form valid words should be rejected","SUCCESS","2022-09-07T12:09:34.413632604Z[Etc/UTC]","0.0","0.07"
-"Wordle Rules","Two incorrectly placed letters","SUCCESS","2022-09-07T12:09:34.485931178Z[Etc/UTC]","0.0","0.01"
-"Wordle Rules","Player guesses the right word","SUCCESS","2022-09-07T12:09:34.507331108Z[Etc/UTC]","0.0","0.02"
-"Wordle Rules","Player runs out of tries","SUCCESS","2022-09-07T12:09:34.53082026Z[Etc/UTC]","0.0","0.02"
