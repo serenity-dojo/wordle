@@ -12,14 +12,15 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <encoding>UTF-8</encoding>
-        <serenity.version>3.3.1</serenity.version>
-        <rest-assured.version>5.1.1</rest-assured.version>
+        <serenity.version>3.7.2-SNAPSHOT</serenity.version>
+        <rest-assured.version>5.3.0</rest-assured.version>
+        <junit5.version>5.9.2</junit5.version>
     </properties>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.2</version>
+        <version>3.0.6</version>
     </parent>
 
     <dependencies>
@@ -58,17 +59,17 @@
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.10</version>
         </dependency>
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-xml</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.10</version>
         </dependency>
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-json</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.10</version>
         </dependency>
 
         <!-- Swagger -->
@@ -126,39 +127,49 @@
             <artifactId>xml-path</artifactId>
             <version>${rest-assured.version}</version>
         </dependency>
+        <!-- JUNIT 5 DEPENDENCY-->
         <dependency>
             <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>1.8.1</version>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>1.9.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.2</version>
+            <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>5.8.2</version>
+            <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.8.2</version>
+            <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- Cucumber parallel execution dependencies -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.10</version>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>7.11.1</version>
+            <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.6.2</version>
+            <version>3.24.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -167,7 +178,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.2</version>
+                <version>3.0.6</version>
                 <executions>
                     <execution>
                         <goals>
@@ -191,27 +202,26 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>3.0.0</version>
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
                         <include>**/Test*.java</include>
                         <include>**/When*.java</include>
                     </includes>
-                    <excludes>
-                        <exclude>**/api/*.java</exclude>
-                    </excludes>
+                    <excludedGroups>integration | acceptance</excludedGroups>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>3.0.0</version>
                 <configuration>
                     <includes>
-                        <include>**/api/*.java</include>
+                        <include>**/*Test.java</include>
+                        <include>**/When*.java</include>
                         <include>**/*TestSuite.java</include>
                     </includes>
-                    <parallel>all</parallel>
+                    <includedGroups>acceptance</includedGroups>
                 </configuration>
                 <executions>
                     <execution>
@@ -227,8 +237,11 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>17</source>
+                    <target>17</target>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -237,8 +250,23 @@
                 <version>${serenity.version}</version>
                 <configuration>
                     <tags>${tags}</tags>
+                    <reports>single-page-html</reports>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.serenity-bdd</groupId>
+                        <artifactId>serenity-single-page-report</artifactId>
+                        <version>${serenity.version}</version>
+                    </dependency>
+                </dependencies>
                 <executions>
+                    <execution>
+                        <id>check-gherkin</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>check-gherkin</goal>
+                        </goals>
+                    </execution>
                     <execution>
                         <id>serenity-reports</id>
                         <phase>post-integration-test</phase>
