@@ -1,4 +1,4 @@
-package com.serenitydojo.wordle.api;
+package com.serenitydojo.wordle.integrationtests.api;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

@@ -1,5 +1,6 @@
 package com.serenitydojo.wordle.api;
 
+import com.serenitydojo.wordle.integrationtests.api.GameAPIFacade;
 import io.restassured.RestAssured;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.serenitybdd.rest.SerenityRest;
@@ -7,7 +8,6 @@ import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import com.serenitydojo.wordle.model.GameResult;
