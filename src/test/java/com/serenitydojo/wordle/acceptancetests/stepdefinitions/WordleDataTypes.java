@@ -17,7 +17,7 @@ public class WordleDataTypes {
     @DataTableType
     public List<CellColor> renderedCells(List<String> cellsInRow) {
         return cellsInRow.stream()
-                .map(CellColor::withSymbol)
+                .map(cell -> CellColor.valueOf(cell.toUpperCase()))
                 .collect(Collectors.toList());
     }
 

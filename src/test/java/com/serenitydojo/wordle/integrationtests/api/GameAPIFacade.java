@@ -43,6 +43,10 @@ public class GameAPIFacade {
 
     @Step("Get the game history")
     public List<List<String>> gameHistory(String id) {
+        return getTheGameHistory(id);
+    }
+
+    public List<List<String>> getTheGameHistory(String id) {
         return (List<List<String>>) SerenityRest.get("/api/game/{id}/history", id)
                 .then()
                 .statusCode(200)
