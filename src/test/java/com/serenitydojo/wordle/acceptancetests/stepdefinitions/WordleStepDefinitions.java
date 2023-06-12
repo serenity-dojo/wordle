@@ -61,4 +61,32 @@ public class WordleStepDefinitions {
     public void playerShould(GameResult gameResult) {
         assertThat(wordleGame.getResult()).isEqualTo(gameResult);
     }
+
+    @Given("the target word is {string}")
+    public void the_target_word_is(String targetWord) {
+        this.wordleGame = new WordleGame(targetWord, dictionary);
+    }
+
+    List<String> proposedHints;
+
+    @When("the player requests a/another hint")
+    @When("the player has requested a hint")
+    public void the_player_requests_a_hint() {
+        proposedHints = wordleGame.requestHint();
+    }
+
+    @Then("the proposed hints should include {string}")
+    public void the_proposed_hints_should_include(String hint) {
+        assertThat(wordleGame.allHints()).contains(hint);
+    }
+
+    @Then("the proposed hint should be one of:")
+    public void the_proposed_hint_should_be_one_of(List<String> expectedHints) {
+        assertThat(proposedHints).hasSize(1).isSubsetOf(expectedHints);
+    }
+
+    @Then("the following hints should be proposed:")
+    public void the_following_hints_should_be_proposed(List<String> expectedHints) {
+        assertThat(proposedHints).containsAll(expectedHints);
+    }
 }

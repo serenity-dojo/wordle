@@ -11,6 +11,7 @@ public class WordleGame {
     private final WordleDictionary dictionary;
 
     List<List<CellColor>> stateOfPlay = new ArrayList<>();
+    private boolean firstHint = true;
 
     public static WordleGame withRandomWord(WordleDictionary dictionary) {
         return new WordleGame(dictionary.random(), dictionary);
@@ -32,9 +33,9 @@ public class WordleGame {
         String normalizedWord = attemptedWord.toUpperCase();
 
         List<CellColor> renderedAttempt = new ArrayList<>();
-        for(int pos = 0; pos < normalizedWord.length(); pos++) {
+        for (int pos = 0; pos < normalizedWord.length(); pos++) {
             CellColor cellColor = RenderedCell.forTargetWord(targetWord)
-                                              .forEntry(normalizedWord, pos);
+                    .forEntry(normalizedWord, pos);
             renderedAttempt.add(cellColor);
         }
 
@@ -84,4 +85,18 @@ public class WordleGame {
         }
         return targetWord;
     }
+
+    public List<String> requestHint() {
+        if (firstHint) {
+            firstHint = false;
+            return new Hints(targetWord).randomHint();
+        } else {
+            return allHints();
+        }
+    }
+
+    public List<String> allHints() {
+        return new Hints(targetWord).allHints();
+    }
+
 }
