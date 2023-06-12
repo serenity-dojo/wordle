@@ -1,2 +1,2 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Playing the game via the APIIT","Playing a game","SUCCESS","2023-05-07T15:15:21.405175306Z[Etc/UTC]","0.0","5.69"
+"Wordle API Specs","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2023-06-12T08:59:11.219228699Z[Etc/UTC]","0.0","2.78"

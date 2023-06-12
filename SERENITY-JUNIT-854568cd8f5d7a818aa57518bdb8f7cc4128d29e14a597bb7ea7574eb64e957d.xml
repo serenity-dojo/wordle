@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="com.serenitydojo.wordle.integrationtests.api.WhenDisplayingTheGame" skipped="0" tests="3" time="0.23" timestamp="2023-06-12 08:59:18"><testcase classname="com.serenitydojo.wordle.integrationtests.api.WhenDisplayingTheGame" name="Should display cells in the right color"/></testsuite>
