@@ -1,0 +1,3 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Wordle Overview","Player runs out of tries and loses","SUCCESS","2023-07-11T05:55:34.886916061Z[Etc/UTC]","0.0","0.39"
+"Wordle Overview","Player guesses the right word and wins","SUCCESS","2023-07-11T05:55:35.132485501Z[Etc/UTC]","0.0","0.12"

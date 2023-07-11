@@ -1,2 +1,2 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Wordle API Specs","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2023-06-12T09:06:14.693488791Z[Etc/UTC]","0.0","2.68"
+"When a player asks for hints","We can request a hint for the current game via GET /api/game/{id}/hint","SUCCESS","2023-07-11T05:55:24.347999571Z[Etc/UTC]","0.0","3.87"

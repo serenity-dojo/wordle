@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Hints" skipped="0" tests="7" time="0.73" timestamp="2023-06-12 09:06:24"><testcase name="If the player asks for another hint, all the hints should be shown"/><testcase name="Possible hints for a word"/><testcase name="The word starts with a particular letter"/></testsuite>
