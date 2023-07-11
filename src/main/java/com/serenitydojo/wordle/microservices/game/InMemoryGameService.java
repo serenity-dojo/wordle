@@ -52,6 +52,11 @@ public class InMemoryGameService implements GameService {
         return gameWithId(gameId).revealAnswer();
     }
 
+    @Override
+    public List<String> getHint(long gameId) {
+        return gameWithId(gameId).requestHint();
+    }
+
     private WordleGame gameWithId(long id) {
         if (!games.containsKey(id)) {
             throw new NoSuchGameException("No game found with id " + id);

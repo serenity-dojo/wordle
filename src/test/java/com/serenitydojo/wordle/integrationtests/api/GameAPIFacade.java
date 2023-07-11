@@ -41,6 +41,12 @@ public class GameAPIFacade {
                 .get("/api/game/{id}/answer", id);
     }
 
+    @Step("Request a hint")
+    public Response requestHint(String id) {
+        return SerenityRest
+                .get("/api/game/{id}/hint", id);
+    }
+
     @Step("Get the game history")
     public List<List<String>> gameHistory(String id) {
         return getTheGameHistory(id);

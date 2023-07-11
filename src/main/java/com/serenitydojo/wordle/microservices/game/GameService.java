@@ -36,4 +36,9 @@ public interface GameService {
      * Reveal the answer
      */
     String revealAnswer(long gameId);
+
+    /**
+     * Get a hint
+     */
+    List<String> getHint(long id);
 }

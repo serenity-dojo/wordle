@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("When rendering a cell")
@@ -47,6 +50,5 @@ class WhenRenderingACell {
                 assertThat(RenderedCell.forTargetWord("quart").forEntry("karaa",4)).isEqualTo(CellColor.GRAY);
             }
         }
-
     }
 }

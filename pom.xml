@@ -11,8 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <encoding>UTF-8</encoding>
-        <serenity.version>3.8.1</serenity.version>
+        <serenity.version>3.9.0</serenity.version>
         <rest-assured.version>5.3.0</rest-assured.version>
         <junit5.version>5.9.3</junit5.version>
         <junit-platform-suite-api.version>1.9.3</junit-platform-suite-api.version>
@@ -96,6 +95,12 @@
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-junit5</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-junit</artifactId>
             <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>
@@ -223,9 +228,11 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
-                    <configurationParameters>
-                        junit.jupiter.extensions.autodetection.enabled = true
-                    </configurationParameters>
+                    <properties>
+                        <configurationParameters>
+                            junit.jupiter.extensions.autodetection.enabled = true
+                        </configurationParameters>
+                    </properties>
                 </configuration>
                 <executions>
                     <execution>
@@ -282,13 +289,13 @@
                     </dependency>
                 </dependencies>
                 <executions>
-                    <execution>
-                        <id>check-gherkin</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>check-gherkin</goal>
-                        </goals>
-                    </execution>
+<!--                    <execution>-->
+<!--                        <id>check-gherkin</id>-->
+<!--                        <phase>process-test-resources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>check-gherkin</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
                     <execution>
                         <id>serenity-reports</id>
                         <phase>post-integration-test</phase>

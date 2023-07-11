@@ -54,6 +54,12 @@ public class GameController {
         return gameService.getResult(id);
     }
 
+    @RequestMapping(value = "/api/game/{id}/hint", method = GET)
+    @Operation(description = "Find a hint for the current game")
+    public List<String> getHint(@PathVariable long id) {
+        return gameService.getHint(id);
+    }
+
     @RequestMapping(value = "/api/game/{id}/answer", method = GET)
     @Operation(description = "Find the answer (only available after the game is lost)")
     public String getAnswer(@PathVariable long id) {
