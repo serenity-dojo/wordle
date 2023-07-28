@@ -63,6 +63,12 @@ class APIExamples {
     @DisplayName("When playing the game")
     @Nested
     class PlayingTheGame {
+        @BeforeEach
+        void newGame() {
+            RestAssured.baseURI = "http://localhost:9000";
+            id = gameAPI.newGame();
+        }
+
         @Test
         @DisplayName("We make a move by posting a word to the with the /api/game/{id}/word end-point")
         @Order(3)

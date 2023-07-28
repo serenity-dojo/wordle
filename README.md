@@ -20,6 +20,15 @@ To execute the tests, you will need to run the following command:
 mvn verify
 ```
 
+## How to run the application
+
+You can run the application locally as follows:
+```bash
+mvn spring-boot:run
+```
+
+Once running, you can access the application at http://localhost:8080/api/status and see the Swagger documentation at http://localhost:9000/swagger-ui.html
+
 ## Reports
 
 Upon completion of the tests, Serenity reports are generated in the `target/site/serenity` directory. You can view a sample report [here](https://serenity-dojo.github.io/wordle/).
