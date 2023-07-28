@@ -1,3 +1,3 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"When creating a new game","We create a new game with the /api/game end-point","SUCCESS","2023-07-11T06:20:46.803709459Z[Etc/UTC]","0.0","0.03"
-"When creating a new game","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2023-07-11T06:20:46.842556746Z[Etc/UTC]","0.0","0.03"
+"When creating a new game","We create a new game with the /api/game end-point","SUCCESS","2023-07-28T10:56:31.915327291Z[Etc/UTC]","0.0","0.03"
+"When creating a new game","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2023-07-28T10:56:31.99291735Z[Etc/UTC]","0.0","0.03"
