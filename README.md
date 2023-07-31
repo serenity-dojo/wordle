@@ -49,4 +49,3 @@ We welcome contributions from everyone. Whether you're a seasoned developer or a
 
 This project is licensed under the terms of the MIT license.
 
-Join us on this exciting journey of learning, collaboration, and growth. Happy coding!
