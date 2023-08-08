@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>At any time we can check the current state of the game by sending a GET to /api/game/{id}/history</title>
+    <title>We can check the current state of the game by sending a GET to /api/game/{id}/history</title>
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
@@ -124,10 +124,10 @@
  <!-- inflection.of(breadcrumb.displayName).asATitle()-->
             > <a href="125ad96fb2b6f80113c246e3be7e5f5be7ef7a6fd43423341451bff7ac62fde6.html">Api</a>
  <!-- inflection.of(breadcrumb.displayName).asATitle()-->
-            > <a href="774c404f9e585328280cc6681217bf10146571de7551e2fddb85dcff6c1ff78b.html">API examples</a>
+            > <a href="774c404f9e585328280cc6681217bf10146571de7551e2fddb85dcff6c1ff78b.html">Wordle API Specs</a>
  <!-- inflection.of(breadcrumb.displayName).asATitle()-->
             > <a href="70076799e0aea44991786dd76b8ba4e0d99967fd85988a006bc0eab4e9ed93b3.html">When playing the game</a>
-        > At any time we can check the current state of the game by sending a GET to /api/game/{id}/history
+        > We can check the current state of the game by sending a GET to /api/game/{id}/history
         </span>
         </div>
         <div class="rightbg"></div>
@@ -154,7 +154,7 @@
             <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 28-07-2023 10:56</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 08-08-2023 15:15</span>
     <br style="clear:left"/>
 </div>
     <div class="clr"></div>
@@ -209,7 +209,7 @@
                             <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon fa-2x' title='SUCCESS'></i></a></span>
                             <span class="test-case-title">
                                 <span class="success-color">
-                                    At any time we can check the current state of the game by sending a GET to /api/game/{id}/history
+                                    We can check the current state of the game by sending a GET to /api/game/{id}/history
                                         <span class="related-issue-title"></span>
                                 </span>
                             </span>
@@ -268,30 +268,93 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">015ms</span></td>
+                    <td width="100"><span class="top-level-step">016ms</span></td>
                 </tr>
                 <tr class="test-SUCCESS">
 
                     <td width="50" class="step-icon">
                         <a name="1"></a>
-                            <span style="margin-left: 20px;"
-                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection1')"
+                               style="display:block">
+                                <i class="bi bi-caret-right-square imgstepSection1 success-icon"
+                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
+                            </a>
                     </td>
 
                     <td class="step-description-column">
                         <div class="step-description">
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection1')"
+                               style="display:block;">
                                 <span class="top-level-step">
-                                                Create a new game
+                                                Play the word 'FEAST'
                                         </span>
+                            </a>
                             <span class="evidence">
                                 </span>
                         </div>
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">020ms</span></td>
+                    <td width="100"><span class="top-level-step">025ms</span></td>
                 </tr>
+                    <tr>
+                        <td colspan="5">
+                            <table id="stepSection1" class="step-table-nested" style="display:none;">
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="1-0"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:9000/api/game/16/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-3">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:9000/api/game/16/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>FEAST</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Tue, 08 Aug 2023 15:15:33 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
+                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
                 <tr class="test-SUCCESS">
 
                     <td width="50" class="step-icon">
@@ -308,7 +371,7 @@
                             <a href="javaScript:void(0)" onClick="toggleDiv('stepSection2')"
                                style="display:block;">
                                 <span class="top-level-step">
-                                                Play the word 'FEAST'
+                                                Play the word 'BEAST'
                                         </span>
                             </a>
                             <span class="evidence">
@@ -317,7 +380,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">035ms</span></td>
+                    <td width="100"><span class="top-level-step">024ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -334,33 +397,33 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                POST http://localhost:9000/api/game/19/word
+                                                POST http://localhost:9000/api/game/16/word
                                         </span>
                             <span class="evidence">
                                         <span class="piece-of-evidence">
                 <span>
                         <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-4">
+                                data-target="#restModal-REST-5">
                             REST Query
                         </button>
                     </span>
                 <!-- Modal -->
                 <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-4">
+                    <div class="collapse multi-collapse" id="restModal-REST-5">
                         <div class="card">
                             <div class="card-body">
                                 <h4>Response</h4>
-                                    <p>URL: http://localhost:9000/api/game/19/word</p>
+                                    <p>URL: http://localhost:9000/api/game/16/word</p>
                                     <p>Status code: 201</p>
                                     <p>Content Type: text/plain</p>
                                     <h4>Request Headers</h4>
                                     <pre>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
                                     <h4>Content Body</h4>
-                                    <pre>FEAST</pre>
+                                    <pre>BEAST</pre>
                                     <h4>Response Headers</h4>
-                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 28 Jul 2023 10:56:31 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Tue, 08 Aug 2023 15:15:33 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
                                 <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
                             </div>
                         </div>
                     </div>
@@ -371,7 +434,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">004ms</span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
                 </tr>
 
                             </table>
@@ -393,7 +456,7 @@
                             <a href="javaScript:void(0)" onClick="toggleDiv('stepSection3')"
                                style="display:block;">
                                 <span class="top-level-step">
-                                                Play the word 'BEAST'
+                                                Get the game history
                                         </span>
                             </a>
                             <span class="evidence">
@@ -402,7 +465,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">029ms</span></td>
+                    <td width="100"><span class="top-level-step">027ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -419,114 +482,29 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                POST http://localhost:9000/api/game/19/word
+                                                GET http://localhost:9000/api/game/16/history
                                         </span>
                             <span class="evidence">
                                         <span class="piece-of-evidence">
                 <span>
                         <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-6">
+                                data-target="#restModal-REST-7">
                             REST Query
                         </button>
                     </span>
                 <!-- Modal -->
                 <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-6">
+                    <div class="collapse multi-collapse" id="restModal-REST-7">
                         <div class="card">
                             <div class="card-body">
                                 <h4>Response</h4>
-                                    <p>URL: http://localhost:9000/api/game/19/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>BEAST</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 28 Jul 2023 10:56:31 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">003ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="4"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection4')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection4 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection4')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Get the game history
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">030ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection4" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="4-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                GET http://localhost:9000/api/game/19/history
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-8">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:9000/api/game/19/history</p>
+                                    <p>URL: http://localhost:9000/api/game/16/history</p>
                                     <p>Status code: 200</p>
                                     <p>Content Type: null</p>
                                     <h4>Request Headers</h4>
                                     <pre>Accept=*/*</pre>
                                     <h4>Response Headers</h4>
-                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 28 Jul 2023 10:56:31 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Tue, 08 Aug 2023 15:15:33 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
                                 <h4>Response Body</h4>
                                     <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
                             </div>
@@ -548,7 +526,7 @@
             <tr class="test-SUCCESS">
                     <td colspan="2"></td>
                 <td width="130"><span class="top-level-step"><em>SUCCESS</em></span></td>
-                <td width="100"><span class="top-level-step"><em>0.14s</em></span></td>
+                <td width="100"><span class="top-level-step"><em>0.02s</em></span></td>
             </tr>
 
         </table>
@@ -561,7 +539,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <span class="version">Serenity BDD version 3.9.8</span>
+            <span class="version">Serenity BDD version 2</span>
         </div>
     </div>
 </div>
