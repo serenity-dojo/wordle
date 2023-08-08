@@ -4,12 +4,11 @@ Feature: Wordle Overview
   To submit a guess, type any five-letter word and press enter.
   All of your guesses must be real words, according to a dictionary of five-letter words that Wordle allows as guesses.
 
-  Players have to guess a five-letter word.
-  - Correctly placed letters are shown as GREEN
-  - Incorrectly placed letters are shown as YELLOW
-  - Letters not appearing in the word are represented as GRAY
-
   Example: Player guesses the right word and wins
+    Players have to guess a five-letter word.
+    - Correctly placed letters are shown as GREEN
+    - Incorrectly placed letters are shown as YELLOW
+    - Letters not appearing in the word are represented as GRAY
     Given the target word is:
       | B | L | A | N | D |
     When the player enters the following letters:

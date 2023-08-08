@@ -2,8 +2,8 @@ package com.serenitydojo.wordle.integrationtests.api;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.annotations.Step;
 import com.serenitydojo.wordle.model.GameResult;
 
 import java.util.List;

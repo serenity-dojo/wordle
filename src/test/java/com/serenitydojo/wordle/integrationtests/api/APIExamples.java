@@ -1,11 +1,11 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
 import io.restassured.RestAssured;
+import net.serenitybdd.annotations.Description;
+import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.annotations.Description;
-import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,35 +39,37 @@ class APIExamples {
         id = gameAPI.newGame();
     }
 
+    @Test
+    @Order(1)
+    @DisplayName("We can check the status of the Wordle service by sending a GET to /api/service")
+    public void checkStatus() {
+        SerenityRest.get("/api/status")
+                .then()
+                .statusCode(200);
+    }
+
     @DisplayName("When creating a new game")
     @Nested
     class CreatingANewGame {
+
         @Test
+        @DisplayName("Each new game should be assigned a unique id")
         @Order(1)
-        @DisplayName("We can check the status of the Wordle service by sending a GET to /api/service")
-        public void checkStatus() {
-            SerenityRest.get("/api/status")
-                    .then()
-                    .statusCode(200);
+        void creatingANewGame() {
+            assertThat(id).isNotEmpty();
         }
 
         @Test
-        @DisplayName("We create a new game with the /api/game end-point")
+        @DisplayName("The new game should contain no moves")
         @Order(2)
-        void creatingANewGame() {
-            String id = gameAPI.newGame();
-            assertThat(id).isNotEmpty();
+        void aNewGameShouldHaveAnEmptyHistory() {
+            gameAPI.gameHistory(id).isEmpty();
         }
     }
 
     @DisplayName("When playing the game")
     @Nested
     class PlayingTheGame {
-        @BeforeEach
-        void newGame() {
-            RestAssured.baseURI = "http://localhost:9000";
-            id = gameAPI.newGame();
-        }
 
         @Test
         @DisplayName("We make a move by posting a word to the with the /api/game/{id}/word end-point")
@@ -77,8 +79,23 @@ class APIExamples {
         }
 
         @Test
-        @DisplayName("At any time we can check the current state of the game by sending a GET to /api/game/{id}/history")
+        @DisplayName("Invalid words should be rejected with a 403 error")
+        @Order(3)
+        void makingAMoveWithAnInvalidWord() {
+            assertThat(gameAPI.playWord(id, "ABCDE").statusCode()).isEqualTo(403);
+        }
+
+        @Test
+        @DisplayName("When we make a move, the move is recorded in the game history")
         @Order(4)
+        void movesAreRecordedInGameHistory() {
+            gameAPI.playWord(id, "FEAST");
+            assertThat(gameAPI.gameHistory(id)).hasSize(1);
+        }
+
+        @Test
+        @DisplayName("We can check the current state of the game by sending a GET to /api/game/{id}/history")
+        @Order(5)
         void checkingTheStateOfTheGame() {
             gameAPI.playWord(id, "FEAST");
             gameAPI.playWord(id, "BEAST");
@@ -90,21 +107,21 @@ class APIExamples {
 
         @Test
         @DisplayName("We can get the current game result by sending a GET to /api/game/{id}/result")
-        @Order(5)
+        @Order(6)
         void fetchingTheGameState() {
             assertThat(gameAPI.resultFor(id)).isEqualTo(GameResult.IN_PROGRESS);
         }
 
         @Test
         @DisplayName("If we try to ask for the answer by sending a GET to /api/game/{id}/answer")
-        @Order(6)
+        @Order(7)
         void tryingToRevealTheAnswerTooSoon() {
             assertThat(gameAPI.requestAnswer(id).statusCode()).isEqualTo(403);
         }
 
 
         @Test
-        @Order(7)
+        @Order(8)
         @DisplayName("This is an example of a complete game played via the API")
         void playingAGame() {
 
@@ -134,6 +151,7 @@ class APIExamples {
 
     @DisplayName("When a player asks for hints")
     @Nested
+    @Tag("hints")
     class WhenAskingForHints {
         @Test
         @DisplayName("We can request a hint for the current game via GET /api/game/{id}/hint")
