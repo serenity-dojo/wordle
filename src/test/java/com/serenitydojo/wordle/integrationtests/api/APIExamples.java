@@ -1,5 +1,8 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
+import com.serenitydojo.wordle.WordleGame;
+import com.serenitydojo.wordle.dictionary.WordleDictionary;
+import com.serenitydojo.wordle.model.CellColor;
 import io.restassured.RestAssured;
 import net.serenitybdd.annotations.Description;
 import net.serenitybdd.annotations.Steps;
@@ -16,6 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
@@ -36,7 +40,6 @@ class APIExamples {
     @BeforeEach
     void newGame() {
         RestAssured.baseURI = "http://localhost:9000";
-        id = gameAPI.newGame();
     }
 
     @Test
@@ -48,9 +51,14 @@ class APIExamples {
                 .statusCode(200);
     }
 
-    @DisplayName("When creating a new game")
+    @DisplayName("Creating a new game")
     @Nested
     class CreatingANewGame {
+
+        @BeforeEach
+        void newGame() {
+            id = gameAPI.newGame();
+        }
 
         @Test
         @DisplayName("Each new game should be assigned a unique id")
@@ -67,9 +75,14 @@ class APIExamples {
         }
     }
 
-    @DisplayName("When playing the game")
+    @DisplayName("Playing the game")
     @Nested
     class PlayingTheGame {
+
+        @BeforeEach
+        void newGame() {
+            id = gameAPI.newGame();
+        }
 
         @Test
         @DisplayName("We make a move by posting a word to the with the /api/game/{id}/word end-point")
@@ -149,7 +162,31 @@ class APIExamples {
         }
     }
 
-    @DisplayName("When a player asks for hints")
+    @DisplayName("Showing game history")
+    @Nested
+    class ShowingGameHistory {
+
+        @ParameterizedTest(name = "When the word is {0} and the guess is {1}, the row is {2}, {3}, {4}, {5}, {6}")
+        @CsvSource({
+                "CRYPT, ORGAN, GRAY, GREEN, GRAY, GRAY, GRAY",
+                "CRYPT, BRACE, GRAY, GREEN, GRAY, YELLOW, GRAY",
+                "CRYPT, CRYPT, GREEN, GREEN, GREEN, GREEN, GREEN",})
+        void shouldShowRowOfColoredCells(String word,
+                                         String guess,
+                                         String cell1,
+                                         String cell2,
+                                         String cell3,
+                                         String cell4,
+                                         String cell5) {
+            id = gameAPI.newGameWith(word);
+            gameAPI.playWord(id, guess);
+            List<List<String>> gameHistory = gameAPI.gameHistory(id);
+            List<String> row = gameHistory.get(0);
+            assertThat(row).containsExactly(cell1, cell2, cell3, cell4, cell5);
+        }
+    }
+
+    @DisplayName("Asking for hints")
     @Nested
     @Tag("hints")
     class WhenAskingForHints {
