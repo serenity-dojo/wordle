@@ -1,5 +1,0 @@
-"Story","Title","Result","Date","Stability","Duration (s)"
-"When rendering cells","Should show correct cells as green","SUCCESS","2023-08-08T15:15:26.077482147Z[Etc/UTC]","0.0","0.01"
-"When rendering cells","Should show cells with color","SUCCESS","2023-08-08T15:15:35.816864155Z[Etc/UTC]","0.0","0.02"
-"When rendering cells","Should show cells with color","SUCCESS","2023-08-08T15:15:35.816864155Z[Etc/UTC]","0.0","0.03"
-"When rendering cells","Should show cells with color","SUCCESS","2023-08-08T15:15:35.816864155Z[Etc/UTC]","0.0","0.02"

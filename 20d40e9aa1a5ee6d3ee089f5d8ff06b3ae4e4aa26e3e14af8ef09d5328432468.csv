@@ -1,6 +1,0 @@
-"Story","Title","Result","Date","Stability","Duration (s)"
-"Displaying the results of a game","Should show misplaced cells as yellow","SUCCESS","2023-08-08T15:15:24.864247679Z[Etc/UTC]","0.0","0.14"
-"Displaying the results of a game","Should show incorrect cells as gray","SUCCESS","2023-08-08T15:15:25.296411868Z[Etc/UTC]","0.0","0.02"
-"A row of cells contains cells of different colors","Should show row of colored cells","SUCCESS","2023-08-08T15:15:35.185221272Z[Etc/UTC]","0.0","0.16"
-"When rendering cells","Should show correct cells as green","SUCCESS","2023-08-08T15:15:26.077482147Z[Etc/UTC]","0.0","0.01"
-"When rendering cells","Should show cells with color","SUCCESS","2023-08-08T15:15:35.816864155Z[Etc/UTC]","0.0","0.07"
