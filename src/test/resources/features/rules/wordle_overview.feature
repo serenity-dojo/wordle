@@ -1,4 +1,4 @@
-Feature: Wordle Overview
+Feature: Game Overview
 
   The rules of Wordle are simple. Your objective is to guess a secret five-letter word in as few guesses as possible.
   To submit a guess, type any five-letter word and press enter.

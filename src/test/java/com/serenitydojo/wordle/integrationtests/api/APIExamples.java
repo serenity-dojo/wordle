@@ -1,8 +1,5 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
-import com.serenitydojo.wordle.WordleGame;
-import com.serenitydojo.wordle.dictionary.WordleDictionary;
-import com.serenitydojo.wordle.model.CellColor;
 import io.restassured.RestAssured;
 import net.serenitybdd.annotations.Description;
 import net.serenitybdd.annotations.Steps;

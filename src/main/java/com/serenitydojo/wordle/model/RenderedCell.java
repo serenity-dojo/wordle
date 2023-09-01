@@ -15,7 +15,7 @@ public class RenderedCell {
         char letter = proposedWord.charAt(position);
         int numberOfMatches = countMatches(letter, targetWord);
 
-        if (targetWord.charAt(position) == letter) {
+        if (Character.toUpperCase(targetWord.charAt(position)) == Character.toUpperCase(letter)) {
             return CellColor.GREEN;
         } else if (targetWord.contains(Character.toString(letter))) {
 
