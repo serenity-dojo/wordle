@@ -18,6 +18,17 @@ Feature: Game Rules
       Then the squares should be colored as follows:
         | GRAY | GRAY | GRAY | GREEN | GRAY |
 
+    Scenario Template: Letters should be displayed with the correct color
+      Given the target word is "<target word>"
+      When the player plays "<player input>"
+      Then the squares should be colored as follows:
+        | <cell 1> | <cell 2> | <cell 3> | <cell 4> | <cell 5> |
+      Examples:
+        | target word | player input | cell 1 | cell 2 | cell 3 | cell 4 | cell 5 |
+        | CRYPT       | CRYPT        | GREEN  | GREEN  | GREEN  | GREEN  | GREEN  |
+        | CRYPT       | BOARD        | GRAY   | GRAY   | GRAY   | YELLOW | GRAY   |
+        | CRYPT       | CROWN        | GREEN  | GREEN  | GRAY   | GRAY   | GRAY   |
+
   Rule: Incorrectly placed letters appear in yellow
     Example: Letters that are present but not in the right place
       Given the target word is:

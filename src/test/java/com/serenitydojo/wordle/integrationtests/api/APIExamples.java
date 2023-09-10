@@ -1,5 +1,7 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
+import com.serenitydojo.wordle.WordleGame;
+import com.serenitydojo.wordle.model.CellColor;
 import io.restassured.RestAssured;
 import net.serenitybdd.annotations.Description;
 import net.serenitybdd.annotations.Steps;
@@ -16,6 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -152,6 +155,25 @@ class APIExamples {
             Serenity.reportThat("The player wins",
                     () -> assertThat(gameAPI.resultFor(id)).isEqualTo(GameResult.WIN)
             );
+        }
+
+
+        @ParameterizedTest
+        @CsvFileSource(resources = "/examples/rendered_words.csv", numLinesToSkip = 1)
+        @DisplayName("Each cell should be rendered in the correct color")
+        void should_render_each_letter_with_the_appropriate_color(String word,
+                                                                  String guess,
+                                                                  String cell1,
+                                                                  String cell2,
+                                                                  String cell3,
+                                                                  String cell4,
+                                                                  String cell5) {
+            id = gameAPI.newGameWith(word);
+
+            gameAPI.playWord(id, guess);
+
+            List<List<String>> moves = gameAPI.gameHistory(id);
+            assertThat(moves.get(0)).containsExactly(cell1, cell2, cell3, cell4, cell5);
         }
 
         private boolean isAValidCellValue(String cell) {

@@ -32,6 +32,11 @@ public class WordleStepDefinitions {
         );
     }
 
+    @When("the player plays {string}")
+    public void the_player_plays(String word) {
+        wordleGame.play(word);
+    }
+
     Throwable exceptionThrownAfterAnInvalidAttempt;
     String attemptedWord;
 
