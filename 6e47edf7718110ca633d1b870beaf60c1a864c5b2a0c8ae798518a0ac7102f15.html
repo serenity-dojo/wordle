@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>We can check the current state of the game by sending a GET to /api/game/{id}/history</title>
+    <title>Letters should be displayed with the correct color</title>
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
@@ -122,12 +122,10 @@
             <a href="index.html" class="breadcrumbs">Home</a>
 
  <!-- inflection.of(breadcrumb.displayName).asATitle()-->
-            > <a href="125ad96fb2b6f80113c246e3be7e5f5be7ef7a6fd43423341451bff7ac62fde6.html">Api</a>
+            > <a href="4b6e177ee0d7ea018b9db4cdf6cde763f58f158e8d2a6b2792336562576d800f.html">Wordle Rules</a>
  <!-- inflection.of(breadcrumb.displayName).asATitle()-->
-            > <a href="774c404f9e585328280cc6681217bf10146571de7551e2fddb85dcff6c1ff78b.html">Wordle API Specs</a>
- <!-- inflection.of(breadcrumb.displayName).asATitle()-->
-            > <a href="70076799e0aea44991786dd76b8ba4e0d99967fd85988a006bc0eab4e9ed93b3.html">Playing the game</a>
-        > We can check the current state of the game by sending a GET to /api/game/{id}/history
+            > <a href="189bf7691f1b2c790f5d22437472c2697629a45bcfaa104bffb0b060b0fe38c4.html">Game Rules</a>
+        > Letters should be displayed with the correct color
         </span>
         </div>
         <div class="rightbg"></div>
@@ -169,7 +167,7 @@
                                 <div>
                                     <h3 class="discreet-story-header">
                                         <i class="fs-2 bi bi-chat-left-quote title-icon"></i>
-                                        <span class="story-header-title">Playing The Game </span>
+                                        <span class="story-header-title">Game Rules </span>
                                     </h3>
 
                                 </div>
@@ -177,12 +175,6 @@
                         </td>
                         <td valign="top">
                             <p class="tag">
-                                    <span class="badge example-tag tag-badge" style="background:default;">
-                                    <i class="bi bi-tag-fill"></i>&nbsp;
-                                        <a class="tagLink" style="background:default;"
-                                           href="3ce0557593d8474e32371d0b17beb9dda2592f8536d3313c16285189516e3537.html">Integration
-                                        </a>
-                                </span>
                                     <span class="badge example-tag tag-badge" style="background:default;">
                                     <i class="bi bi-tag-fill"></i>&nbsp;
                                         <a class="tagLink" style="background:default;"
@@ -203,7 +195,7 @@
                             <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon fa-2x' title='SUCCESS'></i></a></span>
                             <span class="test-case-title">
                                 <span class="success-color">
-                                    We can check the current state of the game by sending a GET to /api/game/{id}/history
+                                    Letters should be displayed with the correct color
                                         <span class="related-issue-title"></span>
                                 </span>
                             </span>
@@ -221,9 +213,113 @@
 
 <div class="clr"></div>
 
+    <div class="story-title">
+        <h3 class="story-header">Scenario Outline</h3>
+
+        <div class="scenario">Given the target word is "&lt;target word&gt;"<br>When the player plays "&lt;player input&gt;"<br>Then the squares should be colored as follows:<br><table class='embedded'><tbody><tr><td>&lt;cell 1&gt;</td><td>&lt;cell 2&gt;</td><td>&lt;cell 3&gt;</td><td>&lt;cell 4&gt;</td><td>&lt;cell 5&gt;</td></tr></tbody></table></div>
+
+    </div>
 
 <div id="beforetable"></div>
 
+
+        <h3 class="story-header">Examples:&nbsp;</h3>
+            <div class="requirementNarrative"></div>
+
+
+            <p class="example-tag">
+            </p>
+
+        <div class="example-table test-report">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                        <th>Target Word</th>
+                        <th>Player Input</th>
+                        <th>Cell 1</th>
+                        <th>Cell 2</th>
+                        <th>Cell 3</th>
+                        <th>Cell 4</th>
+                        <th>Cell 5</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="test-SUCCESS"><a href="#0">1</a></td>
+                            <td class="test-SUCCESS"><a
+                                        href="#0">CRYPT</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#0">CRYPT</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#0">GREEN</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#0">GREEN</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#0">GREEN</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#0">GREEN</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#0">GREEN</a>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td class="test-SUCCESS"><a href="#1">2</a></td>
+                            <td class="test-SUCCESS"><a
+                                        href="#1">CRYPT</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#1">BOARD</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#1">GRAY</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#1">GRAY</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#1">GRAY</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#1">YELLOW</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#1">GRAY</a>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td class="test-SUCCESS"><a href="#2">3</a></td>
+                            <td class="test-SUCCESS"><a
+                                        href="#2">CRYPT</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#2">CROWN</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#2">GREEN</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#2">GREEN</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#2">GRAY</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#2">GRAY</a>
+                            </td>
+                            <td class="test-SUCCESS"><a
+                                        href="#2">GRAY</a>
+                            </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
 <div id="tablecontents">
     <div>
@@ -246,24 +342,102 @@
 
                     <td width="50" class="step-icon">
                         <a name="0"></a>
-                            <span style="margin-left: 20px;"
-                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection0')"
+                               style="display:block">
+                                <i class="bi bi-caret-right-square imgstepSection0 success-icon"
+                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
+                            </a>
                     </td>
 
                     <td class="step-description-column">
                         <div class="step-description">
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection0')"
+                               style="display:block;">
                                 <span class="top-level-step">
-                                                Create a new game
+                                                1: Letters should be displayed with the correct color ({target word=CRYPT, player input=CRYPT, cell 1=GREEN, cell 2=GREEN, cell 3=GREEN, cell 4=GREEN, cell 5=GREEN})
                                         </span>
+                            </a>
                             <span class="evidence">
                                 </span>
                         </div>
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">009ms</span></td>
+                    <td width="100"><span class="top-level-step">008ms</span></td>
                 </tr>
+                    <tr>
+                        <td colspan="5">
+                            <table id="stepSection0" class="step-table-nested" style="display:none;">
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="0-0"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                Given the target word is "CRYPT"
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="0-1"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                When the player plays "CRYPT"
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step"></span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="0-2"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                Then the squares should be colored as follows:<br><table class='embedded'><tbody><tr><td>GREEN</td><td>GREEN</td><td>GREEN</td><td>GREEN</td><td>GREEN</td></tr></tbody></table>
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">004ms</span></td>
+                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
                 <tr class="test-SUCCESS">
 
                     <td width="50" class="step-icon">
@@ -280,7 +454,7 @@
                             <a href="javaScript:void(0)" onClick="toggleDiv('stepSection1')"
                                style="display:block;">
                                 <span class="top-level-step">
-                                                Play the word 'FEAST'
+                                                2: Letters should be displayed with the correct color ({target word=CRYPT, player input=BOARD, cell 1=GRAY, cell 2=GRAY, cell 3=GRAY, cell 4=YELLOW, cell 5=GRAY})
                                         </span>
                             </a>
                             <span class="evidence">
@@ -289,7 +463,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">015ms</span></td>
+                    <td width="100"><span class="top-level-step">007ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -306,44 +480,59 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                POST http://localhost:9000/api/game/20/word
+                                                Given the target word is "CRYPT"
                                         </span>
                             <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-3">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:9000/api/game/20/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>FEAST</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sun, 10 Sep 2023 19:12:01 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
                                 </span>
                         </div>
                     </td>
 
                     <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">002ms</span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="1-1"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                When the player plays "BOARD"
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step"></span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="1-2"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                Then the squares should be colored as follows:<br><table class='embedded'><tbody><tr><td>GRAY</td><td>GRAY</td><td>GRAY</td><td>YELLOW</td><td>GRAY</td></tr></tbody></table>
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
                 </tr>
 
                             </table>
@@ -365,7 +554,7 @@
                             <a href="javaScript:void(0)" onClick="toggleDiv('stepSection2')"
                                style="display:block;">
                                 <span class="top-level-step">
-                                                Play the word 'BEAST'
+                                                3: Letters should be displayed with the correct color ({target word=CRYPT, player input=CROWN, cell 1=GREEN, cell 2=GREEN, cell 3=GRAY, cell 4=GRAY, cell 5=GRAY})
                                         </span>
                             </a>
                             <span class="evidence">
@@ -374,7 +563,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">016ms</span></td>
+                    <td width="100"><span class="top-level-step">019ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -391,83 +580,20 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                POST http://localhost:9000/api/game/20/word
+                                                Given the target word is "CRYPT"
                                         </span>
                             <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-5">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:9000/api/game/20/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>BEAST</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sun, 10 Sep 2023 19:12:01 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
                                 </span>
                         </div>
                     </td>
 
                     <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">002ms</span></td>
+                    <td width="100"><span class="nested-group-step">015ms</span></td>
                 </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="3"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection3')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection3 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection3')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Get the game history
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">019ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection3" class="step-table-nested" style="display:none;">
                 <tr class="test-SUCCESS">
 
                     <td width="70" class="step-icon">
-                        <a name="3-0"></a>
+                        <a name="2-1"></a>
                             <span style="margin-left: 40px;"
                                   class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                 </span>
@@ -476,36 +602,31 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                GET http://localhost:9000/api/game/20/history
+                                                When the player plays "CROWN"
                                         </span>
                             <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-7">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-7">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:9000/api/game/20/history</p>
-                                    <p>Status code: 200</p>
-                                    <p>Content Type: null</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Accept=*/*</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sun, 10 Sep 2023 19:12:01 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
-                            </div>
+                                </span>
                         </div>
-                    </div>
-                </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step"></span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="2-2"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                Then the squares should be colored as follows:<br><table class='embedded'><tbody><tr><td>GREEN</td><td>GREEN</td><td>GRAY</td><td>GRAY</td><td>GRAY</td></tr></tbody></table>
                                         </span>
+                            <span class="evidence">
                                 </span>
                         </div>
                     </td>
@@ -520,7 +641,7 @@
             <tr class="test-SUCCESS">
                     <td colspan="2"></td>
                 <td width="130"><span class="top-level-step"><em>SUCCESS</em></span></td>
-                <td width="100"><span class="top-level-step"><em>0.01s</em></span></td>
+                <td width="100"><span class="top-level-step"><em>0.06s</em></span></td>
             </tr>
 
         </table>
