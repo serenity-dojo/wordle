@@ -217,18 +217,19 @@
                             <goal>repackage</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>pre-integration-test</id>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>post-integration-test</id>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
+<!-- THIS IS ONLY REQUIRED IF WE WANT TO USE PURE REST ASSURED TO TEST THE SERVICES -->
+<!--                    <execution>-->
+<!--                        <id>pre-integration-test</id>-->
+<!--                        <goals>-->
+<!--                            <goal>start</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>post-integration-test</id>-->
+<!--                        <goals>-->
+<!--                            <goal>stop</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
                 </executions>
             </plugin>
             <plugin>

@@ -1,6 +1,7 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
 import com.serenitydojo.wordle.model.GameResult;
+import io.restassured.RestAssured;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.core.Serenity;
@@ -14,6 +15,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -23,24 +25,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SerenityJUnit5Extension.class)
 @DisplayName("Playing the game")
 @Tag("integration")
-@SpringBootTest(classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
-@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
 public class PlayingTheGame {
 
-    @Autowired
-    private MockMvc mockMvc;
-
     String id;
+
+    @LocalServerPort
+    private int port;
 
     @Steps
     GameFacade gameFacade;
 
     @BeforeEach
     void newGame() {
-        RestAssuredMockMvc.mockMvc(mockMvc);
+        RestAssured.baseURI = "http://localhost:" + port;
         id = gameFacade.newGame();
     }
-    
+
     @Test
     @DisplayName("We make a move by posting a word to the with the /api/game/{id}/word end-point")
     @Order(3)

@@ -1,5 +1,6 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
+import io.restassured.RestAssured;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.annotations.Steps;
@@ -11,6 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -22,23 +24,22 @@ import static org.hamcrest.Matchers.equalTo;
 @ExtendWith(SerenityJUnit5Extension.class)
 @DisplayName("Getting hints")
 @Tag("integration")
-@SpringBootTest(classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
-@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
 public class GettingHints {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @LocalServerPort
+    private int port;
+
+    @BeforeEach
+    public void setup() {
+        RestAssured.baseURI= "http://localhost:" + port;
+    }
 
     String id;
 
     @Steps
     GameFacade gameFacade;
-
-    @BeforeEach
-    void newGame() {
-        RestAssuredMockMvc.mockMvc(mockMvc);
-        id = gameFacade.newGame();
-    }
 
     @Test
     @DisplayName("We can request a hint for the current game via GET /api/game/{id}/hint")
