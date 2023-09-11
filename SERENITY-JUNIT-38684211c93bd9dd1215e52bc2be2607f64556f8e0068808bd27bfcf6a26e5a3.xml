@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="com.serenitydojo.wordle.integrationtests.api.CreatingANewGame" skipped="0" tests="1" time="0.01" timestamp="2023-09-11 08:22:51"><testcase classname="com.serenitydojo.wordle.integrationtests.api.CreatingANewGame" name="The new game should initially be In Progress"/></testsuite>
