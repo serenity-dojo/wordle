@@ -122,6 +122,6 @@ public class WhenExercisingTheGameWithPropertyBasedTesting {
 
     @Provide
     Arbitrary<Character> incorrectLetters() {
-        return Arbitraries.chars().filter(letter -> !letter.equals('C'));
+        return Arbitraries.chars().filter(letter -> !(letter == 'C' || letter == 'c'));
     }
 }

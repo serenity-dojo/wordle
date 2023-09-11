@@ -30,8 +30,6 @@ public class WordleGame {
         ensureGameIsNotOver();
         ensureWordIsValidFor(attemptedWord);
 
-//        String normalizedWord = attemptedWord.toUpperCase();
-
         List<CellColor> renderedAttempt = new ArrayList<>();
         for (int pos = 0; pos < attemptedWord.length(); pos++) {
             CellColor cellColor = RenderedCell.forTargetWord(targetWord).forEntry(attemptedWord, pos);
