@@ -4,7 +4,7 @@ public class RenderedCell {
     private final String targetWord;
 
     public RenderedCell(String targetWord) {
-        this.targetWord = targetWord;
+        this.targetWord = targetWord.toLowerCase(); // Convert to lower-case once
     }
 
     public static RenderedCell forTargetWord(String targetWord) {
@@ -13,37 +13,31 @@ public class RenderedCell {
 
     public CellColor forEntry(String proposedWord, int position) {
         char letter = proposedWord.charAt(position);
-        int numberOfMatches = countMatches(letter, targetWord);
+        String letterStr = Character.toString(letter).toLowerCase(); // Convert to string once
 
-        if (Character.toUpperCase(targetWord.charAt(position)) == Character.toUpperCase(letter)) {
+        if (isExactMatch(letterStr, position)) {
             return CellColor.GREEN;
-        } else if (targetWord.contains(Character.toString(letter))) {
-
-            int proposedLetterCount = 0;
-            for(int i = 0; i <= position; i++) {
-                if (proposedWord.charAt(i) == letter) {
-                    proposedLetterCount++;
-                }
-            }
-            if (proposedLetterCount <= numberOfMatches) {
-                return CellColor.YELLOW;
-            } else {
-                return CellColor.GRAY;
-            }
-        } else if (!targetWord.contains(Character.toString(letter))) {
+        } else if (targetWord.contains(letterStr)) {
+            return determineColorForContainedLetter(proposedWord, letterStr, position);
+        } else {
             return CellColor.GRAY;
         }
-        return null;
     }
 
-    private int countMatches(char letter, String word) {
-        int numberOfMatches = 0;
-        for(int pos = 0; pos < word.length(); pos++) {
-            if (word.charAt(pos) == letter) {
-                numberOfMatches++;
-            }
-        }
-        return numberOfMatches;
+    private boolean isExactMatch(String letter, int position) {
+        return targetWord.charAt(position) == letter.charAt(0);
+    }
+
+    private CellColor determineColorForContainedLetter(String proposedWord, String letter, int position) {
+        long proposedLetterCount = proposedWord.toLowerCase().substring(0, position + 1)
+                .chars()
+                .filter(c -> c == letter.charAt(0))
+                .count();
+        long numberOfMatches = targetWord.chars()
+                .filter(c -> c == letter.charAt(0))
+                .count();
+
+        return proposedLetterCount <= numberOfMatches ? CellColor.YELLOW : CellColor.GRAY;
     }
 
 }

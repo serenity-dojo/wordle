@@ -1,6 +1,7 @@
 package com.serenitydojo.wordle.acceptancetests.stepdefinitions;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,6 +20,10 @@ public class WordleStepDefinitions {
     WordleGame wordleGame;
     WordleDictionary dictionary = new WordleDictionary();
 
+    @Before
+    public void before() {
+        System.out.println("CUCUMBER SCENARIO RUNNING IN THREAD " + Thread.currentThread());
+    }
     @Given("the target word is:")
     public void the_target_word_is(DataTable targetWord) {
         String target = String.join("", targetWord.asLists().get(0));

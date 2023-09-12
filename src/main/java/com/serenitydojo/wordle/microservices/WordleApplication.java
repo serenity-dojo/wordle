@@ -18,6 +18,7 @@ public class WordleApplication {
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
             System.out.println(FigletFont.convertOneLine("WORDLE APP"));
+            System.out.println("WORDLE APP STARTED");
         };
     }
 }
