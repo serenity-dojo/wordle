@@ -1,0 +1,3 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Game Overview","Player runs out of tries and loses","SUCCESS","2023-09-20T13:42:10.843765901Z[Etc/UTC]","0.0","0.52"
+"Game Overview","Player guesses the right word and wins","SUCCESS","2023-09-20T13:42:10.8456686Z[Etc/UTC]","0.0","0.55"
