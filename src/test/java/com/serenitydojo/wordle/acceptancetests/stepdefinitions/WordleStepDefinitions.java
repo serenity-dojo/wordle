@@ -2,6 +2,7 @@ package com.serenitydojo.wordle.acceptancetests.stepdefinitions;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,6 +11,7 @@ import com.serenitydojo.wordle.WordleGame;
 import com.serenitydojo.wordle.dictionary.WordleDictionary;
 import com.serenitydojo.wordle.model.CellColor;
 import com.serenitydojo.wordle.model.GameResult;
+import net.serenitybdd.model.buildinfo.BuildInfo;
 
 import java.util.List;
 
@@ -19,6 +21,16 @@ public class WordleStepDefinitions {
 
     WordleGame wordleGame;
     WordleDictionary dictionary = new WordleDictionary();
+
+    @BeforeAll
+    public static void recordToggles() {
+        BuildInfo.section("Toggles").setProperty("toggle-custom-ads-v2", "on");
+        BuildInfo.section("Toggles").setProperty("toggle-user-feedback", "on");
+
+        BuildInfo.section("Versions").setProperty("game-history-service", "1.2.3");
+        BuildInfo.section("Versions").setProperty("player-service", "3.4.5");
+        BuildInfo.section("Versions").setProperty("related-products-service", "2.3.4");
+    }
 
     @Before
     public void before() {

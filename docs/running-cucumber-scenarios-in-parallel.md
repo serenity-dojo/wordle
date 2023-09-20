@@ -97,11 +97,11 @@ cucumber.plugin=io.cucumber.core.plugin.SerenityReporterParallel,pretty
 Sometimes you might want to limit the number of threads explicitly. This can be useful if you are running tests on a Selenium Grid and don't want to overload the Grid nodes, for example. In the following example, Cucumber will limit the total number of threads to 5. (Note that while the `fixed.max-pool-size` propertie effectively limits the maximum number of concurrent threads, Cucumber does not guarantee that the number of concurrently executing scenarios will not exceed this. See [junit5/#3108](https://github.com/junit-team/junit5/issues/3108) for details.)
 
 ```properties
-#cucumber.execution.parallel.enabled=true
-#cucumber.execution.parallel.config.strategy=fixed
-#cucumber.execution.parallel.config.fixed.parallelism=5
-#cucumber.execution.parallel.config.fixed.max-pool-size=5
-#cucumber.plugin=io.cucumber.core.plugin.SerenityReporterParallel,pretty
+cucumber.execution.parallel.enabled=true
+cucumber.execution.parallel.config.strategy=fixed
+cucumber.execution.parallel.config.fixed.parallelism=5
+cucumber.execution.parallel.config.fixed.max-pool-size=5
+cucumber.plugin=io.cucumber.core.plugin.SerenityReporterParallel,pretty
 ```
 
 ## Run individal tests in isolation
@@ -132,3 +132,4 @@ Next, set the `cucumber.execution.exclusive-resources.isolated.read-write` prope
 ```
 cucumber.execution.exclusive-resources.isolated.read-write=org.junit.platform.engine.support.hierarchical.ExclusiveResource.GLOBAL_KEY
 ```
+

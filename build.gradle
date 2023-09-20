@@ -1,0 +1,76 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:4.0.5"
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+
+sourceCompatibility = 18
+targetCompatibility = 18
+
+ext {
+    serenityVersion = '4.0.6-SNAPSHOT'
+    junitPlatformVersion = '1.10.0'
+    cucumberJunitPlatformEngineVersion = '7.13.0'
+    junitJupiterEngineVersion = '5.10.0'
+    logbackVersion = '1.2.10'
+    assertjCoreVersion = '3.22.0'
+}
+
+dependencies {
+    // Serenity dependencies
+    implementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-junit:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-ensure:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-saucelabs:${serenityVersion}"
+
+    // JUnit platform and engine dependencies
+    testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVersion}"
+    testImplementation "io.cucumber:cucumber-junit-platform-engine:${cucumberJunitPlatformEngineVersion}"
+    testImplementation "org.junit.platform:junit-platform-suite:${junitPlatformVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitJupiterEngineVersion}"
+    testImplementation "org.junit.vintage:junit-vintage-engine:${junitJupiterEngineVersion}"
+
+    // Other dependencies
+    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+    testImplementation "org.assertj:assertj-core:${assertjCoreVersion}"
+}
+
+test {
+    useJUnitPlatform()
+//    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+    maxParallelForks = 8
+}
+
+serenity {
+    // Specify the root package of any JUnit acceptance tests
+    testRoot = "net.serenitybdd.demos.todos"
+
+    // Specify the root directory of any Cucumber feature files
+    requirementsDir = "src/test/resources/features"
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
