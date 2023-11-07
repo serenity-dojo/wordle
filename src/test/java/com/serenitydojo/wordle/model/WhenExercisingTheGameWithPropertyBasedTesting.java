@@ -2,7 +2,6 @@ package com.serenitydojo.wordle.model;
 
 import com.serenitydojo.wordle.WordleGame;
 import com.serenitydojo.wordle.dictionary.WordleDictionary;
-import io.cucumber.java.sl.Ce;
 import net.jqwik.api.*;
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +62,7 @@ public class WhenExercisingTheGameWithPropertyBasedTesting {
 
         game.play(guess);
         List<CellColor> cells = game.getRenderedCells().get(0);
-        assertThat(cells).contains(CellColor.GRAY, CellColor.GRAY, CellColor.GREEN, CellColor.GRAY, CellColor.GRAY);
+        assertThat(cells).contains(CellColor.BLACK, CellColor.BLACK, CellColor.GREEN, CellColor.BLACK, CellColor.BLACK);
     }
 
     @Property
@@ -103,7 +102,7 @@ public class WhenExercisingTheGameWithPropertyBasedTesting {
                 remainingLetters.remove(guess.charAt(i));
             } else {
                 // Any other letters should be grey
-                expectedColors[i] = CellColor.GRAY;
+                expectedColors[i] = CellColor.BLACK;
             }
         }
         return Arrays.asList(expectedColors);

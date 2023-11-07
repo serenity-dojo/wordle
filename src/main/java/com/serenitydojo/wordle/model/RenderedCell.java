@@ -20,7 +20,7 @@ public class RenderedCell {
         } else if (targetWord.contains(letterStr)) {
             return determineColorForContainedLetter(proposedWord, letterStr, position);
         } else {
-            return CellColor.GRAY;
+            return CellColor.BLACK;
         }
     }
 
@@ -37,7 +37,7 @@ public class RenderedCell {
                 .filter(c -> c == letter.charAt(0))
                 .count();
 
-        return proposedLetterCount <= numberOfMatches ? CellColor.YELLOW : CellColor.GRAY;
+        return proposedLetterCount <= numberOfMatches ? CellColor.YELLOW : CellColor.BLACK;
     }
 
 }

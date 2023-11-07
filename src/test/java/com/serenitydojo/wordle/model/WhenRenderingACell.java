@@ -5,9 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("When rendering a cell")
@@ -27,7 +24,7 @@ class WhenRenderingACell {
     @Test
     @DisplayName("Matching letters in the wrong spot are Yellow")
     void nonMatchingLetters() {
-        assertThat(RenderedCell.forTargetWord("weary").forEntry("karat",0)).isEqualTo(CellColor.GRAY);
+        assertThat(RenderedCell.forTargetWord("weary").forEntry("karat",0)).isEqualTo(CellColor.BLACK);
     }
 
     @DisplayName("When the same letter is tried twice")
@@ -43,11 +40,11 @@ class WhenRenderingACell {
             }
             @Test
             void secondMatch() {
-                assertThat(RenderedCell.forTargetWord("quart").forEntry("karat",3)).isEqualTo(CellColor.GRAY);
+                assertThat(RenderedCell.forTargetWord("quart").forEntry("karat",3)).isEqualTo(CellColor.BLACK);
             }
             @Test
             void thridMatch() {
-                assertThat(RenderedCell.forTargetWord("quart").forEntry("karaa",4)).isEqualTo(CellColor.GRAY);
+                assertThat(RenderedCell.forTargetWord("quart").forEntry("karaa",4)).isEqualTo(CellColor.BLACK);
             }
         }
     }

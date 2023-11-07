@@ -66,7 +66,7 @@ public class WhenInteractingWithTheGameService {
 
         var playHistory = gameService.getHistory(1);
         assertThat(playHistory).hasSize(1);
-        assertThat(playHistory.get(0)).containsExactly(CellColor.GREEN, CellColor.GREEN, CellColor.GRAY, CellColor.GRAY, CellColor.GREEN);
+        assertThat(playHistory.get(0)).containsExactly(CellColor.GREEN, CellColor.GREEN, CellColor.BLACK, CellColor.BLACK, CellColor.GREEN);
 
     }
 

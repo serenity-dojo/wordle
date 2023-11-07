@@ -105,8 +105,8 @@ public class PlayingTheGame {
         Serenity.reportThat("The game history should be correctly recorded",
                 () -> {
                     SoftAssertions softly = new SoftAssertions();
-                    softly.assertThat(gameFacade.getTheGameHistory(id).get(0)).contains("GREEN", "GRAY", "GREEN", "GRAY", "GRAY");
-                    softly.assertThat(gameFacade.getTheGameHistory(id).get(1)).contains("GREEN", "GRAY", "GREEN", "GRAY", "YELLOW");
+                    softly.assertThat(gameFacade.getTheGameHistory(id).get(0)).contains("GREEN", "BLACK", "GREEN", "BLACK", "BLACK");
+                    softly.assertThat(gameFacade.getTheGameHistory(id).get(1)).contains("GREEN", "BLACK", "GREEN", "BLACK", "YELLOW");
                     softly.assertThat(gameFacade.getTheGameHistory(id).get(2)).contains("GREEN", "GREEN", "GREEN", "GREEN", "GREEN");
                     softly.assertAll();
                 }
@@ -136,13 +136,13 @@ public class PlayingTheGame {
     }
 
     private boolean isAValidCellValue(String cell) {
-        return cell.equals("GRAY") || cell.equals("GREEN") || cell.equals("YELLOW");
+        return cell.equals("BLACK") || cell.equals("GREEN") || cell.equals("YELLOW");
     }
 
     @ParameterizedTest(name = "When the word is {0} and the guess is {1}, the row is {2}, {3}, {4}, {5}, {6}")
     @CsvSource({
-            "CRYPT, ORGAN, GRAY, GREEN, GRAY, GRAY, GRAY",
-            "CRYPT, BRACE, GRAY, GREEN, GRAY, YELLOW, GRAY",
+            "CRYPT, ORGAN, BLACK, GREEN, BLACK, BLACK, BLACK",
+            "CRYPT, BRACE, BLACK, GREEN, BLACK, YELLOW, BLACK",
             "CRYPT, CRYPT, GREEN, GREEN, GREEN, GREEN, GREEN",})
     void shouldShowRowOfColoredCells(String word,
                                      String guess,
