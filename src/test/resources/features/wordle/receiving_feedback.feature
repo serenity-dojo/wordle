@@ -19,11 +19,11 @@ Feature: Receiving Feedback
       Examples: Letters that do not exist in the word are color coded black.
         | target | guess | feedback_1 | feedback_2 | feedback_3 | feedback_4 | feedback_5 |
         | FOUND  | CHAIR | BLACK      | BLACK      | BLACK      | BLACK      | BLACK      |
-        | WEARY  | CHAIR | BLACK      | BLACK      | BLACK      | BLACK      | BLACK      |
+        | WEARY  | CHAIR | BLACK      | BLACK      | GREEN      | BLACK      | YELLOW     |
 
       Examples: Letters that exist in the word and are in the correct position are color coded green.
         | target | guess | feedback_1 | feedback_2 | feedback_3 | feedback_4 | feedback_5 |
-        | FOUND  | FINDS | GREEN      | BLACK      | BLACK      | BLACK      | BLACK      |
+        | FOUND  | FINDS | GREEN      | BLACK      | YELLOW     | YELLOW     | BLACK      |
         | WEARY  | WEARY | GREEN      | GREEN      | GREEN      | GREEN      | GREEN      |
 
       Examples: Letters that exist in the word but are not in the correct position are color coded yellow.
