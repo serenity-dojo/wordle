@@ -9,7 +9,7 @@ The goal of the Wordle project is to serve as an illustrative example of how mod
 ## Tech Stack
 
 - **Java (JDK 17)**
-- **Maven **
+- **Maven**
 - **Serenity BDD:** An open-source library that helps you write higher-quality automated acceptance criteria.
 - **Cucumber:** A tool that supports BDD, enabling you to define application behavior in plain meaningful English language.
 - **JUnit 5:** The next generation testing framework for Java and JVM.
