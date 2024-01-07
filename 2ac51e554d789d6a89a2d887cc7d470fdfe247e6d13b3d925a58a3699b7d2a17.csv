@@ -1,4 +1,5 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Wordle Status Check","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2023-09-20T13:42:18.483797273Z[Etc/UTC]","0.0","2.75"
-"Getting hints","Requesting another hint","SUCCESS","2023-09-20T13:42:25.456992216Z[Etc/UTC]","0.0","2.78"
-"Playing the game","Should show row of colored cells","SUCCESS","2023-09-20T13:42:25.456473115Z[Etc/UTC]","0.0","2.32"
+"Wordle Status Check","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2024-01-07T09:12:16.401403353Z[Etc/UTC]","0.0","2.18"
+"Creating a new game","The new game should initially be In Progress","SUCCESS","2024-01-07T09:12:16.384236483Z[Etc/UTC]","0.0","2.2"
+"Getting hints","Requesting another hint","SUCCESS","2024-01-07T09:12:21.533560852Z[Etc/UTC]","0.0","2.16"
+"Playing the game","Should show row of colored cells","SUCCESS","2024-01-07T09:12:21.539109292Z[Etc/UTC]","0.0","2.8"
