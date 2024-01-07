@@ -8,6 +8,8 @@ The goal of the Wordle project is to serve as an illustrative example of how mod
 
 ## Tech Stack
 
+- **Java (JDK 17)**
+- **Maven **
 - **Serenity BDD:** An open-source library that helps you write higher-quality automated acceptance criteria.
 - **Cucumber:** A tool that supports BDD, enabling you to define application behavior in plain meaningful English language.
 - **JUnit 5:** The next generation testing framework for Java and JVM.
@@ -17,7 +19,12 @@ The goal of the Wordle project is to serve as an illustrative example of how mod
 To execute the tests, you will need to run the following command:
 
 ```bash
-mvn verify
+mvn clean verify
+```
+
+You can also use the Maven wrapper if you don't have Maven installed:
+```bash
+./mvnw clean verify
 ```
 
 ## How to run the application

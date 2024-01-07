@@ -13,6 +13,8 @@ buildNumber.properties
 .idea
 *.iml
 .DS_Store
+.mvn
+.jqwik-database
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
