@@ -3,6 +3,7 @@ package com.serenitydojo.wordle.microservices.game;
 import com.serenitydojo.wordle.model.CellColor;
 import com.serenitydojo.wordle.model.GameResult;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
+@Tag(name = "Game Controller", description = "End points used to create a new game, and play a game.")
 public class GameController {
 
     private final GameService gameService;
@@ -23,13 +25,13 @@ public class GameController {
     }
 
     @RequestMapping(value = "/api/game", method = POST)
-    @Operation(description = "Start a new Wordle game with a random word")
+    @Operation(description = "Start a new Wordle game with a random word. Returns the ID of the newly created game.")
     public Long newGame() {
         return gameService.newGame();
     }
 
     @RequestMapping(value = "/api/game/seed", method = POST)
-    @Operation(description = "Start a new Wordle game with a specified word")
+    @Operation(description = "Start a new Wordle game with a specified word. Returns the ID of the newly created game.")
     public Long newGame(@RequestBody String initialWord) {
         return gameService.newGame(initialWord);
     }
