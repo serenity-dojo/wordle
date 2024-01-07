@@ -38,6 +38,15 @@ Feature: Game Rules
       Then the squares should be colored as follows:
         | GREEN | GRAY | GREEN | GRAY | YELLOW |
 
+  Rule: Repeated letters in the wrong spot appear in grey
+    Example: Two incorrectly placed letters
+      Given the target word is:
+        | B | L | A | N | D |
+      When the player enters the following letters:
+        | L | A | B | E | L |
+      Then the squares should be colored as follows:
+        | YELLOW | YELLOW | YELLOW | GRAY | GRAY |
+
     Scenario Outline: Letters that do not form valid words should be rejected
       Given the target word is:
         | B | L | A | N | D |
@@ -49,15 +58,6 @@ Feature: Game Rules
         | T        | O        |          |          |          | Word too short |
         | A        | B        | C        | D        | E        | Not a word     |
         | F        | A        | S        | T        | !        | Not a word     |
-
-  Rule: Repeated letters in the wrong spot appear in grey
-    Example: Two incorrectly placed letters
-      Given the target word is:
-        | B | L | A | N | D |
-      When the player enters the following letters:
-        | L | A | B | E | L |
-      Then the squares should be colored as follows:
-        | YELLOW | YELLOW | YELLOW | GRAY | GRAY |
 
   Rule: The player wins when they find the right word in 6 or less tries
     Example: Player guesses the right word

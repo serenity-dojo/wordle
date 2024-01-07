@@ -11,10 +11,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <serenity.version>4.0.12</serenity.version>
-        <rest-assured.version>5.3.1</rest-assured.version>
-        <junit-jupiter.version>5.10.0</junit-jupiter.version>
-        <junit-platform-suite-api.version>1.10.0</junit-platform-suite-api.version>
+        <serenity.version>4.0.30</serenity.version>
+        <rest-assured.version>5.4.0</rest-assured.version>
+        <junit-jupiter.version>5.10.1</junit-jupiter.version>
+        <junit-platform-suite-api.version>1.10.1</junit-platform-suite-api.version>
         <sonar.coverage.jacoco.xmlReportPaths>${basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 

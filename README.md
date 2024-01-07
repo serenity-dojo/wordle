@@ -27,7 +27,7 @@ You can run the application locally as follows:
 mvn spring-boot:run
 ```
 
-Once running, you can access the application at http://localhost:8080/api/status and see the Swagger documentation at http://localhost:9000/swagger-ui.html
+Once running, you can access the application at http://localhost:9000/api/status and see the Swagger documentation at http://localhost:9000/swagger-ui.html
 
 ## Reports
 
