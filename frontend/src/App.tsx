@@ -53,6 +53,7 @@ import {
   solutionGameDate,
   unicodeLength,
 } from './lib/words'
+import { attempt_word } from './api/api'
 
 function App() {
   const isLatestGame = getIsLatestGame()
@@ -76,30 +77,14 @@ function App() {
     localStorage.getItem('theme')
       ? localStorage.getItem('theme') === 'dark'
       : prefersDarkMode
-      ? true
-      : false
+        ? true
+        : false
   )
   const [isHighContrastMode, setIsHighContrastMode] = useState(
     getStoredIsHighContrastMode()
   )
   const [isRevealing, setIsRevealing] = useState(false)
-  const [guesses, setGuesses] = useState<string[]>(() => {
-    const loaded = loadGameStateFromLocalStorage(isLatestGame)
-    if (loaded?.solution !== solution) {
-      return []
-    }
-    const gameWasWon = loaded.guesses.includes(solution)
-    if (gameWasWon) {
-      setIsGameWon(true)
-    }
-    if (loaded.guesses.length === MAX_CHALLENGES && !gameWasWon) {
-      setIsGameLost(true)
-      showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
-        persist: true,
-      })
-    }
-    return loaded.guesses
-  })
+  const [guesses, setGuesses] = useState<string[]>([])
 
   const [stats, setStats] = useState(() => loadStats())
 
@@ -207,10 +192,11 @@ function App() {
     )
   }
 
-  const onEnter = () => {
+  const onEnter = async () => {
     if (isGameWon || isGameLost) {
       return
     }
+    await attempt_word(currentGuess);
 
     if (!(unicodeLength(currentGuess) === solution.length)) {
       setCurrentRowClass('jiggle')
@@ -218,6 +204,7 @@ function App() {
         onClose: clearCurrentRowClass,
       })
     }
+    console.log(isWordInWordList(currentGuess))
 
     if (!isWordInWordList(currentGuess)) {
       setCurrentRowClass('jiggle')

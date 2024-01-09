@@ -7,6 +7,7 @@ import {
 
 import { ENABLE_ARCHIVED_GAMES } from '../../constants/settings'
 import { GAME_TITLE } from '../../constants/strings'
+import { start_new_game } from '../../api/api'
 
 type Props = {
   setIsInfoModalOpen: (value: boolean) => void
@@ -21,10 +22,14 @@ export const Navbar = ({
   setIsDatePickerModalOpen,
   setIsSettingsModalOpen,
 }: Props) => {
+  const newStartGame = async () => {
+    start_new_game();
+  }
+
   return (
     <div className="navbar">
-      <div className="navbar-content px-5 short:h-auto">
-        <div className="flex">
+      <div className="flex h-[3rem] items-center justify-between px-5 short:h-auto">
+        <div className="flex w-1/3">
           <InformationCircleIcon
             className="h-6 w-6 cursor-pointer dark:stroke-white"
             onClick={() => setIsInfoModalOpen(true)}
@@ -36,8 +41,17 @@ export const Navbar = ({
             />
           )}
         </div>
-        <p className="text-xl font-bold dark:text-white">{GAME_TITLE}</p>
-        <div className="right-icons">
+        <p className="text-xl text-center font-bold dark:text-white w-1/3">{GAME_TITLE}</p>
+        <div className="right-icons items-center justify-end w-1/3">
+          <div className='flex items-center mr-4'>
+            <button
+              type="button"
+              className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+              onClick={newStartGame}
+            >
+              Start a new game
+            </button>
+          </div>
           <ChartBarIcon
             className="mr-3 h-6 w-6 cursor-pointer dark:stroke-white"
             onClick={() => setIsStatsModalOpen(true)}
