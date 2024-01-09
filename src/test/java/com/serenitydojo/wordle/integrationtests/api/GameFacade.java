@@ -1,12 +1,18 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
+import com.google.common.collect.ImmutableMap;
+import com.serenitydojo.wordle.microservices.authentication.Player;
 import com.serenitydojo.wordle.model.GameResult;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.rest.SerenityRest;
 
+import javax.annotation.concurrent.Immutable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameFacade {
 
@@ -64,6 +70,16 @@ public class GameFacade {
     @Step("Get the game result")
     public GameResult resultFor(String id) {
         return SerenityRest.get("/api/game/{id}/result", id).body().as(GameResult.class);
+    }
+
+    public Long registerPlayer(String name, String email, String password) {
+        Player player = new Player(email, password, name);
+        return SerenityRest
+                .with()
+                .body(player)
+                .contentType(ContentType.JSON)
+                .post("/api/players/register")
+                .getBody().as(Long.class);
     }
 
 }
