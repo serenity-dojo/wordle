@@ -1,4 +1,4 @@
-import { ClockIcon, ShareIcon } from '@heroicons/react/outline'
+import { ClockIcon } from '@heroicons/react/outline'
 import { format } from 'date-fns'
 import Countdown from 'react-countdown'
 
@@ -11,11 +11,9 @@ import {
   ARCHIVE_GAMEDATE_TEXT,
   GUESS_DISTRIBUTION_TEXT,
   NEW_WORD_TEXT,
-  SHARE_TEXT,
   STATISTICS_TITLE,
 } from '../../constants/strings'
 import { GameStats } from '../../lib/localStorage'
-import { shareStatus } from '../../lib/share'
 import { solutionGameDate, tomorrow } from '../../lib/words'
 import { Histogram } from '../stats/Histogram'
 import { MigrationIntro } from '../stats/MigrationIntro'
@@ -34,7 +32,6 @@ type Props = {
   handleShareToClipboard: () => void
   handleShareFailure: () => void
   handleMigrateStatsButton: () => void
-  isHardMode: boolean
   isDarkMode: boolean
   isHighContrastMode: boolean
   numberOfGuessesMade: number
@@ -52,7 +49,6 @@ export const StatsModal = ({
   handleShareToClipboard,
   handleShareFailure,
   handleMigrateStatsButton,
-  isHardMode,
   isDarkMode,
   isHighContrastMode,
   numberOfGuessesMade,
@@ -112,27 +108,6 @@ export const StatsModal = ({
                 </div>
               </div>
             )}
-          </div>
-          <div>
-            <button
-              type="button"
-              className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-base"
-              onClick={() => {
-                shareStatus(
-                  solution,
-                  guesses,
-                  isGameLost,
-                  isHardMode,
-                  isDarkMode,
-                  isHighContrastMode,
-                  handleShareToClipboard,
-                  handleShareFailure
-                )
-              }}
-            >
-              <ShareIcon className="mr-2 h-6 w-6 cursor-pointer dark:stroke-white" />
-              {SHARE_TEXT}
-            </button>
           </div>
         </div>
       )}
