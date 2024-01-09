@@ -997,10 +997,10 @@
                                             </tr>
                                             <tr>
                                                 <td style="font-family:Helvetica, sans-serif;vertical-align:top;color:grey;text-align:right;font-size:0.9em;">13s</td>
-                                                <td style="font-family:Helvetica, sans-serif;vertical-align:top;color:grey;text-align:right;font-size:0.9em;">12s</td>
-                                                <td style="font-family:Helvetica, sans-serif;vertical-align:top;color:grey;text-align:right;font-size:0.9em;">315ms</td>
+                                                <td style="font-family:Helvetica, sans-serif;vertical-align:top;color:grey;text-align:right;font-size:0.9em;">13s</td>
+                                                <td style="font-family:Helvetica, sans-serif;vertical-align:top;color:grey;text-align:right;font-size:0.9em;">327ms</td>
                                                 <td style="font-family:Helvetica, sans-serif;vertical-align:top;color:grey;text-align:right;font-size:0.9em;">2s</td>
-                                                <td style="font-family:Helvetica, sans-serif;vertical-align:top;color:grey;text-align:right;font-size:0.9em;">5ms</td>
+                                                <td style="font-family:Helvetica, sans-serif;vertical-align:top;color:grey;text-align:right;font-size:0.9em;">6ms</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -1236,7 +1236,7 @@
                                         <td class="scenarioName"
                                             style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
 	                                        
-	                                        <a>Player runs out of tries and loses</a>
+	                                        <a>Player guesses the right word and wins</a>
                                             
                                         </td>
                                         <td>
@@ -1258,7 +1258,7 @@
                                         <td class="scenarioName"
                                             style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
 	                                        
-	                                        <a>Player guesses the right word and wins</a>
+	                                        <a>Player runs out of tries and loses</a>
                                             
                                         </td>
                                         <td>
@@ -1279,6 +1279,28 @@
 											<tr>
 												<td colspan="2" class="feature feature-title"  style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;font-style:italic;padding-left:16px;">Game Rules</td>
 											</tr>
+											<tr>
+                                        <td class="scenarioName"
+                                            style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
+	                                        
+	                                        <a>Player runs out of tries</a>
+                                            
+                                        </td>
+                                        <td>
+                                          
+
+	                                        <div>
+                                                <div>
+                                                    <span class="frequent-failure for-success"
+                                                          style="font-weight: bold; text-transform: uppercase;">success</span>
+                                                    
+                                                </div>
+                                                <div class="frequent-failure for-success"
+                                                     style="padding-left: 1em; padding-bottom: 0.5em;"></div>
+                                            </div>
+
+	                                    </td>
+                                
 											<tr>
                                         <td class="scenarioName"
                                             style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
@@ -1329,28 +1351,6 @@
 	                                        
 	                                        <a>3: Letters should be displayed with the correct color ( [3]</a>
                                             <div>target word=CRYPT, player input=CROWN, cell 1=GREEN, cell 2=GREEN, cell 3=GRAY, cell 4=GRAY, cell 5=GRAY</div>
-                                        </td>
-                                        <td>
-                                          
-
-	                                        <div>
-                                                <div>
-                                                    <span class="frequent-failure for-success"
-                                                          style="font-weight: bold; text-transform: uppercase;">success</span>
-                                                    
-                                                </div>
-                                                <div class="frequent-failure for-success"
-                                                     style="padding-left: 1em; padding-bottom: 0.5em;"></div>
-                                            </div>
-
-	                                    </td>
-                                
-											<tr>
-                                        <td class="scenarioName"
-                                            style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
-	                                        
-	                                        <a>Player runs out of tries</a>
-                                            
                                         </td>
                                         <td>
                                           
@@ -1842,51 +1842,29 @@
                                         <td class="scenarioName"
                                             style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
 	                                        
-	                                        <a>When we make a move, the move is recorded in the game history</a>
-                                            
-                                        </td>
-                                        <td>
-                                          
-
-	                                        <div>
-                                                <div>
-                                                    <span class="frequent-failure for-success"
-                                                          style="font-weight: bold; text-transform: uppercase;">success</span>
-                                                    
-                                                </div>
-                                                <div class="frequent-failure for-success"
-                                                     style="padding-left: 1em; padding-bottom: 0.5em;"></div>
-                                            </div>
-
-	                                    </td>
-                                
-											<tr>
-                                        <td class="scenarioName"
-                                            style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
-	                                        
-	                                        <a>We can check the current state of the game by sending a GET to /api/game/{id}/history</a>
-                                            
-                                        </td>
-                                        <td>
-                                          
-
-	                                        <div>
-                                                <div>
-                                                    <span class="frequent-failure for-success"
-                                                          style="font-weight: bold; text-transform: uppercase;">success</span>
-                                                    
-                                                </div>
-                                                <div class="frequent-failure for-success"
-                                                     style="padding-left: 1em; padding-bottom: 0.5em;"></div>
-                                            </div>
-
-	                                    </td>
-                                
-											<tr>
-                                        <td class="scenarioName"
-                                            style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
-	                                        
 	                                        <a>We make a move by posting a word to the with the /api/game/{id}/word end-point</a>
+                                            
+                                        </td>
+                                        <td>
+                                          
+
+	                                        <div>
+                                                <div>
+                                                    <span class="frequent-failure for-success"
+                                                          style="font-weight: bold; text-transform: uppercase;">success</span>
+                                                    
+                                                </div>
+                                                <div class="frequent-failure for-success"
+                                                     style="padding-left: 1em; padding-bottom: 0.5em;"></div>
+                                            </div>
+
+	                                    </td>
+                                
+											<tr>
+                                        <td class="scenarioName"
+                                            style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
+	                                        
+	                                        <a>If we try to ask for the answer by sending a GET to /api/game/{id}/answer</a>
                                             
                                         </td>
                                         <td>
@@ -1930,7 +1908,29 @@
                                         <td class="scenarioName"
                                             style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
 	                                        
-	                                        <a>If we try to ask for the answer by sending a GET to /api/game/{id}/answer</a>
+	                                        <a>When we make a move, the move is recorded in the game history</a>
+                                            
+                                        </td>
+                                        <td>
+                                          
+
+	                                        <div>
+                                                <div>
+                                                    <span class="frequent-failure for-success"
+                                                          style="font-weight: bold; text-transform: uppercase;">success</span>
+                                                    
+                                                </div>
+                                                <div class="frequent-failure for-success"
+                                                     style="padding-left: 1em; padding-bottom: 0.5em;"></div>
+                                            </div>
+
+	                                    </td>
+                                
+											<tr>
+                                        <td class="scenarioName"
+                                            style="font-family:Helvetica, sans-serif;font-size:14px;vertical-align:top;padding-left:32px;min-width:4em;width:55%;">
+	                                        
+	                                        <a>We can check the current state of the game by sending a GET to /api/game/{id}/history</a>
                                             
                                         </td>
                                         <td>
