@@ -236,6 +236,10 @@ function App() {
     }
   }
 
+  const handleNewGame = () => {
+    setGuesses([]);
+  }
+
   return (
     <Div100vh>
       <div className="flex h-full flex-col">
@@ -244,6 +248,7 @@ function App() {
           setIsStatsModalOpen={setIsStatsModalOpen}
           setIsDatePickerModalOpen={setIsDatePickerModalOpen}
           setIsSettingsModalOpen={setIsSettingsModalOpen}
+          handleNewGame={handleNewGame}
         />
 
         {!isLatestGame && (
