@@ -27,7 +27,6 @@ import {
   CORRECT_WORD_MESSAGE,
   DISCOURAGE_INAPP_BROWSER_TEXT,
   GAME_COPIED_MESSAGE,
-  HARD_MODE_ALERT_MESSAGE,
   NOT_ENOUGH_LETTERS_MESSAGE,
   SHARE_FAILURE_TEXT,
   WIN_MESSAGES,
@@ -43,7 +42,6 @@ import {
 } from './lib/localStorage'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
-  findFirstUnusedReveal,
   getGameDate,
   getIsLatestGame,
   isWinningWord,
@@ -85,14 +83,9 @@ function App() {
   )
   const [isRevealing, setIsRevealing] = useState(false)
   const [guesses, setGuesses] = useState<string[]>([])
+  const [gameStatus, setGameStatus] = useState<string[]>([])
 
   const [stats, setStats] = useState(() => loadStats())
-
-  const [isHardMode, setIsHardMode] = useState(
-    localStorage.getItem('gameMode')
-      ? localStorage.getItem('gameMode') === 'hard'
-      : false
-  )
 
   useEffect(() => {
     // if no game state on load,
@@ -130,15 +123,6 @@ function App() {
   const handleDarkMode = (isDark: boolean) => {
     setIsDarkMode(isDark)
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
-  }
-
-  const handleHardMode = (isHard: boolean) => {
-    if (guesses.length === 0 || localStorage.getItem('gameMode') === 'hard') {
-      setIsHardMode(isHard)
-      localStorage.setItem('gameMode', isHard ? 'hard' : 'normal')
-    } else {
-      showErrorAlert(HARD_MODE_ALERT_MESSAGE)
-    }
   }
 
   const handleHighContrastMode = (isHighContrast: boolean) => {
@@ -196,7 +180,9 @@ function App() {
     if (isGameWon || isGameLost) {
       return
     }
-    await attempt_word(currentGuess);
+    const result: any = await attempt_word(currentGuess);
+    console.log(result)
+    setGameStatus(result?.data);
 
     if (!(unicodeLength(currentGuess) === solution.length)) {
       setCurrentRowClass('jiggle')
@@ -204,24 +190,12 @@ function App() {
         onClose: clearCurrentRowClass,
       })
     }
-    console.log(isWordInWordList(currentGuess))
 
     if (!isWordInWordList(currentGuess)) {
       setCurrentRowClass('jiggle')
       return showErrorAlert(WORD_NOT_FOUND_MESSAGE, {
         onClose: clearCurrentRowClass,
       })
-    }
-
-    // enforce hard mode - all guesses must contain all previously revealed letters
-    if (isHardMode) {
-      const firstMissingReveal = findFirstUnusedReveal(currentGuess, guesses)
-      if (firstMissingReveal) {
-        setCurrentRowClass('jiggle')
-        return showErrorAlert(firstMissingReveal, {
-          onClose: clearCurrentRowClass,
-        })
-      }
     }
 
     setIsRevealing(true)
@@ -283,7 +257,7 @@ function App() {
         <div className="mx-auto flex w-full grow flex-col px-1 pt-2 pb-8 sm:px-6 md:max-w-7xl lg:px-8 short:pb-2 short:pt-2">
           <div className="flex grow flex-col justify-center pb-6 short:pb-2">
             <Grid
-              solution={solution}
+              gameStatus={gameStatus}
               guesses={guesses}
               currentGuess={currentGuess}
               isRevealing={isRevealing}
@@ -294,7 +268,7 @@ function App() {
             onChar={onChar}
             onDelete={onDelete}
             onEnter={onEnter}
-            solution={solution}
+            gameStatus={gameStatus}
             guesses={guesses}
             isRevealing={isRevealing}
           />
@@ -321,7 +295,6 @@ function App() {
               setIsStatsModalOpen(false)
               setIsMigrateStatsModalOpen(true)
             }}
-            isHardMode={isHardMode}
             isDarkMode={isDarkMode}
             isHighContrastMode={isHighContrastMode}
             numberOfGuessesMade={guesses.length}
@@ -342,8 +315,6 @@ function App() {
           <SettingsModal
             isOpen={isSettingsModalOpen}
             handleClose={() => setIsSettingsModalOpen(false)}
-            isHardMode={isHardMode}
-            handleHardMode={handleHardMode}
             isDarkMode={isDarkMode}
             handleDarkMode={handleDarkMode}
             isHighContrastMode={isHighContrastMode}

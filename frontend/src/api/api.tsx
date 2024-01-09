@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const gameId = localStorage.getItem("gameId");
-
 export const start_new_game = async () => {
   await axios
     .post("http://localhost:9000/api/game"
@@ -15,19 +13,23 @@ export const start_new_game = async () => {
 }
 
 export const attempt_word = async (word: string) => {
+  const gameId = localStorage.getItem("gameId");
   const config = {
     headers: {
-      'Content-Length': 0,
       'Content-Type': 'text/plain'
     }
   }
+  let result;
   await axios
     .post(`http://localhost:9000/api/game/${gameId}/word`, word, config
     )
     .then((response) => {
-      console.log(response)
+      console.log(response.data)
+      result = response;
     })
     .catch((error) => {
       console.log(error);
+      result = error;
     });
+  return result;
 }
