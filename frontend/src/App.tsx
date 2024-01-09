@@ -180,18 +180,19 @@ function App() {
     if (isGameWon || isGameLost) {
       return
     }
-    const result: any = await attempt_word(currentGuess);
-    console.log(result)
-    setGameStatus(result?.data);
 
-    if (!(unicodeLength(currentGuess) === solution.length)) {
+    if (!(unicodeLength(currentGuess) === 5)) {
       setCurrentRowClass('jiggle')
       return showErrorAlert(NOT_ENOUGH_LETTERS_MESSAGE, {
         onClose: clearCurrentRowClass,
       })
     }
 
-    if (!isWordInWordList(currentGuess)) {
+    const result: any = await attempt_word(currentGuess);
+    if (result?.data !== undefined)
+      setGameStatus(result?.data);
+
+    if (result.response?.status === 403) {
       setCurrentRowClass('jiggle')
       return showErrorAlert(WORD_NOT_FOUND_MESSAGE, {
         onClose: clearCurrentRowClass,
