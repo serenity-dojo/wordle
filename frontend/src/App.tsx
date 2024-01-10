@@ -245,7 +245,6 @@ function App() {
         if (isLatestGame) {
           setStats(addStatsForCompletedGame(stats, guesses.length))
         }
-        localStorage.setItem("gameStatus", JSON.stringify([]));
         return setIsGameWon(true)
       }
 
@@ -260,7 +259,6 @@ function App() {
           persist: true,
           delayMs: REVEAL_TIME_MS * solution.length + 1,
         })
-        localStorage.setItem("gameStatus", JSON.stringify([]));
       }
     }
   }
