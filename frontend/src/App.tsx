@@ -5,6 +5,8 @@ import { format } from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 import { useEffect, useState } from 'react'
 import Div100vh from 'react-div-100vh'
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 import { AlertContainer } from './components/alerts/AlertContainer'
 import { Grid } from './components/grid/Grid'
@@ -51,7 +53,7 @@ import {
   solutionGameDate,
   unicodeLength,
 } from './lib/words'
-import { attempt_word } from './api/api'
+import { attempt_word, get_answer } from './api/api'
 
 function App() {
   const isLatestGame = getIsLatestGame()
@@ -60,7 +62,7 @@ function App() {
     '(prefers-color-scheme: dark)'
   ).matches
 
-  const { showError: showErrorAlert, showSuccess: showSuccessAlert } =
+  const { showError: showErrorAlert, showSuccess: showSuccessAlert, hiddenError: hiddenErrorAlert } =
     useAlert()
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
@@ -82,8 +84,28 @@ function App() {
     getStoredIsHighContrastMode()
   )
   const [isRevealing, setIsRevealing] = useState(false)
-  const [guesses, setGuesses] = useState<string[]>([])
-  const [gameStatus, setGameStatus] = useState<string[]>([])
+  const [guesses, setGuesses] = useState<string[]>(() => {
+    const loaded = loadGameStateFromLocalStorage(isLatestGame)
+    if (loaded?.solution !== solution) {
+      return []
+    }
+    const gameWasWon = loaded.guesses.includes(solution)
+    if (gameWasWon) {
+      setIsGameWon(true)
+    }
+    if (loaded.guesses.length === MAX_CHALLENGES && !gameWasWon) {
+      setIsGameLost(true)
+      showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+        persist: true,
+      })
+    }
+    return loaded.guesses
+  })
+  const [gameStatus, setGameStatus] = useState<string[]>(() => {
+    const status: any = localStorage.getItem("gameStatus");
+    return JSON.parse(status)
+  })
+  const [answer, setAnswer] = useState("");
 
   const [stats, setStats] = useState(() => loadStats())
 
@@ -189,8 +211,11 @@ function App() {
     }
 
     const result: any = await attempt_word(currentGuess);
-    if (result?.data !== undefined)
+    if (result?.data !== undefined) {
+      console.log(result?.data)
       setGameStatus(result?.data);
+      localStorage.setItem("gameStatus", JSON.stringify(result?.data));
+    }
 
     if (result.response?.status === 403) {
       setCurrentRowClass('jiggle')
@@ -206,7 +231,7 @@ function App() {
       setIsRevealing(false)
     }, REVEAL_TIME_MS * solution.length)
 
-    const winningWord = isWinningWord(currentGuess)
+    const winningWord = isWinningWord(result?.data[result?.data.length - 1])
 
     if (
       unicodeLength(currentGuess) === solution.length &&
@@ -224,16 +249,26 @@ function App() {
       }
 
       if (guesses.length === MAX_CHALLENGES - 1) {
+        const ans: any = await get_answer();
+        setAnswer(ans);
         if (isLatestGame) {
           setStats(addStatsForCompletedGame(stats, guesses.length + 1))
         }
         setIsGameLost(true)
-        showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+        showErrorAlert(CORRECT_WORD_MESSAGE(ans), {
           persist: true,
           delayMs: REVEAL_TIME_MS * solution.length + 1,
         })
       }
     }
+  }
+
+  const handleNewGame = () => {
+    setGuesses([]);
+    setIsGameWon(false);
+    setIsGameLost(false);
+    hiddenErrorAlert();
+    toast.success("New game started!");
   }
 
   return (
@@ -244,6 +279,7 @@ function App() {
           setIsStatsModalOpen={setIsStatsModalOpen}
           setIsDatePickerModalOpen={setIsDatePickerModalOpen}
           setIsSettingsModalOpen={setIsSettingsModalOpen}
+          handleNewGame={handleNewGame}
         />
 
         {!isLatestGame && (
@@ -324,6 +360,15 @@ function App() {
           <AlertContainer />
         </div>
       </div>
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+      />
     </Div100vh>
   )
 }

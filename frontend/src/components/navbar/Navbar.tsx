@@ -14,6 +14,7 @@ type Props = {
   setIsStatsModalOpen: (value: boolean) => void
   setIsDatePickerModalOpen: (value: boolean) => void
   setIsSettingsModalOpen: (value: boolean) => void
+  handleNewGame: () => void
 }
 
 export const Navbar = ({
@@ -21,9 +22,11 @@ export const Navbar = ({
   setIsStatsModalOpen,
   setIsDatePickerModalOpen,
   setIsSettingsModalOpen,
+  handleNewGame
 }: Props) => {
   const newStartGame = async () => {
     start_new_game();
+    handleNewGame();
   }
 
   return (

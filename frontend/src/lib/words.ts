@@ -26,8 +26,11 @@ export const isWordInWordList = (word: string) => {
   )
 }
 
-export const isWinningWord = (word: string) => {
-  return solution === word
+export const isWinningWord = (gameStatus: string[]) => {
+  console.log(gameStatus)
+  if (gameStatus[0] === 'GREEN' && gameStatus[1] === 'GREEN' && gameStatus[2] === 'GREEN' && gameStatus[3] === 'GREEN' && gameStatus[4] === 'GREEN')
+    return true;
+  return false;
 }
 
 export const unicodeSplit = (word: string) => {
