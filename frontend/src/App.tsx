@@ -51,7 +51,7 @@ import {
   solutionGameDate,
   unicodeLength,
 } from './lib/words'
-import { attempt_word } from './api/api'
+import { attempt_word, get_answer } from './api/api'
 
 function App() {
   const isLatestGame = getIsLatestGame()
@@ -189,8 +189,10 @@ function App() {
     }
 
     const result: any = await attempt_word(currentGuess);
-    if (result?.data !== undefined)
+    if (result?.data !== undefined) {
+      console.log(result?.data)
       setGameStatus(result?.data);
+    }
 
     if (result.response?.status === 403) {
       setCurrentRowClass('jiggle')
@@ -206,7 +208,7 @@ function App() {
       setIsRevealing(false)
     }, REVEAL_TIME_MS * solution.length)
 
-    const winningWord = isWinningWord(currentGuess)
+    const winningWord = isWinningWord(result?.data[result?.data.length - 1])
 
     if (
       unicodeLength(currentGuess) === solution.length &&
@@ -224,11 +226,12 @@ function App() {
       }
 
       if (guesses.length === MAX_CHALLENGES - 1) {
+        const answer: any = await get_answer();
         if (isLatestGame) {
           setStats(addStatsForCompletedGame(stats, guesses.length + 1))
         }
         setIsGameLost(true)
-        showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+        showErrorAlert(CORRECT_WORD_MESSAGE(answer), {
           persist: true,
           delayMs: REVEAL_TIME_MS * solution.length + 1,
         })

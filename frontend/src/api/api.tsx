@@ -33,3 +33,20 @@ export const attempt_word = async (word: string) => {
     });
   return result;
 }
+
+export const get_answer = async () => {
+  const gameId = localStorage.getItem("gameId");
+  let result;
+  await axios
+    .get(`http://localhost:9000/api/game/${gameId}/answer`
+    )
+    .then((response) => {
+      console.log(response.data)
+      result = response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      result = error;
+    });
+  return result;
+}
