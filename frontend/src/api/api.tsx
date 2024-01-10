@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const start_new_game = async () => {
   await axios
@@ -43,6 +44,22 @@ export const get_answer = async () => {
     .then((response) => {
       console.log(response.data)
       result = response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      result = error;
+    });
+  return result;
+}
+
+export const find_hint = async () => {
+  const gameId = localStorage.getItem("gameId");
+  let result;
+  await axios
+    .get(`http://localhost:9000/api/game/${gameId}/hint`
+    )
+    .then((response) => {
+      toast.info(<div>{response.data.map((string: string) => {return (<p>{string}</p>)})}</div>);
     })
     .catch((error) => {
       console.log(error);
