@@ -1,3 +1,2 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Playing the game","Invalid words should be rejected with a 403 error","SUCCESS","2024-01-10T20:40:39.238428817Z[Etc/UTC]","0.0","1.38"
-"Playing the game","Should show row of colored cells","SUCCESS","2024-01-10T20:40:43.384300462Z[Etc/UTC]","0.0","2.21"
+"Playing the game","Should show row of colored cells","SUCCESS","2024-01-10T20:40:49.03638639Z[Etc/UTC]","0.0","2.24"
