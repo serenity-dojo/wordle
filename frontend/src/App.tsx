@@ -84,8 +84,27 @@ function App() {
     getStoredIsHighContrastMode()
   )
   const [isRevealing, setIsRevealing] = useState(false)
-  const [guesses, setGuesses] = useState<string[]>([])
-  const [gameStatus, setGameStatus] = useState<string[]>([])
+  const [guesses, setGuesses] = useState<string[]>(() => {
+    const loaded = loadGameStateFromLocalStorage(isLatestGame)
+    if (loaded?.solution !== solution) {
+      return []
+    }
+    const gameWasWon = loaded.guesses.includes(solution)
+    if (gameWasWon) {
+      setIsGameWon(true)
+    }
+    if (loaded.guesses.length === MAX_CHALLENGES && !gameWasWon) {
+      setIsGameLost(true)
+      showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+        persist: true,
+      })
+    }
+    return loaded.guesses
+  })
+  const [gameStatus, setGameStatus] = useState<string[]>(() => {
+    const status: any = localStorage.getItem("gameStatus");
+    return JSON.parse(status)
+  })
   const [answer, setAnswer] = useState("");
 
   const [stats, setStats] = useState(() => loadStats())
@@ -195,6 +214,7 @@ function App() {
     if (result?.data !== undefined) {
       console.log(result?.data)
       setGameStatus(result?.data);
+      localStorage.setItem("gameStatus", JSON.stringify(result?.data));
     }
 
     if (result.response?.status === 403) {
@@ -225,6 +245,7 @@ function App() {
         if (isLatestGame) {
           setStats(addStatsForCompletedGame(stats, guesses.length))
         }
+        localStorage.setItem("gameStatus", JSON.stringify([]));
         return setIsGameWon(true)
       }
 
@@ -239,6 +260,7 @@ function App() {
           persist: true,
           delayMs: REVEAL_TIME_MS * solution.length + 1,
         })
+        localStorage.setItem("gameStatus", JSON.stringify([]));
       }
     }
   }
@@ -247,11 +269,7 @@ function App() {
     setGuesses([]);
     setIsGameWon(false);
     setIsGameLost(false);
-    hiddenErrorAlert()
-    // hiddenSuccessAlert(winMessage, {
-    //   delayMs,
-    //   onClose: () => setIsStatsModalOpen(true),
-    // })
+    hiddenErrorAlert();
     toast.success("New game started!");
   }
 
