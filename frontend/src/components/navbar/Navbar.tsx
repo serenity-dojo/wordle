@@ -7,7 +7,7 @@ import {
 
 import { ENABLE_ARCHIVED_GAMES } from '../../constants/settings'
 import { GAME_TITLE } from '../../constants/strings'
-import { start_new_game } from '../../api/api'
+import { start_new_game, find_hint } from '../../api/api'
 
 type Props = {
   setIsInfoModalOpen: (value: boolean) => void
@@ -27,6 +27,10 @@ export const Navbar = ({
   const newStartGame = async () => {
     start_new_game();
     handleNewGame();
+  }
+
+  const findHint = async () => {
+    find_hint();
   }
 
   return (
@@ -53,6 +57,15 @@ export const Navbar = ({
               onClick={newStartGame}
             >
               Start a new game
+            </button>
+          </div>
+          <div className='flex items-center mr-4'>
+            <button
+              type="button"
+              className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+              onClick={findHint}
+            >
+              Hint
             </button>
           </div>
           <ChartBarIcon
