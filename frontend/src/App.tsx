@@ -5,6 +5,8 @@ import { format } from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 import { useEffect, useState } from 'react'
 import Div100vh from 'react-div-100vh'
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 import { AlertContainer } from './components/alerts/AlertContainer'
 import { Grid } from './components/grid/Grid'
@@ -60,7 +62,7 @@ function App() {
     '(prefers-color-scheme: dark)'
   ).matches
 
-  const { showError: showErrorAlert, showSuccess: showSuccessAlert } =
+  const { showError: showErrorAlert, showSuccess: showSuccessAlert, hiddenError: hiddenErrorAlert } =
     useAlert()
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
@@ -84,6 +86,7 @@ function App() {
   const [isRevealing, setIsRevealing] = useState(false)
   const [guesses, setGuesses] = useState<string[]>([])
   const [gameStatus, setGameStatus] = useState<string[]>([])
+  const [answer, setAnswer] = useState("");
 
   const [stats, setStats] = useState(() => loadStats())
 
@@ -226,12 +229,13 @@ function App() {
       }
 
       if (guesses.length === MAX_CHALLENGES - 1) {
-        const answer: any = await get_answer();
+        const ans: any = await get_answer();
+        setAnswer(ans);
         if (isLatestGame) {
           setStats(addStatsForCompletedGame(stats, guesses.length + 1))
         }
         setIsGameLost(true)
-        showErrorAlert(CORRECT_WORD_MESSAGE(answer), {
+        showErrorAlert(CORRECT_WORD_MESSAGE(ans), {
           persist: true,
           delayMs: REVEAL_TIME_MS * solution.length + 1,
         })
@@ -241,6 +245,14 @@ function App() {
 
   const handleNewGame = () => {
     setGuesses([]);
+    setIsGameWon(false);
+    setIsGameLost(false);
+    hiddenErrorAlert()
+    // hiddenSuccessAlert(winMessage, {
+    //   delayMs,
+    //   onClose: () => setIsStatsModalOpen(true),
+    // })
+    toast.success("New game started!");
   }
 
   return (
@@ -332,6 +344,15 @@ function App() {
           <AlertContainer />
         </div>
       </div>
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+      />
     </Div100vh>
   )
 }

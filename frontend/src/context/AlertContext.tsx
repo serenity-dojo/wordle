@@ -23,6 +23,7 @@ type AlertContextValue = {
   isVisible: boolean
   showSuccess: (message: string, options?: ShowOptions) => void
   showError: (message: string, options?: ShowOptions) => void
+  hiddenError: () => void
 }
 
 export const AlertContext = createContext<AlertContextValue | null>({
@@ -31,6 +32,7 @@ export const AlertContext = createContext<AlertContextValue | null>({
   isVisible: false,
   showSuccess: () => null,
   showError: () => null,
+  hiddenError: () => null
 })
 AlertContext.displayName = 'AlertContext'
 
@@ -72,11 +74,25 @@ export const AlertProvider = ({ children }: Props) => {
     [setStatus, setMessage, setIsVisible]
   )
 
+  const hidden = useCallback(
+    () => {
+      setIsVisible(false)
+    },
+    [setIsVisible]
+  )
+
   const showError = useCallback(
     (newMessage: string, options?: ShowOptions) => {
       show('error', newMessage, options)
     },
     [show]
+  )
+
+  const hiddenError = useCallback(
+    () => {
+      hidden()
+    },
+    [hidden]
   )
 
   const showSuccess = useCallback(
@@ -94,6 +110,7 @@ export const AlertProvider = ({ children }: Props) => {
         isVisible,
         showError,
         showSuccess,
+        hiddenError
       }}
     >
       {children}
