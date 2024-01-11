@@ -1,4 +1,4 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Creating a new game","The new game should initially be In Progress","SUCCESS","2024-01-10T20:40:44.052612285Z[Etc/UTC]","0.0","2.27"
-"Creating a new game","The new game should contain no moves","SUCCESS","2024-01-10T20:40:47.415365933Z[Etc/UTC]","0.0","0.08"
-"Creating a new game","Each new game should be assigned a unique id","SUCCESS","2024-01-10T20:40:47.640521541Z[Etc/UTC]","0.0","0.04"
+"Creating a new game","The new game should initially be In Progress","SUCCESS","2024-01-11T05:31:52.271181373Z[Etc/UTC]","0.0","2.23"
+"Creating a new game","The new game should contain no moves","SUCCESS","2024-01-11T05:31:55.566587878Z[Etc/UTC]","0.0","0.07"
+"Creating a new game","Each new game should be assigned a unique id","SUCCESS","2024-01-11T05:31:55.765205821Z[Etc/UTC]","0.0","0.04"
