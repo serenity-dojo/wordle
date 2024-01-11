@@ -217,7 +217,7 @@ function App() {
       localStorage.setItem("gameStatus", JSON.stringify(result?.data));
     }
 
-    if (result.response?.status !== 201) {
+    if (result.response?.status === 403) {
       setCurrentRowClass('jiggle')
       return showErrorAlert(WORD_NOT_FOUND_MESSAGE, {
         onClose: clearCurrentRowClass,
