@@ -13,12 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsString;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 @DisplayName("Registering a new user")
 @Tag("integration")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-                classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
+        classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
 public class RegisteringANewPlayer {
 
     @LocalServerPort
@@ -38,7 +39,6 @@ public class RegisteringANewPlayer {
 
     @Test
     @DisplayName("Players need to register before they can login and play")
-    @Order(1)
     void registeringAsANewPlayer() {
         String name = fake.name().name();
         String email = fake.bothify("????##@gmail.com");
@@ -57,8 +57,7 @@ public class RegisteringANewPlayer {
 
     @Test
     @DisplayName("Password must not be empty")
-    @Order(1)
-    void registeringAsANewPlayerWithAnExistingEmail() {
+    void registeringAsANewPlayerWithAMissingPassowrd() {
         String name = fake.name().name();
         String email = fake.bothify("????##@gmail.com");
 
@@ -68,21 +67,26 @@ public class RegisteringANewPlayer {
                 .body(player)
                 .contentType(ContentType.JSON)
                 .post("/api/players/register")
-                        .then().statusCode(409);
+                .then().statusCode(400);
     }
 
     @Test
     @DisplayName("Email must be unique")
-    @Order(1)
-    void registeringAsANewPlayerWithAMissingPassowrd() {
+    void registeringAsANewPlayerWithAnExistingEmail() {
         String name = fake.name().name();
         String email = fake.bothify("????##@gmail.com");
-        String password = "";
+        String password = "secret";
 
         Player player = new Player(email, password, name);
         SerenityRest
                 .with()
-                .body(player)
+                .body(new Player(email, password, name + " 1"))
+                .contentType(ContentType.JSON)
+                .post("/api/players/register");
+
+        SerenityRest
+                .with()
+                .body(new Player(email, password, name + " 2"))
                 .contentType(ContentType.JSON)
                 .post("/api/players/register")
                 .then().statusCode(409);

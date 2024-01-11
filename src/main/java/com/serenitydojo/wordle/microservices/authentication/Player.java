@@ -1,17 +1,20 @@
 package com.serenitydojo.wordle.microservices.authentication;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(nullable = false, unique = true, length = 45)
     private String email;
+
+    @Column(nullable = false, length = 64)
     private String password; // Store encrypted passwords for security
+
+    @Column(nullable = false, length = 40)
     private String name;
 
     public Player() {
