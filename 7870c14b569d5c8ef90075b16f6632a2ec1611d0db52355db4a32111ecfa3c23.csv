@@ -1,4 +1,4 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Getting hints","We can request a hint for the current game via GET /api/game/{id}/hint","SUCCESS","2024-01-11T05:31:53.320930543Z[Etc/UTC]","0.0","0.93"
-"Getting hints","Requesting another hint","SUCCESS","2024-01-11T05:31:57.229667889Z[Etc/UTC]","0.0","0.14"
-"Getting hints","Requesting another hint","SUCCESS","2024-01-11T05:31:57.229667889Z[Etc/UTC]","0.0","0.15"
+"Getting hints","We can request a hint for the current game via GET /api/game/{id}/hint","SUCCESS","2024-01-11T05:32:03.06463747Z[Etc/UTC]","0.0","0.03"
+"Getting hints","Requesting another hint","SUCCESS","2024-01-11T05:32:04.704556158Z[Etc/UTC]","0.0","0.16"
+"Getting hints","Requesting another hint","SUCCESS","2024-01-11T05:32:04.704556158Z[Etc/UTC]","0.0","0.17"
