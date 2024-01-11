@@ -67,3 +67,35 @@ export const find_hint = async () => {
     });
   return result;
 }
+
+export const find_result = async () => {
+  const gameId = localStorage.getItem("gameId");
+  let result;
+  await axios
+    .get(`http://localhost:9000/api/game/${gameId}/result`
+    )
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error);
+      result = error;
+    });
+  return result;
+}
+
+export const find_current_history = async () => {
+  const gameId = localStorage.getItem("gameId");
+  let result;
+  await axios
+    .get(`http://localhost:9000/api/game/${gameId}/history`
+    )
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error);
+      result = error;
+    });
+  return result;
+}
