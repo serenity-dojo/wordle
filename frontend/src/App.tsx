@@ -217,7 +217,7 @@ function App() {
       localStorage.setItem("gameStatus", JSON.stringify(result?.data));
     }
 
-    if (result.response?.status === 403) {
+    if (result.response?.status !== 201) {
       setCurrentRowClass('jiggle')
       return showErrorAlert(WORD_NOT_FOUND_MESSAGE, {
         onClose: clearCurrentRowClass,
@@ -230,7 +230,8 @@ function App() {
     setTimeout(() => {
       setIsRevealing(false)
     }, REVEAL_TIME_MS * solution.length)
-
+  
+    console.log(result)
     const winningWord = isWinningWord(result?.data[result?.data.length - 1])
 
     if (
@@ -265,6 +266,7 @@ function App() {
 
   const handleNewGame = () => {
     setGuesses([]);
+    setCurrentGuess('');
     setIsGameWon(false);
     setIsGameLost(false);
     hiddenErrorAlert();
