@@ -230,7 +230,8 @@ function App() {
     setTimeout(() => {
       setIsRevealing(false)
     }, REVEAL_TIME_MS * solution.length)
-
+  
+    console.log(result)
     const winningWord = isWinningWord(result?.data[result?.data.length - 1])
 
     if (
@@ -265,6 +266,7 @@ function App() {
 
   const handleNewGame = () => {
     setGuesses([]);
+    setCurrentGuess('');
     setIsGameWon(false);
     setIsGameLost(false);
     hiddenErrorAlert();
