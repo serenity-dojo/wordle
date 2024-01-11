@@ -8,13 +8,13 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 45)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false)
     private String password; // Store encrypted passwords for security
 
-    @Column(nullable = false, length = 40)
+    @Column(nullable = false)
     private String name;
 
     public Player() {
