@@ -1,4 +1,4 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Wordle Status Check","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2024-01-11T08:27:59.358346012Z[Etc/UTC]","0.0","2.35"
-"Creating a new game","The new game should initially be In Progress","SUCCESS","2024-01-11T08:27:59.343746724Z[Etc/UTC]","0.0","2.38"
-"Playing the game","Invalid words should be rejected with a 403 error","SUCCESS","2024-01-11T08:28:00.523394656Z[Etc/UTC]","0.0","1.2"
+"Wordle Status Check","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2024-01-11T13:08:30.645448747Z[Etc/UTC]","0.0","2.28"
+"Creating a new game","The new game should initially be In Progress","SUCCESS","2024-01-11T13:08:30.635664584Z[Etc/UTC]","0.0","2.25"
+"Registering a new user","Password should be stored as a hashed password","SUCCESS","2024-01-11T13:08:31.704059416Z[Etc/UTC]","0.0","2.41"

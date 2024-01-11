@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="com.serenitydojo.wordle.integrationtests.api.RegisteringANewPlayer" skipped="0" tests="1" time="0.15" timestamp="2024-01-11 01:08:34"><testcase classname="com.serenitydojo.wordle.integrationtests.api.RegisteringANewPlayer" name="Password must not be empty"/></testsuite>
