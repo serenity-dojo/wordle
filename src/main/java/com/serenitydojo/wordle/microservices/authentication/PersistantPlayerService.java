@@ -14,7 +14,7 @@ public class PersistantPlayerService implements PlayerService {
 
     /**
      * Register a new player
-     */
+     */ 
     public Long registerPlayer(Player newPlayer) {
         if (playerRepository.findByEmail(newPlayer.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("A player with this email already exists");
