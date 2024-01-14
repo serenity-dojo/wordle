@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,18 +25,21 @@ public class GameController {
         this.gameService = gameService;
     }
 
+    @PreAuthorize("hasRole('PLAYER')")
     @RequestMapping(value = "/api/game", method = POST)
     @Operation(description = "Start a new Wordle game with a random word. Returns the ID of the newly created game.")
     public Long newGame() {
         return gameService.newGame();
     }
 
+    @PreAuthorize("hasRole('PLAYER')")
     @RequestMapping(value = "/api/game/seed", method = POST)
     @Operation(description = "Start a new Wordle game with a specified word. Returns the ID of the newly created game.")
     public Long newGame(@RequestBody String initialWord) {
         return gameService.newGame(initialWord);
     }
 
+    @PreAuthorize("hasRole('PLAYER')")
     @RequestMapping(value = "/api/game/{id}/word", method = POST)
     @Operation(description = "Attempt a new word")
     @ResponseStatus(HttpStatus.CREATED)
@@ -44,24 +48,28 @@ public class GameController {
         return gameService.getHistory(id);
     }
 
+    @PreAuthorize("hasRole('PLAYER')")
     @RequestMapping(value = "/api/game/{id}/history", method = GET)
     @Operation(description = "Find the current history of moves of the game")
     public List<List<CellColor>> get(@PathVariable long id) {
         return gameService.getHistory(id);
     }
 
+    @PreAuthorize("hasRole('PLAYER')")
     @RequestMapping(value = "/api/game/{id}/result", method = GET)
     @Operation(description = "Find the current result of the game")
     public GameResult getResult(@PathVariable long id) {
         return gameService.getResult(id);
     }
 
+    @PreAuthorize("hasRole('PLAYER')")
     @RequestMapping(value = "/api/game/{id}/hint", method = GET)
     @Operation(description = "Find a hint for the current game")
     public List<String> getHint(@PathVariable long id) {
         return gameService.getHint(id);
     }
 
+    @PreAuthorize("hasRole('PLAYER')")
     @RequestMapping(value = "/api/game/{id}/answer", method = GET)
     @Operation(description = "Find the answer (only available after the game is lost)")
     public String getAnswer(@PathVariable long id) {

@@ -1,4 +1,4 @@
-package com.serenitydojo.wordle.microservices.authentication;
+package com.serenitydojo.wordle.microservices.players;
 
 public class EmailAlreadyExistsException extends RuntimeException {
     public EmailAlreadyExistsException(String message) {

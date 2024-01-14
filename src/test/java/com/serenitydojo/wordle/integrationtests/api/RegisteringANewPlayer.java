@@ -1,9 +1,9 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
 import com.github.javafaker.Faker;
-import com.serenitydojo.wordle.microservices.authentication.PasswordHashService;
-import com.serenitydojo.wordle.microservices.authentication.Player;
-import com.serenitydojo.wordle.microservices.authentication.PlayerRepository;
+import com.serenitydojo.wordle.microservices.players.PasswordHashService;
+import com.serenitydojo.wordle.microservices.players.Player;
+import com.serenitydojo.wordle.microservices.players.PlayerRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import net.serenitybdd.annotations.Steps;
@@ -18,7 +18,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.containsString;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 @DisplayName("Registering a new user")
@@ -96,7 +95,7 @@ public class RegisteringANewPlayer {
                 .post("/api/players/register").then()
                 .statusCode(201);
 
-        Optional<Player> savedPlayer = playerRepository.findByEmail(email);
+        Optional<Player> savedPlayer = playerRepository.findByUsername(name);
 
         assertThat(savedPlayer).isPresent();
         assertThat(passwordHashService.check(password, savedPlayer.get().getPassword())).isTrue();

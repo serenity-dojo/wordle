@@ -1,7 +1,6 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
-import com.google.common.collect.ImmutableMap;
-import com.serenitydojo.wordle.microservices.authentication.Player;
+import com.serenitydojo.wordle.microservices.players.Player;
 import com.serenitydojo.wordle.model.GameResult;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -9,10 +8,7 @@ import io.restassured.response.Response;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.rest.SerenityRest;
 
-import javax.annotation.concurrent.Immutable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class GameFacade {
 

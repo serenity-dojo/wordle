@@ -1,4 +1,4 @@
-package com.serenitydojo.wordle.microservices.authentication;
+package com.serenitydojo.wordle.microservices.players;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,15 +6,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/api/players")
-public class PlayerController {
+public class RegistrationController {
     @Autowired
     private PlayerService playerService;
 
-    @PostMapping("/register")
+    @PostMapping("/api/auth/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Long registerUser(@RequestBody Player player) {
-        if (player.getPassword() == null || player.getPassword().trim().isEmpty()) {
+    public String registerUser(@RequestBody PlayerDTO player) {
+        if (player.password() == null || player.password().trim().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password cannot be empty");
         }
         return playerService.registerPlayer(player);

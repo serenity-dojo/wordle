@@ -1,4 +1,4 @@
-package com.serenitydojo.wordle.microservices.authentication;
+package com.serenitydojo.wordle.microservices.players;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
