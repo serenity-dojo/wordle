@@ -1,2 +1,0 @@
-"Story","Title","Result","Date","Stability","Duration (s)"
-"Getting hints","We can request a hint for the current game via GET /api/game/{id}/hint","SUCCESS","2024-01-15T21:30:07.480810392Z[Etc/UTC]","0.0","1.07"
