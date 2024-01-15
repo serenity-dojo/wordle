@@ -29,12 +29,23 @@ You can also use the Maven wrapper if you don't have Maven installed:
 
 ## How to run the application
 
-You can run the application locally as follows:
+You can run the backend application locally as follows:
 ```bash
 mvn spring-boot:run
 ```
 
-Once running, you can access the application at http://localhost:9000/api/status and see the Swagger documentation at http://localhost:9000/swagger-ui.html
+Once running, you can access the application at http://localhost:9000/wordle/api/status and see the Swagger documentation at http://localhost:9000/wordle/swagger-ui/index.html
+
+## Running the UI
+
+Once the backend service layer is running, you can start the front-end application by going to the frontend folder and running
+
+```bash 
+npm install
+npm start
+```
+
+You can access the application on http://localhost:3000/
 
 ## Reports
 

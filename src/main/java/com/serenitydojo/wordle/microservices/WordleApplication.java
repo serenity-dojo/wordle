@@ -31,8 +31,7 @@ public class WordleApplication {
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
-            System.out.println(FigletFont.convertOneLine("WORDLE APP"));
-            System.out.println("WORDLE APP STARTED");
+            System.out.println(FigletFont.convertOneLine("WORDLE API SERVICE"));
         };
     }
 }
