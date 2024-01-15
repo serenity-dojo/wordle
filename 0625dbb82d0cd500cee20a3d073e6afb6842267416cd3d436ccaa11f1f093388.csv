@@ -1,4 +1,0 @@
-"Story","Title","Result","Date","Stability","Duration (s)"
-"Registering a new user","Email must be unique","SUCCESS","2024-01-11T13:08:34.788246826Z[Etc/UTC]","0.0","0.57"
-"Registering a new user","Password must not be empty","SUCCESS","2024-01-11T13:08:34.961205151Z[Etc/UTC]","0.0","0.15"
-"Registering a new user","Players need to register before they can login and play","SUCCESS","2024-01-11T13:08:35.115568984Z[Etc/UTC]","0.0","0.44"

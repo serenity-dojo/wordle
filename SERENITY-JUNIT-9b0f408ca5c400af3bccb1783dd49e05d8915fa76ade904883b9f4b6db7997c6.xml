@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="com.serenitydojo.wordle.integrationtests.api.CreatingANewGameTest" skipped="0" tests="1" time="0.26" timestamp="2024-01-15 10:49:29"><testcase classname="com.serenitydojo.wordle.integrationtests.api.CreatingANewGameTest" name="The new game should contain no moves"/></testsuite>

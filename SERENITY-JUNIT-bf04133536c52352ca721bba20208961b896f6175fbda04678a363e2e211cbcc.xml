@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="com.serenitydojo.wordle.integrationtests.api.PlayingTheGame" skipped="0" tests="1" time="0.04" timestamp="2024-01-11 01:08:33"><testcase classname="com.serenitydojo.wordle.integrationtests.api.PlayingTheGame" name="Invalid words should be rejected with a 403 error"/></testsuite>

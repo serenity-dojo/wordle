@@ -1,0 +1,6 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Registering a new user","Password should be stored as a hashed password","SUCCESS","2024-01-15T10:49:26.507006805Z[Etc/UTC]","0.0","1.09"
+"Registering a new user","Email must be unique","SUCCESS","2024-01-15T10:49:28.059329583Z[Etc/UTC]","0.0","0.23"
+"Registering a new user","Players need to register before they can login and play","SUCCESS","2024-01-15T10:49:28.35477502Z[Etc/UTC]","0.0","0.2"
+"Registering a new user","Password must not be empty","SUCCESS","2024-01-15T10:49:28.594564399Z[Etc/UTC]","0.0","0.17"
+"Registering a new user","Players can log on with their username and password","SUCCESS","2024-01-15T10:49:28.801527469Z[Etc/UTC]","0.0","0.19"
