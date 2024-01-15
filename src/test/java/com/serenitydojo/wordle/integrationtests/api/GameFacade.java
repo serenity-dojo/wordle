@@ -1,24 +1,25 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
-import com.google.common.collect.ImmutableMap;
-import com.serenitydojo.wordle.microservices.authentication.Player;
+import com.serenitydojo.wordle.microservices.players.Player;
 import com.serenitydojo.wordle.model.GameResult;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 import io.restassured.response.Response;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.rest.SerenityRest;
 
-import javax.annotation.concurrent.Immutable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class GameFacade {
 
+    String token;
+
     @Step("Create a new game")
     public String newGame() {
-        return SerenityRest.when().post("/api/game")
+        return SerenityRest
+                .given().header("Authorization", "Bearer " + token)
+                .when().post("/wordle/api/game")
                 .then()
                 .statusCode(200)
                 .extract().asString();
@@ -27,8 +28,10 @@ public class GameFacade {
     @Step("Create a new game with the word {0}")
     public String newGameWith(String initialWord) {
         return RestAssured
-                .given().body(initialWord)
-                .when().post("/api/game/seed")
+                .given()
+                .given().header("Authorization", "Bearer " + token)
+                .body(initialWord)
+                .when().post("/wordle/api/game/seed")
                 .then()
                 .statusCode(200)
                 .extract().asString();
@@ -38,21 +41,26 @@ public class GameFacade {
     @Step("Play the word '{1}'")
     public Response playWord(String id, String word) {
         return SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
                 .body(word)
                 .when()
-                .post("/api/game/{id}/word", id);
+                .post("/wordle/api/game/{id}/word", id);
     }
 
     @Step("Request the answer")
     public Response requestAnswer(String id) {
         return SerenityRest
-                .get("/api/game/{id}/answer", id);
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .get("/wordle/api/game/{id}/answer", id);
     }
 
     @Step("Request a hint")
     public Response requestHint(String id) {
         return SerenityRest
-                .get("/api/game/{id}/hint", id);
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .get("/wordle/api/game/{id}/hint", id);
     }
 
     @Step("Get the game history")
@@ -61,7 +69,10 @@ public class GameFacade {
     }
 
     public List<List<String>> getTheGameHistory(String id) {
-        return (List<List<String>>) SerenityRest.get("/api/game/{id}/history", id)
+        return (List<List<String>>) SerenityRest
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .get("/wordle/api/game/{id}/history", id)
                 .then()
                 .statusCode(200)
                 .extract().as(List.class);
@@ -69,17 +80,29 @@ public class GameFacade {
 
     @Step("Get the game result")
     public GameResult resultFor(String id) {
-        return SerenityRest.get("/api/game/{id}/result", id).body().as(GameResult.class);
+        return SerenityRest
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .get("/wordle/api/game/{id}/result", id).body().as(GameResult.class);
     }
 
-    public Long registerPlayer(String name, String email, String password) {
-        Player player = new Player(email, password, name);
-        return SerenityRest
-                .with()
+    public String registerPlayer(String name, String password, String email) {
+        Player player = new Player(name, password, email);
+        SerenityRest
+                .given()
                 .body(player)
                 .contentType(ContentType.JSON)
-                .post("/api/players/register")
-                .getBody().as(Long.class);
+                .post("/wordle/api/auth/register")
+                .then().statusCode(201);
+
+        token = SerenityRest
+                .given()
+                .body(new Credentials(player.getUsername(), player.getPassword()))
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/auth/login")
+                .jsonPath().getString("accessToken");
+
+        return token;
     }
 
 }

@@ -1,17 +1,14 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
+import com.github.javafaker.Faker;
 import com.serenitydojo.wordle.model.GameResult;
 import io.restassured.RestAssured;
-import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,14 +17,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag("integration")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
                 classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
-public class CreatingANewGame {
+public class CreatingANewGameTest {
 
     @LocalServerPort
     private int port;
 
+    Faker fake = Faker.instance();
+
+    String name = fake.name().username();
+    String password = fake.bothify("????####");
+    String email = fake.bothify("????##@gmail.com");
+
     @BeforeEach
     public void setup() {
         RestAssured.baseURI = "http://localhost:" + port;
+        gameFacade.registerPlayer(name, password, email);
         id = gameFacade.newGame();
     }
 
