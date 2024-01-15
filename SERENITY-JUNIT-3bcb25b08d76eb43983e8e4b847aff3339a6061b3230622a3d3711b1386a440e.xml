@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Game Overview" skipped="0" tests="2" time="0.37" timestamp="2024-01-15 08:41:51"><testcase name="Player runs out of tries and loses"/><testcase name="Player guesses the right word and wins"/></testsuite>
