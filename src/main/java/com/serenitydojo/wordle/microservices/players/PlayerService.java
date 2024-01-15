@@ -7,5 +7,5 @@ public interface PlayerService {
     /**
      * Register a new player
      */
-    String registerPlayer(PlayerDTO newPlayer);
+    String registerPlayer(Player newPlayer);
 }

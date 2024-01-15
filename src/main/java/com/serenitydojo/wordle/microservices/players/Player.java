@@ -26,7 +26,7 @@ public class Player {
     private String id;
 
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @NotBlank
@@ -38,7 +38,7 @@ public class Player {
     private String email;
 
     @NotBlank
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String role;
 
     public Player(String username, String password, String email) {

@@ -1,22 +1,21 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
+import com.github.javafaker.Faker;
 import com.serenitydojo.wordle.model.GameResult;
 import io.restassured.RestAssured;
-import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
@@ -27,7 +26,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag("integration")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
-public class PlayingTheGame {
+@Execution(ExecutionMode.SAME_THREAD)
+public class PlayingTheGameTest {
 
     String id;
 
@@ -37,9 +37,24 @@ public class PlayingTheGame {
     @Steps
     GameFacade gameFacade;
 
+    Faker fake = Faker.instance();
+
+    String token;
+
+    @BeforeAll
+    static void registerUser() {
+
+    }
+
     @BeforeEach
     void newGame() {
         RestAssured.baseURI = "http://localhost:" + port;
+
+        String name = fake.name().username();
+        String email = fake.bothify("????##@gmail.com");
+        String password = fake.bothify("????####");
+
+        token = gameFacade.registerPlayer(name, password, email);
         id = gameFacade.newGame();
     }
 
@@ -52,14 +67,14 @@ public class PlayingTheGame {
 
     @Test
     @DisplayName("Invalid words should be rejected with a 403 error")
-    @Order(3)
+    @Order(4)
     void makingAMoveWithAnInvalidWord() {
         assertThat(gameFacade.playWord(id, "ABCDE").statusCode()).isEqualTo(403);
     }
 
     @Test
     @DisplayName("When we make a move, the move is recorded in the game history")
-    @Order(4)
+    @Order(5)
     void movesAreRecordedInGameHistory() {
         gameFacade.playWord(id, "FEAST");
         assertThat(gameFacade.gameHistory(id)).hasSize(1);
@@ -67,7 +82,7 @@ public class PlayingTheGame {
 
     @Test
     @DisplayName("We can check the current state of the game by sending a GET to /api/game/{id}/history")
-    @Order(5)
+    @Order(6)
     void checkingTheStateOfTheGame() {
         gameFacade.playWord(id, "FEAST");
         gameFacade.playWord(id, "BEAST");
@@ -79,21 +94,21 @@ public class PlayingTheGame {
 
     @Test
     @DisplayName("We can get the current game result by sending a GET to /api/game/{id}/result")
-    @Order(6)
+    @Order(7)
     void fetchingTheGameState() {
         assertThat(gameFacade.resultFor(id)).isEqualTo(GameResult.IN_PROGRESS);
     }
 
     @Test
     @DisplayName("If we try to ask for the answer by sending a GET to /api/game/{id}/answer")
-    @Order(7)
+    @Order(8)
     void tryingToRevealTheAnswerTooSoon() {
         assertThat(gameFacade.requestAnswer(id).statusCode()).isEqualTo(403);
     }
 
 
     @Test
-    @Order(8)
+    @Order(9)
     @DisplayName("This is an example of a complete game played via the API")
     void playingAGame() {
 

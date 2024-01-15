@@ -1,19 +1,22 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
 import com.github.javafaker.Faker;
-import com.serenitydojo.wordle.microservices.players.PasswordHashService;
 import com.serenitydojo.wordle.microservices.players.Player;
+import com.serenitydojo.wordle.microservices.players.PlayerDTO;
 import com.serenitydojo.wordle.microservices.players.PlayerRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.serenitybdd.rest.SerenityRest;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -24,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag("integration")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
-public class RegisteringANewPlayer {
+public class RegisteringANewPlayerTest {
 
     @LocalServerPort
     private int port;
@@ -34,77 +37,98 @@ public class RegisteringANewPlayer {
         RestAssured.baseURI = "http://localhost:" + port;
     }
 
-    String id;
-
-    @Steps
-    GameFacade gameFacade;
-
     @Autowired
     PlayerRepository playerRepository;
 
     @Autowired
-    PasswordHashService passwordHashService;
+    PasswordEncoder passwordEncoder;
 
     Faker fake = Faker.instance();
 
     @Test
     @DisplayName("Players need to register before they can login and play")
     void registeringAsANewPlayer() {
-        String name = fake.name().name();
+        String name = fake.name().username();
         String email = fake.bothify("????##@gmail.com");
         String password = fake.bothify("????####");
 
-        Player player = new Player(email, password, name);
-        Long id = SerenityRest
+        Player player = new Player(name, password, email);
+        SerenityRest
                 .with()
                 .body(player)
                 .contentType(ContentType.JSON)
-                .post("/api/players/register")
-                .getBody().as(Long.class);
+                .post("/wordle/api/auth/register")
+                .then()
+                .statusCode(201);
+    }
 
-        assertThat(id).isNotZero();
+    @Test
+    @DisplayName("Players can log on with their username and password")
+    void loggingOn() {
+        String name = fake.name().username();
+        String email = fake.bothify("????##@gmail.com");
+        String password = fake.bothify("????####");
+
+        Player player = new Player(name, password, email);
+        SerenityRest
+                .given()
+                .body(player)
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/auth/register")
+                .then().statusCode(201);
+
+        String token = SerenityRest
+                .given()
+                .body(new Credentials(player.getUsername(), player.getPassword()))
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/auth/login")
+                .getBody().asString();
+
+        assertThat(token).isNotEmpty();
     }
 
     @Test
     @DisplayName("Password must not be empty")
     void registeringAsANewPlayerWithAMissingPassowrd() {
-        String name = fake.name().name();
+        String name = fake.name().username();
         String email = fake.bothify("????##@gmail.com");
 
-        Player player = new Player(email, "", name);
+        PlayerDTO player = new PlayerDTO(name, "", email);
         SerenityRest
                 .with()
                 .body(player)
                 .contentType(ContentType.JSON)
-                .post("/api/players/register")
+                .post("/wordle/api/auth/register")
                 .then().statusCode(400);
     }
 
     @Test
     @DisplayName("Password should be stored as a hashed password")
     void hashTheUserPassword() {
-        String name = fake.name().name();
+        String name = fake.name().username();
         String email = fake.bothify("????##@gmail.com");
         String password = fake.bothify("????####");
 
-        Player player = new Player(email, password, name);
+        Player player = new Player(name, password, email);
         SerenityRest
                 .with()
                 .body(player)
                 .contentType(ContentType.JSON)
-                .post("/api/players/register").then()
+                .post("/wordle/api/auth/register")
+                .then()
                 .statusCode(201);
 
         Optional<Player> savedPlayer = playerRepository.findByUsername(name);
 
         assertThat(savedPlayer).isPresent();
-        assertThat(passwordHashService.check(password, savedPlayer.get().getPassword())).isTrue();
+
+        assertThat(passwordEncoder.matches(password, savedPlayer.get().getPassword())).isTrue();
     }
 
     @Test
     @DisplayName("Email must be unique")
     void registeringAsANewPlayerWithAnExistingEmail() {
-        String name = fake.name().name();
+        String name = fake.name().username();
         String email = fake.bothify("????##@gmail.com");
         String password = "secret";
 
@@ -112,13 +136,13 @@ public class RegisteringANewPlayer {
                 .with()
                 .body(new Player(email, password, name + " 1"))
                 .contentType(ContentType.JSON)
-                .post("/api/players/register");
+                .post("/wordle/api/auth/register");
 
         SerenityRest
                 .with()
                 .body(new Player(email, password, name + " 2"))
                 .contentType(ContentType.JSON)
-                .post("/api/players/register")
+                .post("/wordle/api/auth/register")
                 .then().statusCode(409);
     }
 }
