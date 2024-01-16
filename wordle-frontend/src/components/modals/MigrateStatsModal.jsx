@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import { EmigratePanel } from '../stats/EmigratePanel'
-import { ImmigratePanel } from '../stats/ImmigratePanel'
 import { BaseModal } from './BaseModal'
 
 export const MigrateStatsModal = ({ isOpen, handleClose }) => {
@@ -61,9 +59,6 @@ export const MigrateStatsModal = ({ isOpen, handleClose }) => {
           </label>
         </div>
       </div>
-
-      {isEmigrateVisible && <EmigratePanel />}
-      {!isEmigrateVisible && <ImmigratePanel />}
     </BaseModal>
   )
 }

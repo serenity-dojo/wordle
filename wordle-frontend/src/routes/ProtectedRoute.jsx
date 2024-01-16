@@ -19,13 +19,7 @@ const ProtectedRoute = () => {
 
   // If authenticated, render the child route
   if (checked === true) {
-    return (
-      <div className="w-full min-h-screen flex flex-row bg-sidebar">
-        <div className='flex flex-col gap-[44px] bg-main w-full rounded-3xl px-[60px] py-6'>
-          <Outlet />
-        </div>
-      </div>
-    );
+    return <Outlet />;
   }
 
   // Check if the user is authenticated

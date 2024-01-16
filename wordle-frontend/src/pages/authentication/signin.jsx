@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { toast } from "react-toastify";
@@ -14,6 +14,24 @@ const Signin = () => {
   const [loadingView, setLoadingView] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const prefersDarkMode = window.matchMedia(
+    '(prefers-color-scheme: dark)'
+  ).matches
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem('theme')
+      ? localStorage.getItem('theme') === 'dark'
+      : prefersDarkMode
+        ? true
+        : false
+  )
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [isDarkMode])
 
   const handleLogin = async () => {
     setLoadingView(true);
@@ -28,32 +46,14 @@ const Signin = () => {
       console.log(err)
       toast.error("Signin failed!");
     }
-
-    // axios
-    //   .post(`${import.meta.env.VITE_SERVER_URL}/auth/signin`, {
-    //     email: email,
-    //     password: password,
-    //   })
-    //   .then(async (response) => {
-    //     setLoadingView(false);
-    //     if (response.data.code === 200) {
-    //       await signIn(response.data.data[0].access_token);
-    //       navigate("/dashboard");
-    //     } else toast.error(response.data.message);
-    //   })
-    //   .catch((error) => {
-    //     setLoadingView(false);
-    //     console.log(error);
-    //     toast.error(error.response.statusText);
-    //   });
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-row bg-white">
+    <div className="w-full min-h-screen flex flex-row">
       <div className="flex flex-col justify-center gap-16 w-full pt-12 sm:pt-0">
         <div className="relative flex flex-col bg-main justify-center w-full">
           <div className="flex flex-col justify-center gap-16 sm:w-1/3 mx-auto">
-            <div className="flex flex-col gap-8 text-sm text-[#111827] w-full px-4">
+            <div className="flex flex-col gap-8 text-sm text-[#111827] dark:text-white w-full px-4">
               <p className="text-xl sm:text-2xl font-bold text-center text-primary-500">
                 Login first to your account
               </p>
@@ -64,7 +64,7 @@ const Signin = () => {
                   </p>
                   <input
                     type="text"
-                    className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input"
+                    className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input dark:text-black"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -76,7 +76,7 @@ const Signin = () => {
                   </p>
                   <input
                     type="password"
-                    className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input"
+                    className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input dark:text-black"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required

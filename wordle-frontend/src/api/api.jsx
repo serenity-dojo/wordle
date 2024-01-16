@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 export const signin = async (name, password) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/wordle/api/auth/login`, {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/wordle/api/auth/login`, {
         username: name,
         password: password,
       }
@@ -20,7 +20,7 @@ export const signin = async (name, password) => {
 export const signup = async (name, workEmail, password) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/wordle/api/auth/register`, {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/wordle/api/auth/register`, {
         username: name,
         email: workEmail,
         password: password,
@@ -37,7 +37,7 @@ export const signup = async (name, workEmail, password) => {
 
 export const start_new_game = async () => {
   await axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/api/game`
+    .post(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game`
     )
     .then((response) => {
       localStorage.setItem("gameId", response.data);
@@ -56,7 +56,7 @@ export const attempt_word = async (word) => {
   }
   let result;
   await axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/api/game/${gameId}/word`, word, config
+    .post(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game/${gameId}/word`, word, config
     )
     .then((response) => {
       console.log(response.data)
@@ -73,7 +73,7 @@ export const get_answer = async () => {
   const gameId = localStorage.getItem("gameId");
   let result;
   await axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/api/game/${gameId}/answer`
+    .get(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game/${gameId}/answer`
     )
     .then((response) => {
       console.log(response.data)
@@ -90,10 +90,10 @@ export const find_hint = async () => {
   const gameId = localStorage.getItem("gameId");
   let result;
   await axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/api/game/${gameId}/hint`
+    .get(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game/${gameId}/hint`
     )
     .then((response) => {
-      toast.info(<div>{response.data.map((string) => { return (<p>{string}</p>) })}</div>);
+      toast.info(<div>{response.data.map((string, index) => { return (<p key={index}>{string}</p>) })}</div>);
     })
     .catch((error) => {
       console.log(error);
@@ -106,7 +106,7 @@ export const find_result = async () => {
   const gameId = localStorage.getItem("gameId");
   let result;
   await axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/api/game/${gameId}/result`
+    .get(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game/${gameId}/result`
     )
     .then((response) => {
       console.log(response)
@@ -122,7 +122,7 @@ export const find_current_history = async () => {
   const gameId = localStorage.getItem("gameId");
   let result;
   await axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/api/game/${gameId}/history`
+    .get(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game/${gameId}/history`
     )
     .then((response) => {
       console.log(response)

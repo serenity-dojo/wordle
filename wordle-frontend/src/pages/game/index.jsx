@@ -108,7 +108,6 @@ function Game() {
   const [stats, setStats] = useState(() => loadStats())
 
   useEffect(() => {
-    console.log("asdfasfdsafd")
     // if no game state on load,
     // show the user the how-to info modal
     if (!loadGameStateFromLocalStorage(true)) {
