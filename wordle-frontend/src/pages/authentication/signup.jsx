@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { toast } from "react-toastify";
@@ -12,6 +12,24 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [workEmail, setWorkEmail] = useState("");
   const [password, setPassword] = useState("");
+  const prefersDarkMode = window.matchMedia(
+    '(prefers-color-scheme: dark)'
+  ).matches
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem('theme')
+      ? localStorage.getItem('theme') === 'dark'
+      : prefersDarkMode
+        ? true
+        : false
+  )
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [isDarkMode])
 
   const handleCreateAccount = async () => {
     if (!validator.isEmail(workEmail)) {
@@ -33,21 +51,21 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-row bg-white">
+    <div className="w-full min-h-screen flex flex-row">
       <div className="flex flex-col justify-center gap-16 w-full">
         <div className="relative flex flex-col bg-main justify-center w-full">
-          <div className="flex flex-col justify-center gap-8 sm:w-1/2 mx-auto px-4">
+          <div className="flex flex-col justify-center gap-8 sm:w-1/3 mx-auto px-4">
             <p className="text-xl sm:text-[32px] text-center font-bold text-primary-500">
               Sign up
             </p>
-            <div className="flex flex-col gap-6 text-sm text-[#111827]">
+            <div className="flex flex-col gap-6 text-sm text-[#111827] dark:text-white">
               <div className="flex flex-col gap-[10px]">
                 <p>
                   Name <span className="text-[#E03137]">*</span>
                 </p>
                 <input
                   type="text"
-                  className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input"
+                  className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input dark:text-black"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
@@ -59,7 +77,7 @@ const Signup = () => {
                 </p>
                 <input
                   type="email"
-                  className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input"
+                  className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input dark:text-black"
                   value={workEmail}
                   onChange={(e) => setWorkEmail(e.target.value)}
                   required
@@ -71,7 +89,7 @@ const Signup = () => {
                 </p>
                 <input
                   type="password"
-                  className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input"
+                  className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input dark:text-black"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
