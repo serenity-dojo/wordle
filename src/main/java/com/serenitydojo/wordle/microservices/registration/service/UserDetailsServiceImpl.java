@@ -1,5 +1,7 @@
-package com.serenitydojo.wordle.microservices.players;
+package com.serenitydojo.wordle.microservices.registration.service;
 
+import com.serenitydojo.wordle.microservices.domain.Player;
+import com.serenitydojo.wordle.microservices.persistance.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

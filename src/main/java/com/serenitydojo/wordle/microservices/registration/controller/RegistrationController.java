@@ -1,12 +1,13 @@
-package com.serenitydojo.wordle.microservices.players;
+package com.serenitydojo.wordle.microservices.registration.controller;
 
+import com.serenitydojo.wordle.microservices.domain.Player;
+import com.serenitydojo.wordle.microservices.registration.service.PlayerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;

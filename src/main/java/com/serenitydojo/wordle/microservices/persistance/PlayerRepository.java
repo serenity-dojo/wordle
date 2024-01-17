@@ -1,5 +1,6 @@
-package com.serenitydojo.wordle.microservices.players;
+package com.serenitydojo.wordle.microservices.persistance;
 
+import com.serenitydojo.wordle.microservices.domain.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

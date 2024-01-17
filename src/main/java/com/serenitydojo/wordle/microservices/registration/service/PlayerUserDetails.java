@@ -1,5 +1,6 @@
-package com.serenitydojo.wordle.microservices.players;
+package com.serenitydojo.wordle.microservices.registration.service;
 
+import com.serenitydojo.wordle.microservices.domain.Player;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

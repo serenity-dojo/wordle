@@ -1,8 +1,6 @@
 package com.serenitydojo.wordle.model;
 
-import com.serenitydojo.wordle.WordleGame;
 import com.serenitydojo.wordle.dictionary.WordleDictionary;
-import io.cucumber.java.sl.Ce;
 import net.jqwik.api.*;
 import org.junit.jupiter.api.Test;
 

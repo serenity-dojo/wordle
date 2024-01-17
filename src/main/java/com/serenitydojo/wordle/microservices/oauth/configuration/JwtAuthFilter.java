@@ -1,6 +1,6 @@
 package com.serenitydojo.wordle.microservices.oauth.configuration;
 
-import com.serenitydojo.wordle.microservices.players.UserDetailsServiceImpl;
+import com.serenitydojo.wordle.microservices.registration.service.UserDetailsServiceImpl;
 import com.serenitydojo.wordle.microservices.oauth.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -16,6 +16,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @Tag(name = "Game Controller", description = "End points used to create a new game, and play a game.")
+@CrossOrigin(origins = {"http://127.0.0.1:5173", "http://localhost:5173"})
 public class GameController {
 
     private final GameService gameService;

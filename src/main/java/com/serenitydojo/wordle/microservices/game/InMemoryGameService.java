@@ -1,6 +1,6 @@
 package com.serenitydojo.wordle.microservices.game;
 
-import com.serenitydojo.wordle.WordleGame;
+import com.serenitydojo.wordle.model.WordleGame;
 import com.serenitydojo.wordle.dictionary.WordleDictionary;
 import com.serenitydojo.wordle.model.CellColor;
 import com.serenitydojo.wordle.model.GameResult;

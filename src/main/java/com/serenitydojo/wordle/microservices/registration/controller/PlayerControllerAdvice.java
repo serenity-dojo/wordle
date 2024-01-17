@@ -1,5 +1,6 @@
-package com.serenitydojo.wordle.microservices.players;
+package com.serenitydojo.wordle.microservices.registration.controller;
 
+import com.serenitydojo.wordle.microservices.registration.service.EmailAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

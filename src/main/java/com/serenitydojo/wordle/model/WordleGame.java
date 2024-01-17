@@ -1,7 +1,6 @@
-package com.serenitydojo.wordle;
+package com.serenitydojo.wordle.model;
 
 import com.serenitydojo.wordle.dictionary.WordleDictionary;
-import com.serenitydojo.wordle.model.*;
 
 import java.util.ArrayList;
 import java.util.List;

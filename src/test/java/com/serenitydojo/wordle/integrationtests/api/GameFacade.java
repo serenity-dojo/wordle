@@ -1,10 +1,9 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
-import com.serenitydojo.wordle.microservices.players.Player;
+import com.serenitydojo.wordle.microservices.domain.Player;
 import com.serenitydojo.wordle.model.GameResult;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.http.Header;
 import io.restassured.response.Response;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.rest.SerenityRest;
