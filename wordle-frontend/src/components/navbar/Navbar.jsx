@@ -4,6 +4,7 @@ import {
   CogIcon,
   InformationCircleIcon,
 } from '@heroicons/react/outline'
+import { toast } from "react-toastify";
 
 import { ENABLE_ARCHIVED_GAMES } from '../../constants/settings'
 import { GAME_TITLE } from '../../constants/strings'
@@ -17,8 +18,11 @@ export const Navbar = ({
   handleNewGame
 }) => {
   const newStartGame = async () => {
-    start_new_game();
-    handleNewGame();
+    const result = await start_new_game();
+    if (result === true)
+      handleNewGame();
+    else
+      toast.error("error");
   }
 
   const findHint = async () => {
