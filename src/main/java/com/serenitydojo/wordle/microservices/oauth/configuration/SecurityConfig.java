@@ -42,7 +42,7 @@ public class SecurityConfig {
                     r.requestMatchers("/api/v1/auth/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll();
                     r.requestMatchers("/api/auth/**").permitAll();
                     r.requestMatchers("/api/status").permitAll();
-                    r.requestMatchers("/api/game/**").authenticated();
+                    r.requestMatchers("/api/game/**").permitAll();
                 })
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

@@ -88,7 +88,7 @@ public class RegisteringANewPlayerTest {
     }
 
     @Test
-    @DisplayName("Logged-on players can access the APIs")
+    @DisplayName("Logged-on players can play the game")
     void accessingSecureAPIs() {
         String name = fake.name().username();
         String email = fake.bothify("????##@gmail.com");
@@ -122,7 +122,7 @@ public class RegisteringANewPlayerTest {
     }
 
     @Test
-    @DisplayName("Non-authentication access to APIs is not allowed")
+    @DisplayName("Users cannot access the game without logging on")
     void accessingSecureAPIsWithoutAJWTToken() {
         String name = fake.name().username();
         String email = fake.bothify("????##@gmail.com");
