@@ -88,6 +88,64 @@ public class RegisteringANewPlayerTest {
     }
 
     @Test
+    @DisplayName("Logged-on players can access the APIs")
+    void accessingSecureAPIs() {
+        String name = fake.name().username();
+        String email = fake.bothify("????##@gmail.com");
+        String password = fake.bothify("????####");
+
+        Player player = new Player(name, password, email);
+        SerenityRest
+                .given()
+                .body(player)
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/auth/register")
+                .then().statusCode(201);
+
+        JWTToken token = SerenityRest
+                .given()
+                .body(new Credentials(player.getUsername(), player.getPassword()))
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/auth/login")
+                .getBody().as(JWTToken.class);
+
+        assertThat(token.accessToken()).isNotEmpty();
+
+        SerenityRest
+                .given()
+                .header("Authorization","Bearer " + token.accessToken())
+                .body(player)
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/game")
+                .then().statusCode(200);
+
+    }
+
+    @Test
+    @DisplayName("Non-authentication access to APIs is not allowed")
+    void accessingSecureAPIsWithoutAJWTToken() {
+        String name = fake.name().username();
+        String email = fake.bothify("????##@gmail.com");
+        String password = fake.bothify("????####");
+
+        Player player = new Player(name, password, email);
+        SerenityRest
+                .given()
+                .body(player)
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/auth/register")
+                .then().statusCode(201);
+
+        SerenityRest
+                .given()
+                .body(player)
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/game")
+                .then().statusCode(403);
+
+    }
+
+    @Test
     @DisplayName("Password must not be empty")
     void registeringAsANewPlayerWithAMissingPassowrd() {
         String name = fake.name().username();
