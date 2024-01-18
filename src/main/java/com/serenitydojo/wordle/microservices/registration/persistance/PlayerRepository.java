@@ -1,4 +1,4 @@
-package com.serenitydojo.wordle.microservices.persistance;
+package com.serenitydojo.wordle.microservices.registration.persistance;
 
 import com.serenitydojo.wordle.microservices.domain.Player;
 import org.springframework.data.jpa.repository.JpaRepository;

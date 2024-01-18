@@ -3,7 +3,7 @@ package com.serenitydojo.wordle.integrationtests.api;
 import com.github.javafaker.Faker;
 import com.serenitydojo.wordle.microservices.domain.Player;
 import com.serenitydojo.wordle.microservices.registration.dto.PlayerDTO;
-import com.serenitydojo.wordle.microservices.persistance.PlayerRepository;
+import com.serenitydojo.wordle.microservices.registration.persistance.PlayerRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;

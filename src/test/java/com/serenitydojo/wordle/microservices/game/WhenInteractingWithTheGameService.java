@@ -1,5 +1,6 @@
 package com.serenitydojo.wordle.microservices.game;
 
+import com.serenitydojo.wordle.microservices.registration.service.PlayerService;
 import com.serenitydojo.wordle.model.CellColor;
 import com.serenitydojo.wordle.model.GameResult;
 import com.serenitydojo.wordle.model.IllegalAttemptToShowAnswerException;
@@ -7,17 +8,27 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(MockitoExtension.class)
 public class WhenInteractingWithTheGameService {
     private InMemoryGameService gameService;
 
+    @Mock
+    private GameHistoryService gameHistoryService;
+
+    @Mock
+    private PlayerService playerService;
+
     @BeforeEach
     void setUp() {
-        gameService = new InMemoryGameService();
+        gameService = new InMemoryGameService(gameHistoryService, playerService);
     }
 
     @Test

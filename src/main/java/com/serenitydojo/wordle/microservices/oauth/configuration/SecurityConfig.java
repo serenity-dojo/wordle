@@ -38,11 +38,12 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(r -> {
-//                    r.requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**", "/swagger-resources", "/v3/api-docs/**", "/proxy/**").permitAll();
                     r.requestMatchers("/api/v1/auth/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll();
                     r.requestMatchers("/api/auth/**").permitAll();
                     r.requestMatchers("/api/status").permitAll();
                     r.requestMatchers("/api/game/**").permitAll();
+//                    r.requestMatchers("/api/history/**").permitAll();
+//                    r.requestMatchers("/api/**").permitAll();
                 })
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

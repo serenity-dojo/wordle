@@ -1,10 +1,12 @@
 package com.serenitydojo.wordle.microservices.registration.service;
 
 import com.serenitydojo.wordle.microservices.domain.Player;
-import com.serenitydojo.wordle.microservices.persistance.PlayerRepository;
+import com.serenitydojo.wordle.microservices.registration.persistance.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class PersistantPlayerService implements PlayerService {
@@ -29,5 +31,10 @@ public class PersistantPlayerService implements PlayerService {
 
         Player savedPlayer = playerRepository.save(newPlayer);
         return savedPlayer.getId();
+    }
+
+    @Override
+    public Optional<Player> findPlayerByUsername(String username) {
+        return playerRepository.findByUsername(username);
     }
 }

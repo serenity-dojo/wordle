@@ -1,5 +1,6 @@
 package com.serenitydojo.wordle.microservices.game;
 
+import com.serenitydojo.wordle.microservices.domain.GameHistory;
 import com.serenitydojo.wordle.model.CellColor;
 import com.serenitydojo.wordle.model.GameResult;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,7 +21,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class GameController {
 
     private final GameService gameService;
-
     @Autowired
     public GameController(GameService gameService) {
         this.gameService = gameService;
@@ -50,9 +50,9 @@ public class GameController {
     }
 
     @PreAuthorize("hasRole('PLAYER')")
-    @RequestMapping(value = "/api/game/{id}/history", method = GET)
-    @Operation(description = "Find the current history of moves of the game")
-    public List<List<CellColor>> get(@PathVariable long id) {
+    @RequestMapping(value = "/api/game/{id}/guesses", method = GET)
+    @Operation(description = "Find the guesses so far for the current game")
+    public List<List<CellColor>> guesses(@PathVariable long id) {
         return gameService.getHistory(id);
     }
 

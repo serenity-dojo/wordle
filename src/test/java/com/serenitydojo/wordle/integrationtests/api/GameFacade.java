@@ -1,5 +1,6 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
+import com.serenitydojo.wordle.microservices.domain.GameHistoryDTO;
 import com.serenitydojo.wordle.microservices.domain.Player;
 import com.serenitydojo.wordle.model.GameResult;
 import io.restassured.RestAssured;
@@ -71,10 +72,20 @@ public class GameFacade {
         return (List<List<String>>) SerenityRest
                 .given()
                 .header("Authorization", "Bearer " + token)
-                .get("/wordle/api/game/{id}/history", id)
+                .get("/wordle/api/game/{id}/guesses", id)
                 .then()
                 .statusCode(200)
                 .extract().as(List.class);
+    }
+
+    public List<GameHistoryDTO> getTheGameHistoryForTheCurrentPlayer() {
+        return SerenityRest
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .get("/wordle/api/game/history")
+                .then()
+                .statusCode(200)
+                .extract().jsonPath().getList("", GameHistoryDTO.class);
     }
 
     @Step("Get the game result")
