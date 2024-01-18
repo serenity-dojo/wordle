@@ -36,15 +36,19 @@ export const signup = async (name, workEmail, password) => {
 }
 
 export const start_new_game = async () => {
+  let result;
   await axios
     .post(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game`
     )
     .then((response) => {
       localStorage.setItem("gameId", response.data);
+      result = true;
     })
     .catch((error) => {
       console.log(error);
+      result = false;
     });
+  return result;
 }
 
 export const attempt_word = async (word) => {
