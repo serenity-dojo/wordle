@@ -1,3 +1,2 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Creating a new game","The new game should contain no moves","SUCCESS","2024-01-18T19:32:44.030735971Z[Etc/UTC]","0.0","0.17"
-"Creating a new game","Each new game should be assigned a unique id","SUCCESS","2024-01-18T19:32:44.672771285Z[Etc/UTC]","0.0","0.31"
+"Creating a new game","The new game should contain no moves","SUCCESS","2024-01-18T19:33:06.567512472Z[Etc/UTC]","0.0","0.21"
