@@ -104,6 +104,7 @@ function Game() {
     return JSON.parse(status)
   })
   const [answer, setAnswer] = useState("");
+  const [isGameStarted, setIsGameStarted] = useState(false);
 
   const [stats, setStats] = useState(() => loadStats())
 
@@ -184,7 +185,7 @@ function Game() {
     if (
       unicodeLength(`${currentGuess}${value}`) <= solution.length &&
       guesses.length < MAX_CHALLENGES &&
-      !isGameWon
+      !isGameWon && isGameStarted === true
     ) {
       setCurrentGuess(`${currentGuess}${value}`)
     }
@@ -197,7 +198,7 @@ function Game() {
   }
 
   const onEnter = async () => {
-    if (isGameWon || isGameLost) {
+    if (isGameWon || isGameLost || !isGameStarted) {
       return
     }
 
@@ -268,6 +269,7 @@ function Game() {
     setIsGameWon(false);
     setIsGameLost(false);
     hiddenErrorAlert();
+    setIsGameStarted(true);
     toast.success("New game started!");
   }
 
