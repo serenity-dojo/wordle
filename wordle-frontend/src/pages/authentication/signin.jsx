@@ -40,6 +40,7 @@ const Signin = () => {
       const response = await signin(username, password);
       setLoadingView(false);
       await signIn(response.accessToken);
+      localStorage.setItem("isLogined", "true");
       navigate("/game");
     } catch (err) {
       setLoadingView(false);

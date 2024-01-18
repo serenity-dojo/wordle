@@ -2,6 +2,7 @@ import { ClockIcon } from '@heroicons/react/outline'
 import { format } from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 import { useEffect, useState } from 'react'
+import { useLocation } from "react-router-dom";
 import Div100vh from 'react-div-100vh'
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
@@ -51,9 +52,11 @@ import {
   solutionGameDate,
   unicodeLength,
 } from '../../lib/words'
-import { attempt_word, get_answer } from '../../api/api'
+import { attempt_word, get_answer, start_new_game } from '../../api/api'
 
 function Game() {
+  const { state } = useLocation();
+
   const isLatestGame = getIsLatestGame()
   const gameDate = getGameDate()
   const prefersDarkMode = window.matchMedia(
@@ -107,6 +110,21 @@ function Game() {
   const [isGameStarted, setIsGameStarted] = useState(false);
 
   const [stats, setStats] = useState(() => loadStats())
+
+  useEffect(() => {
+    const newStartGame = async () => {
+      const result = await start_new_game();
+      if (result === true)
+        handleNewGame();
+      else
+        toast.error("error");
+    }
+
+    if (localStorage.getItem("isLogined") === "true") {
+      localStorage.setItem("isLogined", "false");
+      newStartGame();
+    }
+  }, []);
 
   useEffect(() => {
     // if no game state on load,
