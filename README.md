@@ -34,7 +34,7 @@ You can run the backend application locally as follows:
 mvn spring-boot:run
 ```
 
-Once running, you can access the application at http://localhost:9000/wordle/api/status and see the Swagger documentation at http://localhost:9000/wordle/swagger-ui/index.html
+Once running, you can access the application at http://localhost:9999/wordle/api/status and see the Swagger documentation at http://localhost:9999/wordle/swagger-ui/index.html
 
 ## Running the UI
 
