@@ -24,8 +24,7 @@ spring:
 
 wordle:
   openapi:
-    dev-url: http://localhost:8088
-    prod-url: https://localhost:8080
+    dev-url: http://localhost:9999/wordle
 
 #  doc:
 #    api-docs:

@@ -42,9 +42,8 @@ public class SecurityConfig {
                     r.requestMatchers("/api/auth/**").permitAll();
                     r.requestMatchers("/api/status").permitAll();
                     r.requestMatchers("/api/game/**").permitAll();
+                    r.requestMatchers("/api/**").permitAll();
                     r.requestMatchers("/error").permitAll();
-//                    r.requestMatchers("/api/history/**").permitAll();
-//                    r.requestMatchers("/api/**").permitAll();
                 })
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
