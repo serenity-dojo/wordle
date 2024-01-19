@@ -11,25 +11,40 @@ const Signup = () => {
   const [loadingView, setLoadingView] = useState(false);
   const [name, setName] = useState("");
   const [workEmail, setWorkEmail] = useState("");
-  const [password, setPassword] = useState("");
   const prefersDarkMode = window.matchMedia(
-    '(prefers-color-scheme: dark)'
-  ).matches
+    "(prefers-color-scheme: dark)"
+  ).matches;
   const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem('theme')
-      ? localStorage.getItem('theme') === 'dark'
+    localStorage.getItem("theme")
+      ? localStorage.getItem("theme") === "dark"
       : prefersDarkMode
-        ? true
-        : false
-  )
+      ? true
+      : false
+  );
+  const [meter, setMeter] = useState(false);
+  const [password, setPassword] = useState("");
+
+  const atLeastOneUppercase = /[A-Z]/g; // capital letters from A to Z
+  const atLeastOneLowercase = /[a-z]/g; // small letters from a to z
+  const atLeastOneNumeric = /[0-9]/g; // numbers from 0 to 9
+  const atLeastOneSpecialChar = /[#?!@$%^&*-]/g; // any of the special characters within the square brackets
+  const eightCharsOrMore = /.{8,}/g; // eight characters or more
+
+  const passwordTracker = {
+    uppercase: password.match(atLeastOneUppercase),
+    lowercase: password.match(atLeastOneLowercase),
+    number: password.match(atLeastOneNumeric),
+    specialChar: password.match(atLeastOneSpecialChar),
+    eightCharsOrGreater: password.match(eightCharsOrMore),
+  };
 
   useEffect(() => {
     if (isDarkMode) {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove("dark");
     }
-  }, [isDarkMode])
+  }, [isDarkMode]);
 
   const handleCreateAccount = async () => {
     if (!validator.isEmail(workEmail)) {
@@ -38,14 +53,14 @@ const Signup = () => {
     }
 
     setLoadingView(true);
-    
+
     try {
       await signup(name, workEmail, password);
       setLoadingView(false);
       navigate("/signin");
     } catch (err) {
       setLoadingView(false);
-      console.log(err)
+      console.log(err);
       toast.error(err.response.data);
     }
   };
@@ -73,7 +88,7 @@ const Signup = () => {
               </div>
               <div className="flex flex-col gap-[10px]">
                 <p>
-                 E-Mail <span className="text-[#E03137]">*</span>
+                  E-Mail <span className="text-[#E03137]">*</span>
                 </p>
                 <input
                   type="email"
@@ -91,9 +106,232 @@ const Signup = () => {
                   type="password"
                   className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input dark:text-black"
                   value={password}
+                  onFocus={() => setMeter(true)}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                {meter && (
+                  <div>
+                    <div className="password-strength-meter"></div>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2 items-center ml-3">
+                        <div
+                          className={clsx(
+                            "rounded-full p-1 fill-current",
+                            passwordTracker.eightCharsOrGreater
+                              ? "bg-green-200 text-green-700"
+                              : "bg-red-200 text-red-700"
+                          )}
+                        >
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            {passwordTracker.eightCharsOrGreater ? (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            ) : (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            )}
+                          </svg>
+                        </div>
+                        <span
+                          className={clsx(
+                            "text-sm font-medium",
+                            passwordTracker.eightCharsOrGreater
+                              ? "text-green-700"
+                              : "text-red-700"
+                          )}
+                        >
+                          At least 8 characters required
+                        </span>
+                      </div>
+                      <div className="flex gap-2 items-center ml-3">
+                        <div
+                          className={clsx(
+                            "rounded-full p-1 fill-current",
+                            passwordTracker.uppercase
+                              ? "bg-green-200 text-green-700"
+                              : "bg-red-200 text-red-700"
+                          )}
+                        >
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            {passwordTracker.uppercase ? (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            ) : (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            )}
+                          </svg>
+                        </div>
+                        <span
+                          className={clsx(
+                            "text-sm font-medium",
+                            passwordTracker.uppercase
+                              ? "text-green-700"
+                              : "text-red-700"
+                          )}
+                        >
+                          Password should contain with one uppercase
+                        </span>
+                      </div>
+                      <div className="flex gap-2 items-center ml-3">
+                        <div
+                          className={clsx(
+                            "rounded-full p-1 fill-current",
+                            passwordTracker.lowercase
+                              ? "bg-green-200 text-green-700"
+                              : "bg-red-200 text-red-700"
+                          )}
+                        >
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            {passwordTracker.lowercase ? (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            ) : (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            )}
+                          </svg>
+                        </div>
+                        <span
+                          className={clsx(
+                            "text-sm font-medium",
+                            passwordTracker.lowercase
+                              ? "text-green-700"
+                              : "text-red-700"
+                          )}
+                        >
+                          Password should contain with one lowercase
+                        </span>
+                      </div>
+                      <div className="flex gap-2 items-center ml-3">
+                        <div
+                          className={clsx(
+                            "rounded-full p-1 fill-current",
+                            passwordTracker.specialChar
+                              ? "bg-green-200 text-green-700"
+                              : "bg-red-200 text-red-700"
+                          )}
+                        >
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            {passwordTracker.specialChar ? (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            ) : (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            )}
+                          </svg>
+                        </div>
+                        <span
+                          className={clsx(
+                            "text-sm font-medium",
+                            passwordTracker.specialChar
+                              ? "text-green-700"
+                              : "text-red-700"
+                          )}
+                        >
+                          Password should contain with one special character
+                        </span>
+                      </div>
+                      <div className="flex gap-2 items-center ml-3">
+                        <div
+                          className={clsx(
+                            "rounded-full p-1 fill-current",
+                            passwordTracker.number
+                              ? "bg-green-200 text-green-700"
+                              : "bg-red-200 text-red-700"
+                          )}
+                        >
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            {passwordTracker.number ? (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            ) : (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            )}
+                          </svg>
+                        </div>
+                        <span
+                          className={clsx(
+                            "text-sm font-medium",
+                            passwordTracker.number
+                              ? "text-green-700"
+                              : "text-red-700"
+                          )}
+                        >
+                          Password should contain with one number
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex flex-col gap-4">
@@ -101,13 +339,28 @@ const Signup = () => {
                 type="button"
                 className={clsx(
                   "flex items-center justify-center text-white focus:ring-0 font-bold text-center rounded-[10px] text-base px-6 py-5",
-                  name === "" || workEmail === "" || password === ""
+                  name === "" ||
+                    workEmail === "" ||
+                    password === "" ||
+                    !passwordTracker.eightCharsOrGreater ||
+                    !passwordTracker.uppercase ||
+                    !passwordTracker.lowercase ||
+                    !passwordTracker.specialChar ||
+                    !passwordTracker.number
                     ? "cursor-not-allowed bg-primary-400"
                     : "bg-primary-500"
                 )}
                 onClick={handleCreateAccount}
                 disabled={
-                  loadingView === true || name === "" || workEmail === "" || password === ""
+                  loadingView === true ||
+                  name === "" ||
+                  workEmail === "" ||
+                  password === "" ||
+                  !passwordTracker.eightCharsOrGreater ||
+                  !passwordTracker.uppercase ||
+                  !passwordTracker.lowercase ||
+                  !passwordTracker.specialChar ||
+                  !passwordTracker.number
                     ? true
                     : false
                 }
