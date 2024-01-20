@@ -137,3 +137,18 @@ export const find_current_history = async () => {
     });
   return result;
 }
+
+export const get_game_history = async () => {
+  let result;
+  await axios
+    .get(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game/history`
+    )
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error);
+      result = error;
+    });
+  return result;
+}
