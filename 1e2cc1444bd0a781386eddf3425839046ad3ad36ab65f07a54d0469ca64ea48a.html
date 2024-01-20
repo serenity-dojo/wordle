@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Game results are recorded in the game history</title>
+    <title>Game statistics can be retrieved for the current player</title>
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
@@ -124,8 +124,8 @@
  <!-- inflection.of(breadcrumb.displayName).asATitle()-->
             > <a href="097b48750ce2987b1b8c5e1601936339bb36214e1269675cfdfc5a35c6b9f8f9.html">Api</a>
  <!-- inflection.of(breadcrumb.displayName).asATitle()-->
-            > <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
-        > Game results are recorded in the game history
+            > <a href="084e4f8972d090c12eec1ef4da7e2128a31129973c8e8dcf57ee91d5d4210833.html">Game history and statistics</a>
+        > Game statistics can be retrieved for the current player
         </span>
         </div>
         <div class="rightbg"></div>
@@ -152,7 +152,7 @@
             <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 19-01-2024 16:45</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 20-01-2024 11:42</span>
     <br style="clear:left"/>
 </div>
     <div class="clr"></div>
@@ -167,7 +167,7 @@
                                 <div>
                                     <h3 class="discreet-story-header">
                                         <i class="fs-2 bi bi-chat-left-quote title-icon"></i>
-                                        <span class="story-header-title">Playing The Game </span>
+                                        <span class="story-header-title">Game History And Statistics </span>
                                     </h3>
 
                                 </div>
@@ -201,7 +201,7 @@
                             <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon fa-2x' title='SUCCESS'></i></a></span>
                             <span class="test-case-title">
                                 <span class="success-color">
-                                    Game results are recorded in the game history
+                                    Game statistics can be retrieved for the current player
                                         <span class="related-issue-title"></span>
                                 </span>
                             </span>
@@ -252,7 +252,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="top-level-step">
-                                                POST http://localhost:37453/wordle/api/auth/register
+                                                POST http://localhost:38389/wordle/api/auth/register
                                         </span>
                             <span class="evidence">
                                         <span class="piece-of-evidence">
@@ -268,17 +268,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/auth/register</p>
+                                    <p>URL: http://localhost:38389/wordle/api/auth/register</p>
                                     <p>Status code: 201</p>
                                     <p>Content Type: application/json</p>
                                     <h4>Request Headers</h4>
                                     <pre>Accept=*/*<br>Content-Type=application/json</pre>
                                     <h4>Content Body</h4>
-                                    <pre>{<br>    &quot;id&quot;: null,<br>    &quot;username&quot;: &quot;edmond.beier&quot;,<br>    &quot;password&quot;: &quot;njxk3729&quot;,<br>    &quot;email&quot;: &quot;uerk45@gmail.com&quot;,<br>    &quot;role&quot;: &quot;ROLE_PLAYER&quot;<br>}</pre>
+                                    <pre>{<br>    &quot;id&quot;: null,<br>    &quot;username&quot;: &quot;charlie.boyle&quot;,<br>    &quot;password&quot;: &quot;tsho2236&quot;,<br>    &quot;email&quot;: &quot;bvdl81@gmail.com&quot;,<br>    &quot;role&quot;: &quot;ROLE_PLAYER&quot;<br>}</pre>
                                     <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: text/plain;charset=UTF-8<br>Content-Length: 36<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: text/plain;charset=UTF-8<br>Content-Length: 13<br>Date: Sat, 20 Jan 2024 11:42:06 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
                                 <h4>Response Body</h4>
-                                    <pre>e8796c73-f30c-4cfe-9fef-0aa1eb351847</pre>
+                                    <pre>charlie.boyle</pre>
                             </div>
                         </div>
                     </div>
@@ -303,7 +303,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="top-level-step">
-                                                POST http://localhost:37453/wordle/api/auth/login
+                                                POST http://localhost:38389/wordle/api/auth/login
                                         </span>
                             <span class="evidence">
                                         <span class="piece-of-evidence">
@@ -319,17 +319,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/auth/login</p>
+                                    <p>URL: http://localhost:38389/wordle/api/auth/login</p>
                                     <p>Status code: 200</p>
                                     <p>Content Type: application/json</p>
                                     <h4>Request Headers</h4>
                                     <pre>Accept=*/*<br>Content-Type=application/json</pre>
                                     <h4>Content Body</h4>
-                                    <pre>{<br>    &quot;username&quot;: &quot;edmond.beier&quot;,<br>    &quot;password&quot;: &quot;njxk3729&quot;<br>}</pre>
+                                    <pre>{<br>    &quot;username&quot;: &quot;charlie.boyle&quot;,<br>    &quot;password&quot;: &quot;tsho2236&quot;<br>}</pre>
                                     <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:06 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
                                 <h4>Response Body</h4>
-                                    <pre>{<br>    &quot;accessToken&quot;: &quot;eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA&quot;<br>}</pre>
+                                    <pre>{<br>    &quot;accessToken&quot;: &quot;eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8&quot;<br>}</pre>
                             </div>
                         </div>
                     </div>
@@ -346,89 +346,6 @@
 
                     <td width="50" class="step-icon">
                         <a name="2"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection2')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection2 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection2')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Create a new game
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">039ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection2" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="2-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-4">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game</p>
-                                    <p>Status code: 200</p>
-                                    <p>Content Type: application/x-www-form-urlencoded</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=application/x-www-form-urlencoded; charset=ISO-8859-1</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>33</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="3"></a>
                             <span style="margin-left: 20px;"
                                   class="top-level-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                 </span>
@@ -445,25 +362,25 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">047ms</span></td>
+                    <td width="100"><span class="top-level-step">021ms</span></td>
                 </tr>
                 <tr class="test-SUCCESS">
 
                     <td width="50" class="step-icon">
-                        <a name="4"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection4')"
+                        <a name="3"></a>
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection3')"
                                style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection4 success-icon"
+                                <i class="bi bi-caret-right-square imgstepSection3 success-icon"
                                    style="margin-left: 20px; float:left; padding-right:5px"></i>
                             </a>
                     </td>
 
                     <td class="step-description-column">
                         <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection4')"
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection3')"
                                style="display:block;">
                                 <span class="top-level-step">
-                                                Play the word 'BEAST'
+                                                Play the words '{BEAST,BRAIN,BLAND}'
                                         </span>
                             </a>
                             <span class="evidence">
@@ -472,15 +389,15 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">039ms</span></td>
+                    <td width="100"><span class="top-level-step">097ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
-                            <table id="stepSection4" class="step-table-nested" style="display:none;">
+                            <table id="stepSection3" class="step-table-nested" style="display:none;">
                 <tr class="test-SUCCESS">
 
                     <td width="70" class="step-icon">
-                        <a name="4-0"></a>
+                        <a name="3-0"></a>
                             <span style="margin-left: 40px;"
                                   class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                 </span>
@@ -489,7 +406,109 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/35/word
+                                                POST http://localhost:38389/wordle/api/game/13/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-5">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/13/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>BEAST</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:06 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="3-1"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/13/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-6">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/13/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>BRAIN</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:06 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="3-2"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/13/word
                                         </span>
                             <span class="evidence">
                                         <span class="piece-of-evidence">
@@ -505,185 +524,15 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/35/word</p>
+                                    <p>URL: http://localhost:38389/wordle/api/game/13/word</p>
                                     <p>Status code: 201</p>
                                     <p>Content Type: text/plain</p>
                                     <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>BEAST</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">002ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="5"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection5')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection5 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection5')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Play the word 'BRAIN'
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">052ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection5" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="5-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/35/word
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-9">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/35/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>BRAIN</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">002ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="6"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection6')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection6 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection6')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Play the word 'BLAND'
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">052ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection6" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="6-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/35/word
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-11">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-11">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/35/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
                                     <h4>Content Body</h4>
                                     <pre>BLAND</pre>
                                     <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:06 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
                                 <h4>Response Body</h4>
                                     <pre>[<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ]<br>]</pre>
                             </div>
@@ -705,7 +554,7 @@
                 <tr class="test-SUCCESS">
 
                     <td width="50" class="step-icon">
-                        <a name="7"></a>
+                        <a name="4"></a>
                             <span style="margin-left: 20px;"
                                   class="top-level-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                 </span>
@@ -722,25 +571,25 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">014ms</span></td>
+                    <td width="100"><span class="top-level-step">048ms</span></td>
                 </tr>
                 <tr class="test-SUCCESS">
 
                     <td width="50" class="step-icon">
-                        <a name="8"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection8')"
+                        <a name="5"></a>
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection5')"
                                style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection8 success-icon"
+                                <i class="bi bi-caret-right-square imgstepSection5 success-icon"
                                    style="margin-left: 20px; float:left; padding-right:5px"></i>
                             </a>
                     </td>
 
                     <td class="step-description-column">
                         <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection8')"
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection5')"
                                style="display:block;">
                                 <span class="top-level-step">
-                                                Play the word 'CLEAN'
+                                                Play the words '{CLEAN,CLEAR,QUEEN,QUEST}'
                                         </span>
                             </a>
                             <span class="evidence">
@@ -749,15 +598,15 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">024ms</span></td>
+                    <td width="100"><span class="top-level-step">198ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
-                            <table id="stepSection8" class="step-table-nested" style="display:none;">
+                            <table id="stepSection5" class="step-table-nested" style="display:none;">
                 <tr class="test-SUCCESS">
 
                     <td width="70" class="step-icon">
-                        <a name="8-0"></a>
+                        <a name="5-0"></a>
                             <span style="margin-left: 40px;"
                                   class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                 </span>
@@ -766,31 +615,31 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/36/word
+                                                POST http://localhost:38389/wordle/api/game/15/word
                                         </span>
                             <span class="evidence">
                                         <span class="piece-of-evidence">
                 <span>
                         <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-14">
+                                data-target="#restModal-REST-10">
                             REST Query
                         </button>
                     </span>
                 <!-- Modal -->
                 <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-14">
+                    <div class="collapse multi-collapse" id="restModal-REST-10">
                         <div class="card">
                             <div class="card-body">
                                 <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/36/word</p>
+                                    <p>URL: http://localhost:38389/wordle/api/game/15/word</p>
                                     <p>Status code: 201</p>
                                     <p>Content Type: text/plain</p>
                                     <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
                                     <h4>Content Body</h4>
                                     <pre>CLEAN</pre>
                                     <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:06 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
                                 <h4>Response Body</h4>
                                     <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
                             </div>
@@ -803,12 +652,447 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="5-1"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/15/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-11">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-11">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/15/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>CLEAR</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:06 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="5-2"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/15/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-12">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/15/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>QUEEN</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:06 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
                     <td width="100"><span class="nested-group-step">002ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="5-3"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/15/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-13">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-13">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/15/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>QUEST</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:06 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
                 </tr>
 
                             </table>
                         </td>
                     </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="50" class="step-icon">
+                        <a name="6"></a>
+                            <span style="margin-left: 20px;"
+                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="top-level-step">
+                                                Create a new game with the word BEAST
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
+                    <td width="100"><span class="top-level-step">021ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="50" class="step-icon">
+                        <a name="7"></a>
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection7')"
+                               style="display:block">
+                                <i class="bi bi-caret-right-square imgstepSection7 success-icon"
+                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
+                            </a>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection7')"
+                               style="display:block;">
+                                <span class="top-level-step">
+                                                Play the words '{CLEAN,CLEAR,QUEEN,BEAST}'
+                                        </span>
+                            </a>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
+                    <td width="100"><span class="top-level-step">199ms</span></td>
+                </tr>
+                    <tr>
+                        <td colspan="5">
+                            <table id="stepSection7" class="step-table-nested" style="display:none;">
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="7-0"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/18/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-16">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-16">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/18/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>CLEAN</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="7-1"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/18/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-17">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-17">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/18/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>CLEAR</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="7-2"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/18/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-18">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-18">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/18/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>QUEEN</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">002ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="7-3"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/18/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-19">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-19">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/18/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>BEAST</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="50" class="step-icon">
+                        <a name="8"></a>
+                            <span style="margin-left: 20px;"
+                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="top-level-step">
+                                                Create a new game with the word BEAST
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
+                    <td width="100"><span class="top-level-step">040ms</span></td>
+                </tr>
                 <tr class="test-SUCCESS">
 
                     <td width="50" class="step-icon">
@@ -825,7 +1109,7 @@
                             <a href="javaScript:void(0)" onClick="toggleDiv('stepSection9')"
                                style="display:block;">
                                 <span class="top-level-step">
-                                                Play the word 'CLEAR'
+                                                Play the words '{CLEAN,QUEEN,QUEST,CRONE,CREST,CROWN}'
                                         </span>
                             </a>
                             <span class="evidence">
@@ -834,7 +1118,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">029ms</span></td>
+                    <td width="100"><span class="top-level-step">249ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -851,33 +1135,288 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/36/word
+                                                POST http://localhost:38389/wordle/api/game/23/word
                                         </span>
                             <span class="evidence">
                                         <span class="piece-of-evidence">
                 <span>
                         <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-16">
+                                data-target="#restModal-REST-22">
                             REST Query
                         </button>
                     </span>
                 <!-- Modal -->
                 <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-16">
+                    <div class="collapse multi-collapse" id="restModal-REST-22">
                         <div class="card">
                             <div class="card-body">
                                 <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/36/word</p>
+                                    <p>URL: http://localhost:38389/wordle/api/game/23/word</p>
                                     <p>Status code: 201</p>
                                     <p>Content Type: text/plain</p>
                                     <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
                                     <h4>Content Body</h4>
-                                    <pre>CLEAR</pre>
+                                    <pre>CLEAN</pre>
                                     <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
                                 <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">002ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="9-1"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/23/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-23">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-23">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/23/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>QUEEN</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">002ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="9-2"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/23/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-24">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-24">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/23/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>QUEST</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">022ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="9-3"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/23/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-25">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-25">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/23/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>CRONE</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">002ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="9-4"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/23/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-26">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-26">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/23/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>CREST</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ]<br>]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        </span>
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="9-5"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                POST http://localhost:38389/wordle/api/game/23/word
+                                        </span>
+                            <span class="evidence">
+                                        <span class="piece-of-evidence">
+                <span>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
+                                data-target="#restModal-REST-27">
+                            REST Query
+                        </button>
+                    </span>
+                <!-- Modal -->
+                <div class="rest-query-details">
+                    <div class="collapse multi-collapse" id="restModal-REST-27">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Response</h4>
+                                    <p>URL: http://localhost:38389/wordle/api/game/23/word</p>
+                                    <p>Status code: 201</p>
+                                    <p>Content Type: text/plain</p>
+                                    <h4>Request Headers</h4>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
+                                    <h4>Content Body</h4>
+                                    <pre>CROWN</pre>
+                                    <h4>Response Headers</h4>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                <h4>Response Body</h4>
+                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
                             </div>
                         </div>
                     </div>
@@ -910,7 +1449,7 @@
                             <a href="javaScript:void(0)" onClick="toggleDiv('stepSection10')"
                                style="display:block;">
                                 <span class="top-level-step">
-                                                Play the word 'QUEEN'
+                                                Get the game statistics for the current player
                                         </span>
                             </a>
                             <span class="evidence">
@@ -919,7 +1458,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">040ms</span></td>
+                    <td width="100"><span class="top-level-step">092ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -936,454 +1475,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/36/word
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-18">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-18">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/36/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>QUEEN</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="11"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection11')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection11 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection11')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Play the word 'QUEST'
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">035ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection11" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="11-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/36/word
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-20">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-20">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/36/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>QUEST</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:29 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">002ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="12"></a>
-                            <span style="margin-left: 20px;"
-                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="top-level-step">
-                                                Create a new game with the word BEAST
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">017ms</span></td>
-                </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="13"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection13')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection13 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection13')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Play the word 'CLEAN'
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">029ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection13" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="13-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/38/word
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-23">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-23">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/38/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>CLEAN</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:30 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="14"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection14')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection14 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection14')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Play the word 'QUEEN'
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">024ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection14" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="14-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/38/word
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-25">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-25">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/38/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>QUEEN</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:30 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">002ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="15"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection15')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection15 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection15')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Play the word 'QUEST'
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">022ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection15" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="15-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/38/word
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-27">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-27">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/38/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>QUEST</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:30 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">002ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="16"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection16')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection16 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection16')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Play the word 'CRONE'
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">028ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection16" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="16-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/38/word
+                                                GET http://localhost:38389/wordle/api/game/statistics
                                         </span>
                             <span class="evidence">
                                         <span class="piece-of-evidence">
@@ -1399,240 +1491,15 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/38/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>CRONE</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:30 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="17"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection17')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection17 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection17')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Play the word 'CREST'
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">024ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection17" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="17-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/38/word
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-31">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-31">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/38/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>CREST</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:30 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">002ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="18"></a>
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection18')"
-                               style="display:block">
-                                <i class="bi bi-caret-right-square imgstepSection18 success-icon"
-                                   style="margin-left: 20px; float:left; padding-right:5px"></i>
-                            </a>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                            <a href="javaScript:void(0)" onClick="toggleDiv('stepSection18')"
-                               style="display:block;">
-                                <span class="top-level-step">
-                                                Play the word 'CROWN'
-                                        </span>
-                            </a>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">027ms</span></td>
-                </tr>
-                    <tr>
-                        <td colspan="5">
-                            <table id="stepSection18" class="step-table-nested" style="display:none;">
-                <tr class="test-SUCCESS">
-
-                    <td width="70" class="step-icon">
-                        <a name="18-0"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                POST http://localhost:37453/wordle/api/game/38/word
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-33">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-33">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/38/word</p>
-                                    <p>Status code: 201</p>
-                                    <p>Content Type: text/plain</p>
-                                    <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*<br>Content-Type=text/plain; charset=ISO-8859-1</pre>
-                                    <h4>Content Body</h4>
-                                    <pre>CROWN</pre>
-                                    <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:30 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
-                                <h4>Response Body</h4>
-                                    <pre>[<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;YELLOW&quot;,<br>        &quot;GREEN&quot;,<br>        &quot;GREEN&quot;<br>    ],<br>    [<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;,<br>        &quot;GRAY&quot;<br>    ]<br>]</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                        </span>
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
-                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-                <tr class="test-SUCCESS">
-
-                    <td width="50" class="step-icon">
-                        <a name="19"></a>
-                            <span style="margin-left: 20px;"
-                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="top-level-step">
-                                                GET http://localhost:37453/wordle/api/game/history
-                                        </span>
-                            <span class="evidence">
-                                        <span class="piece-of-evidence">
-                <span>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="collapse"
-                                data-target="#restModal-REST-34">
-                            REST Query
-                        </button>
-                    </span>
-                <!-- Modal -->
-                <div class="rest-query-details">
-                    <div class="collapse multi-collapse" id="restModal-REST-34">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Response</h4>
-                                    <p>URL: http://localhost:37453/wordle/api/game/history</p>
+                                    <p>URL: http://localhost:38389/wordle/api/game/statistics</p>
                                     <p>Status code: 200</p>
                                     <p>Content Type: null</p>
                                     <h4>Request Headers</h4>
-                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZG1vbmQuYmVpZXIiLCJpYXQiOjE3MDU2ODI3MjksImV4cCI6MTcwNTc2OTEyOX0.aoP4tGoi_-prvMYGa4ppwrBTipOHEvNck5GtaAitPNA<br>Accept=*/*</pre>
+                                    <pre>Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllLmJveWxlIiwiaWF0IjoxNzA1NzUwOTI2LCJleHAiOjE3MDU4MzczMjZ9.MPNyLxAFRhlx5Z49uO8WSyfAGfW0Z-rnCSL1PWlfMf8<br>Accept=*/*</pre>
                                     <h4>Response Headers</h4>
-                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Fri, 19 Jan 2024 16:45:30 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
+                                    <pre>Vary: Origin<br>Vary: Access-Control-Request-Method<br>Vary: Access-Control-Request-Headers<br>X-Content-Type-Options: nosniff<br>X-XSS-Protection: 0<br>Cache-Control: no-cache, no-store, max-age=0, must-revalidate<br>Pragma: no-cache<br>Expires: 0<br>X-Frame-Options: DENY<br>Content-Type: application/json<br>Transfer-Encoding: chunked<br>Date: Sat, 20 Jan 2024 11:42:07 GMT<br>Keep-Alive: timeout=60<br>Connection: keep-alive</pre>
                                 <h4>Response Body</h4>
-                                    <pre>[<br>    {<br>        &quot;dateTimePlayed&quot;: &quot;2024-01-19T16:45:30.18659&quot;,<br>        &quot;outcome&quot;: true,<br>        &quot;numberOfGuesses&quot;: 3<br>    },<br>    {<br>        &quot;dateTimePlayed&quot;: &quot;2024-01-19T16:45:30.346108&quot;,<br>        &quot;outcome&quot;: true,<br>        &quot;numberOfGuesses&quot;: 4<br>    },<br>    {<br>        &quot;dateTimePlayed&quot;: &quot;2024-01-19T16:45:30.524539&quot;,<br>        &quot;outcome&quot;: false,<br>        &quot;numberOfGuesses&quot;: 6<br>    }<br>]</pre>
+                                    <pre>{<br>    &quot;totalTries&quot;: 4,<br>    &quot;totalWins&quot;: 3,<br>    &quot;percentageSuccessRate&quot;: 75,<br>    &quot;currentWinningStreak&quot;: 0,<br>    &quot;bestWinningStreak&quot;: 3,<br>    &quot;guessDistribution&quot;: {<br>        &quot;1&quot;: 0,<br>        &quot;2&quot;: 0,<br>        &quot;3&quot;: 1,<br>        &quot;4&quot;: 2,<br>        &quot;5&quot;: 0,<br>        &quot;6&quot;: 0<br>    }<br>}</pre>
                             </div>
                         </div>
                     </div>
@@ -1642,13 +1509,17 @@
                         </div>
                     </td>
 
-                    <td width="130"><span class="top-level-step">SUCCESS</span></td>
-                    <td width="100"><span class="top-level-step">001ms</span></td>
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
                 </tr>
+
+                            </table>
+                        </td>
+                    </tr>
             <tr class="test-SUCCESS">
                     <td colspan="2"></td>
                 <td width="130"><span class="top-level-step"><em>SUCCESS</em></span></td>
-                <td width="100"><span class="top-level-step"><em>0.28s</em></span></td>
+                <td width="100"><span class="top-level-step"><em>0.29s</em></span></td>
             </tr>
 
         </table>
