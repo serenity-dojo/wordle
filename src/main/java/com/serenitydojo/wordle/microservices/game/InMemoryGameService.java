@@ -2,6 +2,7 @@ package com.serenitydojo.wordle.microservices.game;
 
 import com.serenitydojo.wordle.microservices.domain.Player;
 import com.serenitydojo.wordle.microservices.registration.service.AuthenticationContext;
+import com.serenitydojo.wordle.microservices.registration.service.AuthenticationService;
 import com.serenitydojo.wordle.microservices.registration.service.PlayerService;
 import com.serenitydojo.wordle.model.WordleGame;
 import com.serenitydojo.wordle.dictionary.WordleDictionary;
@@ -26,13 +27,13 @@ public class InMemoryGameService implements GameService {
     private AtomicLong idCounter = new AtomicLong(1);
 
     GameHistoryService gameHistoryService;
-
-    PlayerService playerService;
+    AuthenticationService authenticationService;
 
     @Autowired
-    public InMemoryGameService(GameHistoryService gameHistoryService, PlayerService playerService) {
+    public InMemoryGameService(GameHistoryService gameHistoryService,
+                               AuthenticationService authenticationService) {
         this.gameHistoryService = gameHistoryService;
-        this.playerService = playerService;
+        this.authenticationService = authenticationService;
     }
 
     @Override
@@ -51,21 +52,13 @@ public class InMemoryGameService implements GameService {
 
     @Override
     public GameResult play(long gameId, String word) {
-        GameResult result = gameWithId(gameId).play(word);
-        if (userIsAuthenticated()) {
-            playerService.findPlayerByUsername(AuthenticationContext.getCurrentUser().getUsername()).ifPresent(
-                    player -> {
-                        if (result != GameResult.IN_PROGRESS) {
-                            gameHistoryService.recordGameHistory(player, games.get(gameId));
-                        }
-                    }
-            );
+        WordleGame game = gameWithId(gameId);
+        GameResult result = game.play(word);
+        if (authenticationService.userIsAuthenticated() && (result != GameResult.IN_PROGRESS)) {
+            Player player = authenticationService.getCurrentPlayer();
+            gameHistoryService.recordGameHistory(player, game);
         }
         return result;
-    }
-
-    private boolean userIsAuthenticated() {
-        return AuthenticationContext.getCurrentUser() != null && AuthenticationContext.getCurrentUser().getUsername() != null;
     }
 
     @Override

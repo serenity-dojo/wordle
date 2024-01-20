@@ -10,8 +10,6 @@ import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -27,7 +25,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag("integration")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
-//@Execution(ExecutionMode.SAME_THREAD)
 public class PlayingTheGameTest {
 
     String id;
@@ -38,24 +35,14 @@ public class PlayingTheGameTest {
     @Steps
     GameFacade gameFacade;
 
-    Faker fake = Faker.instance();
-
     String token;
-
-    @BeforeAll
-    static void registerUser() {
-
-    }
 
     @BeforeEach
     void newGame() {
         RestAssured.baseURI = "http://localhost:" + port;
 
-        String name = fake.name().username();
-        String email = fake.bothify("????##@gmail.com");
-        String password = fake.bothify("????####");
-
-        token = gameFacade.registerPlayer(name, password, email);
+        TestPlayer testPlayer = TestPlayer.randomPlayer();
+        token = gameFacade.registerPlayer(testPlayer.name(), testPlayer.password(), testPlayer.email());
         id = gameFacade.newGame();
     }
 
@@ -85,8 +72,7 @@ public class PlayingTheGameTest {
     @DisplayName("We can check the current state of the game by sending a GET to /api/game/{id}/guesses")
     @Order(6)
     void checkingTheStateOfTheGame() {
-        gameFacade.playWord(id, "FEAST");
-        gameFacade.playWord(id, "BEAST");
+        gameFacade.playWords(id, "FEAST", "BEAST");
 
         assertThat(gameFacade.gameHistory(id))
                 .hasSize(2)
@@ -114,9 +100,7 @@ public class PlayingTheGameTest {
     void playingAGame() {
 
         id = gameFacade.newGameWith("BLAND");
-        gameFacade.playWord(id, "BEAST");
-        gameFacade.playWord(id, "BRAIN");
-        gameFacade.playWord(id, "BLAND");
+        gameFacade.playWords(id, "BEAST", "BRAIN", "BLAND");
 
         Serenity.reportThat("The game history should be correctly recorded",
                 () -> {
@@ -186,42 +170,4 @@ public class PlayingTheGameTest {
 
         assertThat(answer).isEqualTo("BLAND");
     }
-
-    @Test
-    @Order(11)
-    @DisplayName("Game results are recorded in the game history")
-    void gameHistory() {
-
-        String game1 = gameFacade.newGameWith("BLAND");
-        gameFacade.playWord(game1, "BEAST");
-        gameFacade.playWord(game1, "BRAIN");
-        gameFacade.playWord(game1, "BLAND");
-
-        String game2 = gameFacade.newGameWith("QUEST");
-        gameFacade.playWord(game2,"CLEAN");
-        gameFacade.playWord(game2,"CLEAR");
-        gameFacade.playWord(game2,"QUEEN");
-        gameFacade.playWord(game2,"QUEST");
-
-        String game3 = gameFacade.newGameWith("BEAST");
-        gameFacade.playWord(game3,"CLEAN");
-        gameFacade.playWord(game3,"QUEEN");
-        gameFacade.playWord(game3,"QUEST");
-        gameFacade.playWord(game3,"CRONE");
-        gameFacade.playWord(game3,"CREST");
-        gameFacade.playWord(game3,"CROWN");
-
-        List<GameHistoryDTO> gameHistory = gameFacade.getTheGameHistoryForTheCurrentPlayer();
-
-        assertThat(gameHistory.get(0).numberOfGuesses()).isEqualTo(3);
-        assertThat(gameHistory.get(0).outcome()).isTrue();
-
-        assertThat(gameHistory.get(1).numberOfGuesses()).isEqualTo(4);
-        assertThat(gameHistory.get(1).outcome()).isTrue();
-
-        assertThat(gameHistory.get(2).numberOfGuesses()).isEqualTo(6);
-        assertThat(gameHistory.get(2).outcome()).isFalse();
-
-    }
-
 }

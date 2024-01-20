@@ -1,24 +1,21 @@
 package com.serenitydojo.wordle.microservices.game;
 
-import com.serenitydojo.wordle.microservices.domain.GameHistory;
 import com.serenitydojo.wordle.microservices.domain.GameHistoryDTO;
 import com.serenitydojo.wordle.microservices.domain.Player;
 import com.serenitydojo.wordle.microservices.registration.service.AuthenticationContext;
 import com.serenitydojo.wordle.microservices.registration.service.PlayerService;
-import com.serenitydojo.wordle.model.CellColor;
-import com.serenitydojo.wordle.model.GameResult;
+import com.serenitydojo.wordle.microservices.domain.GameHistoryStatistics;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @Tag(name = "Game History Controller", description = "End points used to report on game history")
@@ -43,10 +40,24 @@ public class GameHistoryController {
             if (playerService.findPlayerByUsername(username).isPresent()) {
                 Player player = playerService.findPlayerByUsername(username).get();
                 return gameHistoryService.findGameHistory(player).stream()
-                        .map(historyEntry -> new GameHistoryDTO(historyEntry.getDateTimePlayed(), historyEntry.getOutcome(), historyEntry.getNumberOfGuesses()))
+                        .map(historyEntry -> new GameHistoryDTO(historyEntry.getDateTimePlayed(), historyEntry.getWon(), historyEntry.getNumberOfGuesses()))
                         .toList();
             }
         }
-        return new ArrayList<>();
+        throw new PlayerNotFoundException("No player found for the current session");
+    }
+
+    @PreAuthorize("hasRole('PLAYER')")
+    @RequestMapping(value = "/api/game/statistics", method = GET)
+    @Operation(description = "Get the game statistics for the current player")
+    public GameHistoryStatistics playerStatistics() {
+        if (AuthenticationContext.getCurrentUser() != null) {
+            String username = AuthenticationContext.getCurrentUser().getUsername();
+            if (playerService.findPlayerByUsername(username).isPresent()) {
+                Player player = playerService.findPlayerByUsername(username).get();
+                return gameHistoryService.calculateStatistics(player);
+            }
+        }
+        throw new PlayerNotFoundException("No player found for the current session");
     }
 }

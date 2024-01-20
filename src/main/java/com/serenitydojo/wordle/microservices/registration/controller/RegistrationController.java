@@ -20,7 +20,7 @@ public class RegistrationController {
     @PostMapping("/api/auth/register")
     @ResponseStatus(HttpStatus.CREATED)
     public String registerUser(@RequestBody @Valid Player player) {
-        return playerService.registerPlayer(player);
+        return playerService.registerPlayer(player).getUsername();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -10,7 +10,7 @@ public interface PlayerService {
     /**
      * Register a new player
      */
-    String registerPlayer(Player newPlayer);
+    Player registerPlayer(Player newPlayer);
 
     Optional<Player> findPlayerByUsername(String username);
 }

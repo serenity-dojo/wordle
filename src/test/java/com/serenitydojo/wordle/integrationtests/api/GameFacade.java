@@ -1,6 +1,7 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
 import com.serenitydojo.wordle.microservices.domain.GameHistoryDTO;
+import com.serenitydojo.wordle.microservices.domain.GameHistoryStatistics;
 import com.serenitydojo.wordle.microservices.domain.Player;
 import com.serenitydojo.wordle.model.GameResult;
 import io.restassured.RestAssured;
@@ -47,6 +48,19 @@ public class GameFacade {
                 .post("/wordle/api/game/{id}/word", id);
     }
 
+    @Step("Play the words '{1}'")
+    public Response playWords(String id, String... words) {
+        Response lastResponse = null;
+        for(String word : words) {
+            lastResponse = SerenityRest.given()
+                    .header("Authorization", "Bearer " + token)
+                    .body(word)
+                    .when()
+                    .post("/wordle/api/game/{id}/word", id);
+        }
+        return lastResponse;
+    }
+
     @Step("Request the answer")
     public Response requestAnswer(String id) {
         return SerenityRest
@@ -78,16 +92,6 @@ public class GameFacade {
                 .extract().as(List.class);
     }
 
-    public List<GameHistoryDTO> getTheGameHistoryForTheCurrentPlayer() {
-        return SerenityRest
-                .given()
-                .header("Authorization", "Bearer " + token)
-                .get("/wordle/api/game/history")
-                .then()
-                .statusCode(200)
-                .extract().jsonPath().getList("", GameHistoryDTO.class);
-    }
-
     @Step("Get the game result")
     public GameResult resultFor(String id) {
         return SerenityRest
@@ -115,4 +119,25 @@ public class GameFacade {
         return token;
     }
 
+    @Step("Get the game history for the current player")
+    public List<GameHistoryDTO> getTheGameHistoryForTheCurrentPlayer() {
+        return SerenityRest
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .get("/wordle/api/game/history")
+                .then()
+                .statusCode(200)
+                .extract().jsonPath().getList("", GameHistoryDTO.class);
+    }
+
+    @Step("Get the game statistics for the current player")
+    public GameHistoryStatistics getTheGameStatisticsForTheCurrentPlayer() {
+        return SerenityRest
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .get("/wordle/api/game/statistics")
+                .then()
+                .statusCode(200)
+                .extract().jsonPath().getObject("", GameHistoryStatistics.class);
+    }
 }

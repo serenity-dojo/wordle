@@ -1,13 +1,13 @@
 package com.serenitydojo.wordle.services;
 
 import com.serenitydojo.wordle.microservices.game.GameHistoryService;
-import com.serenitydojo.wordle.microservices.registration.service.PlayerService;
-import org.junit.Before;
-import org.junit.Test;
+import com.serenitydojo.wordle.microservices.registration.service.AuthenticationService;
 import com.serenitydojo.wordle.microservices.game.GameService;
 import com.serenitydojo.wordle.microservices.game.InMemoryGameService;
 import com.serenitydojo.wordle.microservices.game.NoSuchGameException;
 import com.serenitydojo.wordle.model.GameResult;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -24,11 +24,11 @@ public class WhenInteractingWithTheGameService {
     private GameHistoryService gameHistoryService;
 
     @Mock
-    private PlayerService playerService;
+    private AuthenticationService authenticationService;
 
-    @Before
+    @BeforeEach
     public void newGameService() {
-        gameService = new InMemoryGameService(gameHistoryService, playerService);
+        gameService = new InMemoryGameService(gameHistoryService, authenticationService);
     }
 
     @Test

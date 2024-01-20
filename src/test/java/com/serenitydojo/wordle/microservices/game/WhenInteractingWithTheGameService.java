@@ -1,5 +1,6 @@
 package com.serenitydojo.wordle.microservices.game;
 
+import com.serenitydojo.wordle.microservices.registration.service.AuthenticationService;
 import com.serenitydojo.wordle.microservices.registration.service.PlayerService;
 import com.serenitydojo.wordle.model.CellColor;
 import com.serenitydojo.wordle.model.GameResult;
@@ -24,11 +25,11 @@ public class WhenInteractingWithTheGameService {
     private GameHistoryService gameHistoryService;
 
     @Mock
-    private PlayerService playerService;
+    private AuthenticationService authenticationService;
 
     @BeforeEach
     void setUp() {
-        gameService = new InMemoryGameService(gameHistoryService, playerService);
+        gameService = new InMemoryGameService(gameHistoryService, authenticationService);
     }
 
     @Test

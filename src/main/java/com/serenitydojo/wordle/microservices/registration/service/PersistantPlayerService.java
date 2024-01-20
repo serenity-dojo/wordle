@@ -20,7 +20,7 @@ public class PersistantPlayerService implements PlayerService {
     /**
      * Register a new player
      */
-    public String registerPlayer(Player playerDetails) {
+    public Player registerPlayer(Player playerDetails) {
         if (playerRepository.findByUsername(playerDetails.getUsername()).isPresent()) {
             throw new EmailAlreadyExistsException("A player with this email already exists");
         }
@@ -29,8 +29,7 @@ public class PersistantPlayerService implements PlayerService {
                 passwordEncoder.encode(playerDetails.getPassword()),
                 playerDetails.getEmail());
 
-        Player savedPlayer = playerRepository.save(newPlayer);
-        return savedPlayer.getId();
+        return playerRepository.save(newPlayer);
     }
 
     @Override

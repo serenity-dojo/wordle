@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -29,7 +27,7 @@ public class GameHistory {
     private LocalDateTime dateTimePlayed;
 
     @Column(nullable = false)
-    private Boolean outcome; // true for won, false for lost
+    private Boolean won;
 
     @Column(nullable = false)
     private Integer numberOfGuesses;
