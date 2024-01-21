@@ -1,4 +1,4 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Hints","If the player asks for another hint, all the hints should be shown","SUCCESS","2024-01-21T14:54:08.910306702Z[Etc/UTC]","0.0","0.2"
-"Hints","Possible hints for a word","SUCCESS","2024-01-21T14:54:09.131545086Z[Etc/UTC]","0.0","0.06"
-"Hints","The word starts with a particular letter","SUCCESS","2024-01-21T14:54:09.156322703Z[Etc/UTC]","0.0","0.02"
+"Hints","If the player asks for another hint, all the hints should be shown","SUCCESS","2024-01-21T19:55:38.859679489Z[Etc/UTC]","0.0","0.2"
+"Hints","Possible hints for a word","SUCCESS","2024-01-21T19:55:39.071551614Z[Etc/UTC]","0.0","0.08"
+"Hints","The word starts with a particular letter","SUCCESS","2024-01-21T19:55:39.089458739Z[Etc/UTC]","0.0","0.03"
