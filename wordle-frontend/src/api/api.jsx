@@ -152,3 +152,19 @@ export const get_game_history = async () => {
     });
   return result;
 }
+
+export const get_game_statistics = async () => {
+  let result;
+  await axios
+    .get(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game/statistics`
+    )
+    .then((response) => {
+      console.log(response)
+      result = response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      result = error;
+    });
+  return result;
+}
