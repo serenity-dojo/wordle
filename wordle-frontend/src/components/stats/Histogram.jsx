@@ -15,8 +15,15 @@ export const Histogram = ({
   isGameWon,
   numberOfGuessesMade,
 }) => {
-  const winDistribution = gameStats.winDistribution
+  const winDistribution = [];
+  winDistribution.push(gameStats.guessDistribution["1"]);
+  winDistribution.push(gameStats.guessDistribution["2"]);
+  winDistribution.push(gameStats.guessDistribution["3"]);
+  winDistribution.push(gameStats.guessDistribution["4"]);
+  winDistribution.push(gameStats.guessDistribution["5"]);
+  winDistribution.push(gameStats.guessDistribution["6"]);
   const maxValue = Math.max(...winDistribution, 1)
+  console.log(maxValue)
 
   return (
     <div className="justify-left m-2 columns-1 text-sm dark:text-white">

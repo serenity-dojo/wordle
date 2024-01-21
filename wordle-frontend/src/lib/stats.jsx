@@ -13,7 +13,7 @@ export const addStatsForCompletedGame = (
   // Count is number of incorrect guesses before end.
   const stats = { ...gameStats }
 
-  stats.totalGames += 1
+  stats.totalTries += 1
 
   if (count >= MAX_CHALLENGES) {
     // A fail situation
@@ -39,7 +39,7 @@ const defaultStats = {
   gamesFailed: 0,
   currentStreak: 0,
   bestStreak: 0,
-  totalGames: 0,
+  totalTries: 0,
   successRate: 0,
 }
 
@@ -48,9 +48,9 @@ export const loadStats = () => {
 }
 
 const getSuccessRate = (gameStats) => {
-  const { totalGames, gamesFailed } = gameStats
+  const { totalTries, gamesFailed } = gameStats
 
   return Math.round(
-    (100 * (totalGames - gamesFailed)) / Math.max(totalGames, 1)
+    (100 * (totalTries - gamesFailed)) / Math.max(totalTries, 1)
   )
 }

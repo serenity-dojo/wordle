@@ -33,7 +33,7 @@ export const StatsModal = ({
   isHighContrastMode,
   numberOfGuessesMade,
 }) => {
-  if (gameStats.totalGames <= 0) {
+  if (gameStats.totalTries <= 0) {
     return (
       <BaseModal
         title={STATISTICS_TITLE}

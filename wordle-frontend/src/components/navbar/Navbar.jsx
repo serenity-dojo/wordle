@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 import { ENABLE_ARCHIVED_GAMES } from "../../constants/settings";
 import { GAME_TITLE } from "../../constants/strings";
-import { start_new_game, find_hint } from "../../api/api";
+import { start_new_game, find_hint, get_game_statistics } from "../../api/api";
 import { useAuth } from "../../provider/authProvider";
 
 export const Navbar = ({
@@ -32,6 +32,11 @@ export const Navbar = ({
 
   const logOut = async () => {
     await signOut();
+  }
+
+  const getGameStatistics = async () => {
+    const data = await get_game_statistics();
+    setIsStatsModalOpen(true, data);
   }
 
   return (
@@ -80,7 +85,7 @@ export const Navbar = ({
           </div>
           <ChartBarIcon
             className="mr-3 h-6 w-6 cursor-pointer dark:stroke-white"
-            onClick={() => setIsStatsModalOpen(true)}
+            onClick={() => getGameStatistics()}
           />
           <CogIcon
             className="h-6 w-6 cursor-pointer dark:stroke-white"
