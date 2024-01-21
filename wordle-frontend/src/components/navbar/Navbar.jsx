@@ -1,6 +1,7 @@
 import {
   CalendarIcon,
   ChartBarIcon,
+  PuzzleIcon,
   CogIcon,
   InformationCircleIcon,
 } from "@heroicons/react/outline";
@@ -8,7 +9,7 @@ import { toast } from "react-toastify";
 
 import { ENABLE_ARCHIVED_GAMES } from "../../constants/settings";
 import { GAME_TITLE } from "../../constants/strings";
-import { start_new_game, find_hint, get_game_statistics } from "../../api/api";
+import { start_new_game, find_hint, get_game_statistics, get_game_history } from "../../api/api";
 import { useAuth } from "../../provider/authProvider";
 
 export const Navbar = ({
@@ -16,6 +17,7 @@ export const Navbar = ({
   setIsStatsModalOpen,
   setIsDatePickerModalOpen,
   setIsSettingsModalOpen,
+  setIsHistoryModalOpen,
   handleNewGame,
 }) => {
   const { signOut } = useAuth();
@@ -32,11 +34,16 @@ export const Navbar = ({
 
   const logOut = async () => {
     await signOut();
-  }
+  };
 
   const getGameStatistics = async () => {
     const data = await get_game_statistics();
     setIsStatsModalOpen(true, data);
+  };
+
+  const getGameHistory = async () => {
+    const data = await get_game_history();
+    setIsHistoryModalOpen(true, data);
   }
 
   return (
@@ -86,6 +93,10 @@ export const Navbar = ({
           <ChartBarIcon
             className="mr-3 h-6 w-6 cursor-pointer dark:stroke-white"
             onClick={() => getGameStatistics()}
+          />
+          <PuzzleIcon
+            className="mr-3 h-6 w-6 cursor-pointer dark:stroke-white"
+            onClick={() => getGameHistory()}
           />
           <CogIcon
             className="h-6 w-6 cursor-pointer dark:stroke-white"

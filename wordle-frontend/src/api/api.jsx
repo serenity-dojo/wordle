@@ -145,6 +145,7 @@ export const get_game_history = async () => {
     )
     .then((response) => {
       console.log(response)
+      result = response.data;
     })
     .catch((error) => {
       console.log(error);

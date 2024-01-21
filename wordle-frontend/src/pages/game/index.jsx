@@ -15,6 +15,7 @@ import { InfoModal } from "../../components/modals/InfoModal";
 import { MigrateStatsModal } from "../../components/modals/MigrateStatsModal";
 import { SettingsModal } from "../../components/modals/SettingsModal";
 import { StatsModal } from "../../components/modals/StatsModal";
+import { HistoryModal } from "../../components/modals/HistoryModal";
 import { Navbar } from "../../components/navbar/Navbar";
 import {
   DATE_LOCALE,
@@ -72,6 +73,7 @@ function Game() {
   const [isGameWon, setIsGameWon] = useState(false);
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
+  const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
   const [isDatePickerModalOpen, setIsDatePickerModalOpen] = useState(false);
   const [isMigrateStatsModalOpen, setIsMigrateStatsModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
@@ -113,6 +115,7 @@ function Game() {
 
   const [stats, setStats] = useState(() => loadStats());
   const [statsData, setstatsData] = useState(null);
+  const [historyData, setHistoryData] = useState(null);
 
   useEffect(() => {
     const newStartGame = async () => {
@@ -294,12 +297,16 @@ function Game() {
         <Navbar
           setIsInfoModalOpen={setIsInfoModalOpen}
           setIsStatsModalOpen={(flag, data) => {
-            console.log(flag, data);
             setstatsData(data);
             setIsStatsModalOpen(flag);
           }}
           setIsDatePickerModalOpen={setIsDatePickerModalOpen}
           setIsSettingsModalOpen={setIsSettingsModalOpen}
+          setIsHistoryModalOpen={(flag, data) => {
+            console.log();
+            setHistoryData(data);
+            setIsHistoryModalOpen(flag);
+          }}
           handleNewGame={handleNewGame}
         />
 
@@ -359,6 +366,13 @@ function Game() {
               isDarkMode={isDarkMode}
               isHighContrastMode={isHighContrastMode}
               numberOfGuessesMade={guesses.length}
+            />
+          )}
+          {historyData !== null && (
+            <HistoryModal
+              isOpen={isHistoryModalOpen}
+              handleClose={() => setIsHistoryModalOpen(false)}
+              historyData={historyData}
             />
           )}
           <DatePickerModal
