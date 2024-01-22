@@ -15,7 +15,7 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 // You can customize the path pattern and allowed origins as needed
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:5173") // Add your front-end origin here
+                        .allowedOrigins("http://localhost:5173", "http://127.0.0.1:5173") // Add your front-end origin here
                         .allowedMethods("GET", "POST", "PUT", "DELETE") // Specify the HTTP methods allowed
                         .allowedHeaders("*") // Allow all headers
                         .allowCredentials(true); // Include cookies in the request if needed
