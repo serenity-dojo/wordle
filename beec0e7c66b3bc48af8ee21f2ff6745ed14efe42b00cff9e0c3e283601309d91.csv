@@ -1,2 +1,2 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"Wordle Status Check","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2024-01-21T19:55:44.35972055Z[Etc/UTC]","0.0","2.19"
+"Wordle Status Check","We can check the status of the Wordle service by sending a GET to /api/service","SUCCESS","2024-01-22T16:06:45.795040921Z[Etc/UTC]","0.0","2.03"
