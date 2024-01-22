@@ -10,9 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "game_history")
 public class GameHistory {
     @Id

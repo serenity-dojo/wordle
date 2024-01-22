@@ -57,11 +57,14 @@ public class GameHistoryAPITest {
 
         List<GameHistoryDTO> gameHistory = gameFacade.getTheGameHistoryForTheCurrentPlayer();
 
+        SoftAssertions softly = new SoftAssertions();
         List<Integer> numberOfGuesses = gameHistory.stream().map(GameHistoryDTO::numberOfGuesses).toList();
-        assertThat(numberOfGuesses).contains(3, 4, 6);
+        softly.assertThat(numberOfGuesses).contains(3, 4, 6);
 
         List<Boolean> gameOutcomes = gameHistory.stream().map(GameHistoryDTO::outcome).toList();
-        assertThat(gameOutcomes).contains(true, true, false);
+        softly.assertThat(gameOutcomes).contains(true, true, false);
+
+        softly.assertAll();
     }
 
     @Test

@@ -9,9 +9,7 @@ import lombok.ToString;
 
 @Entity
 @Data
-@ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "players",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
