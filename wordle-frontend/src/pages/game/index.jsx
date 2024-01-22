@@ -53,7 +53,13 @@ import {
   solutionGameDate,
   unicodeLength,
 } from "../../lib/words";
-import { attempt_word, get_answer, start_new_game } from "../../api/api";
+import {
+  attempt_word,
+  get_answer,
+  start_new_game,
+  get_game_statistics,
+  get_game_history,
+} from "../../api/api";
 
 function Game() {
   const { state } = useLocation();
@@ -183,22 +189,36 @@ function Game() {
 
   useEffect(() => {
     if (isGameWon) {
-      const winMessage =
-        WIN_MESSAGES[Math.floor(Math.random() * WIN_MESSAGES.length)];
-      const delayMs = REVEAL_TIME_MS * solution.length;
-
-      showSuccessAlert(winMessage, {
-        delayMs,
-        onClose: () => setIsStatsModalOpen(true),
-      });
+      handleGameWon();
     }
 
     if (isGameLost) {
-      setTimeout(() => {
-        setIsStatsModalOpen(true);
-      }, (solution.length + 1) * REVEAL_TIME_MS);
+      handleGameLost();
     }
   }, [isGameWon, isGameLost, showSuccessAlert]);
+
+  const handleGameWon = async () => {
+    const data = await get_game_statistics();
+    setstatsData(data);
+
+    const winMessage =
+      WIN_MESSAGES[Math.floor(Math.random() * WIN_MESSAGES.length)];
+    const delayMs = REVEAL_TIME_MS * solution.length;
+
+    showSuccessAlert(winMessage, {
+      delayMs,
+      onClose: () => setIsStatsModalOpen(true),
+    });
+  };
+
+  const handleGameLost = async () => {
+    const data = await get_game_statistics();
+    setstatsData(data);
+
+    setTimeout(() => {
+      setIsStatsModalOpen(true);
+    }, (solution.length + 1) * REVEAL_TIME_MS);
+  };
 
   const onChar = (value) => {
     if (
