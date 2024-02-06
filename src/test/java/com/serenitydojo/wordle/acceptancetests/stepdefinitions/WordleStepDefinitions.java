@@ -35,6 +35,7 @@ public class WordleStepDefinitions {
     public void before() {
         System.out.println("CUCUMBER SCENARIO RUNNING IN THREAD " + Thread.currentThread());
     }
+
     @Given("the target word is:")
     public void the_target_word_is(DataTable targetWord) {
         String target = String.join("", targetWord.asLists().get(0));
@@ -62,9 +63,14 @@ public class WordleStepDefinitions {
         attemptedWord = playerAttempts.get(0);
         try {
             wordleGame.play(attemptedWord);
-        } catch(Throwable e) {
+        } catch (Throwable e) {
             exceptionThrownAfterAnInvalidAttempt = e;
         }
+    }
+
+    @Then("the following attempts should be rejected:")
+    public void attempt_should_be_rejected(List<String> playerAttempts) {
+
     }
 
     @Then("the attempt should be rejected")
