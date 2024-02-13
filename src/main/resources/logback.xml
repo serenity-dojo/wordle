@@ -1,0 +1,35 @@
+<configuration>
+
+    <!-- Define the console appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- Define the log message format -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Define a file appender -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <!-- Set the log file name -->
+        <file>wordle.log</file>
+        <!-- Define the log message format for the file -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Set the default logging level to DEBUG -->
+    <root level="WARN">
+        <!-- Attach the console appender -->
+        <appender-ref ref="STDOUT"/>
+        <!-- Optionally attach the file appender -->
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <!-- Adjust the logging level for Hibernate to WARN to suppress DEBUG messages -->
+    <logger name="org.hibernate.type" level="WARN"/>
+
+    <!-- Example of setting a different log level for another package or class -->
+    <logger name="com.serenitydojo.wordle" level="INFO"/>
+
+</configuration>

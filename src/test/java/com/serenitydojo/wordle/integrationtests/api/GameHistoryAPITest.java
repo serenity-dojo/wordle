@@ -6,10 +6,7 @@ import io.restassured.RestAssured;
 import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -21,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SerenityJUnit5Extension.class)
 @DisplayName("Game history and statistics")
 @Tag("integration")
+@Tag("history")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
 public class GameHistoryAPITest {

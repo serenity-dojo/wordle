@@ -17,7 +17,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
   sql:
     init:
       mode: always
@@ -33,7 +33,7 @@ wordle:
 #      path: /swagger-ui.html
 #      enabled: true
 
-#springfox:
-#  documentation:
-#    swagger-ui:
-#      enabled: true
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true

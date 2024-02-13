@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 @DisplayName("Playing the game")
-@Tag("integration")
+@Tag("gameplay")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
 public class PlayingTheGameTest {

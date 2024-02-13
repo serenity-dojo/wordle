@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SerenityJUnit5Extension.class)
 @DisplayName("Wordle Status Check")
 @Tag("integration")
+@Tag("status")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
 class ApplicationStatusTest {

@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SerenityJUnit5Extension.class)
 @DisplayName("Creating a new game")
 @Tag("integration")
+@Tag("creation")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
                 classes = com.serenitydojo.wordle.microservices.WordleApplication.class)
 public class CreatingANewGameTest {

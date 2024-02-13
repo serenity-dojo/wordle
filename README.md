@@ -42,10 +42,10 @@ Once the backend service layer is running, you can start the front-end applicati
 
 ```bash 
 npm install
-npm start
+npm run dev
 ```
 
-You can access the application on http://localhost:3000/
+You can access the application on http://localhost:5173/
 
 ## Reports
 

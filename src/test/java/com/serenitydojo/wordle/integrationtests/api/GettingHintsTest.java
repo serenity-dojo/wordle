@@ -46,6 +46,7 @@ public class GettingHintsTest {
     }
 
     @Test
+    @Tag("hints")
     @DisplayName("We can request a hint for the current game via GET /api/game/{id}/hint")
     void requestingAHint() {
         id = gameFacade.newGameWith("BLAND");
@@ -55,6 +56,7 @@ public class GettingHintsTest {
     }
 
     @ParameterizedTest(name = "Hints should include \"{0}\"")
+    @Tag("hints")
     @ValueSource(strings = {
             "The word starts with the letter B",
             "The word ends with the letter D",
