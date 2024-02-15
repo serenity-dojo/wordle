@@ -79,6 +79,7 @@ const Signup = () => {
                   Name <span className="text-[#E03137]">*</span>
                 </p>
                 <input
+                  id="name"
                   type="text"
                   className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input dark:text-black"
                   value={name}
@@ -91,6 +92,7 @@ const Signup = () => {
                   E-Mail <span className="text-[#E03137]">*</span>
                 </p>
                 <input
+                  id = "email"
                   type="email"
                   className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input dark:text-black"
                   value={workEmail}
@@ -103,6 +105,7 @@ const Signup = () => {
                   Password <span className="text-[#E03137]">*</span>
                 </p>
                 <input
+                  id="password"
                   type="password"
                   className="border border-input rounded-[10px] block w-full px-5 py-4 focus:ring-0 focus:border-input dark:text-black"
                   value={password}
@@ -336,6 +339,7 @@ const Signup = () => {
             </div>
             <div className="flex flex-col gap-4">
               <button
+                id= "create-account"
                 type="button"
                 className={clsx(
                   "flex items-center justify-center text-white focus:ring-0 font-bold text-center rounded-[10px] text-base px-6 py-5",

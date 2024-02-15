@@ -29,18 +29,41 @@ You can also use the Maven wrapper if you don't have Maven installed:
 
 ## How to run the application
 
-You can run the backend application locally as follows:
+You can run the backend application locally as follows. Open a terminal window and run the following:
 ```bash
-mvn spring-boot:run
+mvn spring-boot:run -pl wordle-backend
+```
+
+You should see the following console output:
+
+```bash
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.3)
+
+08:31:55.571 [main] INFO  c.s.w.m.WordleApplication - Starting WordleApplication using Java 21 with PID 42693 (/Users/john/Projects/SerenityDojoExpansion/wordle/wordle-backend/target/classes started by john in /Users/john/Projects/SerenityDojoExpansion/wordle/wordle-backend)
+08:31:55.572 [main] INFO  c.s.w.m.WordleApplication - No active profile set, falling back to 1 default profile: "default"
+08:31:57.491 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+08:31:57.868 [main] INFO  c.s.w.m.WordleApplication - Started WordleApplication in 2.45 seconds (process running for 2.646)
+ __        _____  ____  ____  _     _____   ____  _____ ______     _____ ____ _____      _    ____ ___ 
+ \ \      / / _ \|  _ \|  _ \| |   | ____| / ___|| ____|  _ \ \   / /_ _/ ___| ____|    / \  |  _ \_ _|
+  \ \ /\ / / | | | |_) | | | | |   |  _|   \___ \|  _| | |_) \ \ / / | | |   |  _|     / _ \ | |_) | | 
+   \ V  V /| |_| |  _ <| |_| | |___| |___   ___) | |___|  _ < \ V /  | | |___| |___   / ___ \|  __/| | 
+    \_/\_/  \___/|_| \_\____/|_____|_____| |____/|_____|_| \_\ \_/  |___\____|_____| /_/   \_\_|  |___|
 ```
 
 Once running, you can access the application at http://localhost:9999/wordle/api/status and see the Swagger documentation at http://localhost:9999/wordle/swagger-ui/index.html
 
 ## Running the UI
 
-Once the backend service layer is running, you can start the front-end application by going to the frontend folder and running
+Once the backend service layer is running, you can start the front-end application in a different terminal window with the following instructions:
 
 ```bash 
+cd wordle-frontend
 npm install
 npm run dev
 ```
@@ -49,7 +72,7 @@ You can access the application on http://localhost:5173/
 
 ## Reports
 
-Upon completion of the tests, Serenity reports are generated in the `target/site/serenity` directory. You can view a sample report [here](https://serenity-dojo.github.io/wordle/).
+Upon completion of the tests, Serenity reports are generated in the `wordle-backend/target/site/serenity` directory. You can view a sample report [here](https://serenity-dojo.github.io/wordle/).
 
 ## Learn More
 
@@ -66,4 +89,3 @@ We welcome contributions from everyone. Whether you're a seasoned developer or a
 ## License
 
 This project is licensed under the terms of the MIT license.
-
