@@ -68,7 +68,7 @@ export const Navbar = ({
             Logout
           </button>
         </div>
-        <p className="text-xl text-center font-bold dark:text-white w-1/3">
+        <p className="game-headline text-xl text-center font-bold dark:text-white w-1/3">
           {GAME_TITLE}
         </p>
         <div className="right-icons items-center justify-end w-1/3">
