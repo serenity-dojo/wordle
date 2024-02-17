@@ -27,10 +27,10 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
 
     - name: Build with Maven
-      run: mvn -B verify --file pom.xml -Denvironment=with_screenshots
+      run: mvn -B verify --file pom.xml
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.1
       with:
         branch: gh-pages # The branch the action should deploy to.
-        folder: target/site/serenity # The folder the action should deploy.
+        folder: wordle-backend/target/site/serenity # The folder the action should deploy.
