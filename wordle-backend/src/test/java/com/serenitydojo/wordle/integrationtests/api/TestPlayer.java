@@ -14,6 +14,6 @@ public record TestPlayer(String name, String email, String password) {
     }
 
     public Player asPlayer() {
-        return new Player(name, password, email,"UK",false);
+        return new Player(name, password, email,"US",false);
     }
 }

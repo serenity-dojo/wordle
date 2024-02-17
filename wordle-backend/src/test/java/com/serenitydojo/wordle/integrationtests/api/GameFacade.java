@@ -102,7 +102,7 @@ public class GameFacade {
     }
 
     public String registerPlayer(String name, String password, String email) {
-        return registerPlayer(name, password, email,"UK");
+        return registerPlayer(name, password, email,"GB");
     }
 
     public String registerPlayer(String name, String password, String email, String country) {
