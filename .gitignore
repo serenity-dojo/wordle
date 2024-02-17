@@ -16,8 +16,9 @@ buildNumber.properties
 .mvn
 .jqwik-database
 
+*.log
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 
 # frontend
-/frontend/node_modules
+/wordle-frontend/node_modules

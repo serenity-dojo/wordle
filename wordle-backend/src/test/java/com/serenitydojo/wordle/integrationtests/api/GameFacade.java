@@ -3,6 +3,7 @@ package com.serenitydojo.wordle.integrationtests.api;
 import com.serenitydojo.wordle.microservices.domain.GameHistoryDTO;
 import com.serenitydojo.wordle.microservices.domain.GameHistoryStatistics;
 import com.serenitydojo.wordle.microservices.domain.Player;
+import com.serenitydojo.wordle.microservices.domain.PlayerScore;
 import com.serenitydojo.wordle.model.GameResult;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -101,7 +102,11 @@ public class GameFacade {
     }
 
     public String registerPlayer(String name, String password, String email) {
-        Player player = new Player(name, password, email);
+        return registerPlayer(name, password, email,"UK");
+    }
+
+    public String registerPlayer(String name, String password, String email, String country) {
+        Player player = new Player(name, password, email,country,false);
         SerenityRest
                 .given()
                 .body(player)
@@ -139,5 +144,15 @@ public class GameFacade {
                 .then()
                 .statusCode(200)
                 .extract().jsonPath().getObject("", GameHistoryStatistics.class);
+    }
+
+    public List<PlayerScore> getLeaderboardScores() {
+        return SerenityRest
+                .given()
+                .header("Authorization", "Bearer " + token)
+                .get("/wordle/api/game/leaderboard")
+                .then()
+                .statusCode(200)
+                .extract().jsonPath().getList("", PlayerScore.class);
     }
 }

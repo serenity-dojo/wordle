@@ -2,6 +2,7 @@ package com.serenitydojo.wordle.integrationtests.api;
 
 import com.serenitydojo.wordle.microservices.domain.GameHistoryDTO;
 import com.serenitydojo.wordle.microservices.domain.GameHistoryStatistics;
+import com.serenitydojo.wordle.microservices.domain.PlayerScore;
 import io.restassured.RestAssured;
 import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
@@ -31,13 +32,18 @@ public class GameHistoryAPITest {
 
     String token;
 
+    TestPlayer testPlayer;
+
     @BeforeEach
     void newGame() {
         RestAssured.baseURI = "http://localhost:" + port;
 
-        TestPlayer testPlayer = TestPlayer.randomPlayer();
+        testPlayer = TestPlayer.randomPlayer();
 
-        token = gameFacade.registerPlayer(testPlayer.name(), testPlayer.password(), testPlayer.email());
+        token = gameFacade.registerPlayer(testPlayer.name(),
+                testPlayer.password(),
+                testPlayer.email(),
+                "GB");
     }
 
     @Test
@@ -48,10 +54,10 @@ public class GameHistoryAPITest {
         gameFacade.playWords(game1, "BEAST", "BRAIN", "BLAND");
 
         String game2 = gameFacade.newGameWith("QUEST");
-        gameFacade.playWords(game2,"CLEAN", "CLEAR", "QUEEN", "QUEST");
+        gameFacade.playWords(game2, "CLEAN", "CLEAR", "QUEEN", "QUEST");
 
         String game3 = gameFacade.newGameWith("BEAST");
-        gameFacade.playWords(game3,"CLEAN", "QUEEN", "QUEST", "CRONE", "CREST", "CROWN");
+        gameFacade.playWords(game3, "CLEAN", "QUEEN", "QUEST", "CRONE", "CREST", "CROWN");
 
         List<GameHistoryDTO> gameHistory = gameFacade.getTheGameHistoryForTheCurrentPlayer();
 
@@ -73,13 +79,13 @@ public class GameHistoryAPITest {
         gameFacade.playWords(game1, "BEAST", "BRAIN", "BLAND");
 
         String game2 = gameFacade.newGameWith("QUEST");
-        gameFacade.playWords(game2,"CLEAN", "CLEAR", "QUEEN", "QUEST");
+        gameFacade.playWords(game2, "CLEAN", "CLEAR", "QUEEN", "QUEST");
 
         String game3 = gameFacade.newGameWith("BEAST");
-        gameFacade.playWords(game3,"CLEAN", "CLEAR", "QUEEN", "BEAST");
+        gameFacade.playWords(game3, "CLEAN", "CLEAR", "QUEEN", "BEAST");
 
         String game4 = gameFacade.newGameWith("BEAST");
-        gameFacade.playWords(game4,"CLEAN", "QUEEN", "QUEST", "CRONE", "CREST", "CROWN");
+        gameFacade.playWords(game4, "CLEAN", "QUEEN", "QUEST", "CRONE", "CREST", "CROWN");
 
         GameHistoryStatistics statistics = gameFacade.getTheGameStatisticsForTheCurrentPlayer();
 
@@ -97,5 +103,31 @@ public class GameHistoryAPITest {
         softly.assertThat(statistics.guessDistribution().get(6)).isEqualTo(0);
 
         softly.assertAll();
+    }
+
+    @Test
+    @DisplayName("Player statistics should appear in the leaderboard")
+    void leaderboard() {
+        String game1 = gameFacade.newGameWith("BLAND");
+        gameFacade.playWords(game1, "BEAST", "BRAIN", "BLAND");
+
+        String game2 = gameFacade.newGameWith("QUEST");
+        gameFacade.playWords(game2, "CLEAN", "CLEAR", "QUEEN", "QUEST");
+
+        String game3 = gameFacade.newGameWith("BEAST");
+        gameFacade.playWords(game3, "CLEAN", "CLEAR", "QUEEN", "BEAST");
+
+        String game4 = gameFacade.newGameWith("BEAST");
+        gameFacade.playWords(game4, "CLEAN", "QUEEN", "QUEST", "CRONE", "CREST", "CROWN");
+
+        List<PlayerScore> scores = gameFacade.getLeaderboardScores();
+
+        assertThat(scores).isNotEmpty();
+
+        PlayerScore score = scores.stream().filter(s -> s.name().equals(testPlayer.name())).findFirst().get();
+        assertThat(score.name()).isEqualTo(testPlayer.name());
+        assertThat(score.countryName()).isEqualTo("United Kingdom");
+        assertThat(score.successRate()).isEqualTo(75);
+        assertThat(score.totalTries()).isEqualTo(4);
     }
 }

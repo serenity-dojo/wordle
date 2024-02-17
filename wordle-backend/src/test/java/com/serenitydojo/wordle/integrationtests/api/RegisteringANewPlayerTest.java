@@ -52,7 +52,7 @@ public class RegisteringANewPlayerTest {
         String email = fake.bothify("????##@gmail.com");
         String password = fake.bothify("????####");
 
-        Player player = new Player(name, password, email);
+        Player player = new Player(name, password, email,"UK",false);
         SerenityRest
                 .with()
                 .body(player)
@@ -69,7 +69,7 @@ public class RegisteringANewPlayerTest {
         String email = fake.bothify("????##@gmail.com");
         String password = fake.bothify("????####");
 
-        Player player = new Player(name, password, email);
+        Player player = new Player(name, password, email,"UK",false);
         SerenityRest
                 .given()
                 .body(player)
@@ -94,7 +94,7 @@ public class RegisteringANewPlayerTest {
         String email = fake.bothify("????##@gmail.com");
         String password = fake.bothify("????####");
 
-        Player player = new Player(name, password, email);
+        Player player = new Player(name, password, email,"UK",false);
         SerenityRest
                 .given()
                 .body(player)
@@ -128,7 +128,7 @@ public class RegisteringANewPlayerTest {
         String email = fake.bothify("????##@gmail.com");
         String password = fake.bothify("????####");
 
-        Player player = new Player(name, password, email);
+        Player player = new Player(name, password, email,"UK",false);
         SerenityRest
                 .given()
                 .body(player)
@@ -167,7 +167,7 @@ public class RegisteringANewPlayerTest {
         String email = fake.bothify("????##@gmail.com");
         String password = fake.bothify("????####");
 
-        Player player = new Player(name, password, email);
+        Player player = new Player(name, password, email,"UK",false);
         SerenityRest
                 .with()
                 .body(player)
@@ -192,13 +192,34 @@ public class RegisteringANewPlayerTest {
 
         SerenityRest
                 .with()
-                .body(new Player(email, password, name + " 1"))
+                .body(new Player(email, password, name + " 1","UK",false))
                 .contentType(ContentType.JSON)
                 .post("/wordle/api/auth/register");
 
         SerenityRest
                 .with()
-                .body(new Player(email, password, name + " 2"))
+                .body(new Player(email, password, name + " 2","UK",false))
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/auth/register")
+                .then().statusCode(409);
+    }
+
+    @Test
+    @DisplayName("Username must be unique")
+    void registeringAsANewPlayerWithAnExistingUsername() {
+        String name = fake.name().username();
+        String email = fake.bothify("????##@gmail.com");
+        String password = "secret";
+
+        SerenityRest
+                .with()
+                .body(new Player("a1" + email, password, name,"UK",false))
+                .contentType(ContentType.JSON)
+                .post("/wordle/api/auth/register");
+
+        SerenityRest
+                .with()
+                .body(new Player("a2" + email, password, name,"UK",false))
                 .contentType(ContentType.JSON)
                 .post("/wordle/api/auth/register")
                 .then().statusCode(409);

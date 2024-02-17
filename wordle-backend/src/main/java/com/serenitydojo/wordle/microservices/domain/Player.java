@@ -36,10 +36,19 @@ public class Player {
     @Column(nullable = false)
     private String role;
 
-    public Player(String username, String password, String email) {
+    @NotBlank
+    @Column(nullable = false)
+    private String country;
+
+    @Column
+    private boolean receiveUpdates;
+
+    public Player(String username, String password, String email, String country, boolean receiveUpdates) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = "ROLE_PLAYER";
+        this.country = country;
+        this.receiveUpdates = receiveUpdates;
     }
 }
