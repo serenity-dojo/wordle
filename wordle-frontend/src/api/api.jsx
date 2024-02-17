@@ -17,24 +17,25 @@ export const signin = async (name, password) => {
     })
 }
 
+
 export const signup = async (name, workEmail, password, country, receiveUpdates) => {
-
-    try {
-        const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/wordle/api/auth/register`, {
-                username: name,
-                email: workEmail,
-                password: password,
-                country: country,
-                receiveUpdates: receiveUpdates,
-                role: "ROLE_PLAYER"
-            }
-        )
-        console.log(response)
-        return response.data
-
-    } catch (err) {
-        reject(err);
-    }
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/wordle/api/auth/register`, {
+                    username: name,
+                    email: workEmail,
+                    password: password,
+                    country: country,
+                    receiveUpdates: receiveUpdates,
+                    role: "ROLE_PLAYER"
+                }
+            )
+            console.log(response)
+            resolve(response.data);
+        } catch (err) {
+            reject(err);
+        }
+    })
 }
 
 // export const signup = async (name, workEmail, password, country, receiveUpdates) => {
@@ -166,6 +167,22 @@ export const get_game_history = async () => {
     let result;
     await axios
         .get(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game/history`
+        )
+        .then((response) => {
+            console.log(response)
+            result = response.data;
+        })
+        .catch((error) => {
+            console.log(error);
+            result = error;
+        });
+    return result;
+}
+
+export const get_leaderboard = async () => {
+    let result;
+    await axios
+        .get(`${import.meta.env.VITE_SERVER_URL}/wordle/api/game/leaderboard?size=10`
         )
         .then((response) => {
             console.log(response)

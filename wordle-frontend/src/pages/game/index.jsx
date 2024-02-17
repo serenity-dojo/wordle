@@ -47,7 +47,6 @@ import {
   getGameDate,
   getIsLatestGame,
   isWinningWord,
-  isWordInWordList,
   setGameDate,
   solution,
   solutionGameDate,
@@ -58,12 +57,10 @@ import {
   get_answer,
   start_new_game,
   get_game_statistics,
-  get_game_history,
 } from "../../api/api";
+import {LeaderboardModal} from "../../components/modals/LeaderboardModal.jsx";
 
 function Game() {
-  const { state } = useLocation();
-
   const isLatestGame = getIsLatestGame();
   const gameDate = getGameDate();
   const prefersDarkMode = window.matchMedia(
@@ -80,6 +77,7 @@ function Game() {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
+  const [isLeaderboardModalOpen, setIsLeaderboardModalOpen] = useState(false);
   const [isDatePickerModalOpen, setIsDatePickerModalOpen] = useState(false);
   const [isMigrateStatsModalOpen, setIsMigrateStatsModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
@@ -122,6 +120,7 @@ function Game() {
   const [stats, setStats] = useState(() => loadStats());
   const [statsData, setstatsData] = useState(null);
   const [historyData, setHistoryData] = useState(null);
+  const [leaderboardData, setLeaderboardData] = useState(null);
 
   useEffect(() => {
     const newStartGame = async () => {
@@ -327,6 +326,11 @@ function Game() {
             setHistoryData(data);
             setIsHistoryModalOpen(flag);
           }}
+          setIsLeaderboardModalOpen={(flag, data) => {
+            console.log();
+            setLeaderboardData(data);
+            setIsLeaderboardModalOpen(flag);
+          }}
           handleNewGame={handleNewGame}
         />
 
@@ -394,6 +398,13 @@ function Game() {
               handleClose={() => setIsHistoryModalOpen(false)}
               historyData={historyData}
             />
+          )}
+          {leaderboardData !== null && (
+              <LeaderboardModal
+                  isOpen={isLeaderboardModalOpen}
+                  handleClose={() => setIsLeaderboardModalOpen(false)}
+                  leaderboardData={leaderboardData}
+              />
           )}
           <DatePickerModal
             isOpen={isDatePickerModalOpen}
