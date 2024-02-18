@@ -1,6 +1,5 @@
 import {LEADERBOARD_TITLE} from "../../constants/strings";
 import {BaseModal} from "./BaseModal";
-import {format} from "date-fns";
 
 export const LeaderboardModal = ({isOpen, handleClose, leaderboardData}) => {
     return (

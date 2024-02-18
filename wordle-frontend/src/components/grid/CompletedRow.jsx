@@ -7,7 +7,7 @@ export const CompletedRow = ({ gameStatus, guess, number, isRevealing }) => {
   const splitGuess = unicodeSplit(guess)
 
   return (
-    <div className="mb-1 flex justify-center">
+    <div className="completed-row mb-1 flex justify-center">
       {splitGuess.map((letter, i) => (
         <Cell
           key={i}
