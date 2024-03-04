@@ -36,7 +36,7 @@ export const BaseModal = ({ title, children, isOpen, handleClose }) => {
                 onClick={() => handleClose()}
                 tabIndex={0}
                 aria-pressed="false"
-                className="absolute right-4 top-4"
+                className="modal-close absolute right-4 top-4"
               >
                 <XCircleIcon className="h-6 w-6 cursor-pointer dark:stroke-white" />
               </button>

@@ -60,11 +60,12 @@ Once running, you can access the application at http://localhost:9999/wordle/api
 
 ## Running the UI
 
-Once the backend service layer is running, you can start the front-end application in a different terminal window with the following instructions:
+The frontend application is built using NodeJS and runs with npm, so you will need to install [NodeJS](https://nodejs.org/en). Once the backend service layer is running, you can start the front-end application in a different terminal window with the following instructions:
 
 ```bash 
 cd wordle-frontend
 npm install
+npm run build
 npm run dev
 ```
 
