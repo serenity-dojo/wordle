@@ -72,9 +72,9 @@ const Signup = () => {
             <div className="flex flex-col justify-center gap-16 w-full">
                 <div className="relative flex flex-col bg-main justify-center w-full">
                     <div className="flex flex-col justify-center gap-8 sm:w-1/3 mx-auto px-4">
-                        <p className="text-xl sm:text-[32px] text-center font-bold text-primary-500">
+                        <h2 className="section-heading text-xl sm:text-[32px] text-center font-bold text-primary-500">
                             Sign up
-                        </p>
+                        </h2>
                         <div className="flex flex-col gap-6 text-sm text-[#111827] dark:text-white">
                             <div className="flex flex-col gap-[10px]">
                                 <p>

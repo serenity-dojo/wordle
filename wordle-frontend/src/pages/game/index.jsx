@@ -2,7 +2,6 @@ import { ClockIcon } from "@heroicons/react/outline";
 import { format } from "date-fns";
 import { default as GraphemeSplitter } from "grapheme-splitter";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import Div100vh from "react-div-100vh";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

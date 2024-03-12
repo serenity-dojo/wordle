@@ -1,4 +1,3 @@
 package com.serenitydojo.wordle.integrationtests.api;
 
-public record Credentials(String username, String password) {
-}
+public record Credentials(String username, String password) { }
