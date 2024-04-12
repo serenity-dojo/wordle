@@ -1,0 +1,24 @@
+# Use an official Maven runtime as a parent image with JDK 17
+FROM maven:3.8.4-openjdk-17 as build
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the pom.xml and source code
+COPY ./wordle-backend/pom.xml ./pom.xml
+COPY ./wordle-backend/src ./src
+
+# Package the application
+RUN mvn clean package -DskipTests
+
+# Run stage
+FROM openjdk:17-jdk
+
+# Copy the jar from the build stage
+COPY --from=build /app/target/*.jar /app/app.jar
+
+# Make port 9999 available to the world outside this container
+EXPOSE 9999
+
+# Run the jar file
+ENTRYPOINT ["java","-jar","/app/app.jar"]
