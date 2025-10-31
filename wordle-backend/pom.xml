@@ -16,10 +16,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <serenity.version>4.1.3</serenity.version>
+        <serenity.version>4.3.2</serenity.version>
         <rest-assured.version>5.4.0</rest-assured.version>
-        <junit-jupiter.version>5.10.2</junit-jupiter.version>
-        <junit-platform-suite-api.version>1.10.2</junit-platform-suite-api.version>
+        <junit-jupiter.version>5.13.0</junit-jupiter.version>
+        <junit-platform-suite-api.version>1.13.0</junit-platform-suite-api.version>
         <sonar.coverage.jacoco.xmlReportPaths>${basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
@@ -249,7 +249,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>1.18.42</version>
         </dependency>
     </dependencies>
     <build>
@@ -305,6 +305,13 @@
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.42</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
@@ -343,7 +350,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.11</version>
+                <version>0.8.14</version>
                 <executions>
                     <!-- Prepares the property pointing to the JaCoCo runtime agent which
                          is passed as VM argument when Maven the Surefire plugin is executed. -->
