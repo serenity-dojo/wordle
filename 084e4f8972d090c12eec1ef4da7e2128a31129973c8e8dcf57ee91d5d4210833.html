@@ -24,14 +24,14 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
 <!-- JQuery -->
-<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><!-- Required Stylesheets -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
 <link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 
 <!-- Required Javascript -->
 <script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -69,11 +69,11 @@
     Chart.register(ChartDataLabels);
 </script>
 <!-- JQuery-UI -->
-<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
-<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="jquery-ui-1.14.1/jquery-ui.css" rel="Stylesheet" />
+<script type="text/javascript" src="jquery-ui-1.14.1/jquery-ui.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -107,14 +107,47 @@
 
         $(document).ready(function () {
 
+            $.fn.dataTable.ext.type.order['test-result-pre'] = function(data) {
+                // Extract the text from the hidden span (SUCCESS, FAILURE, etc.)
+                var match = data.match(/<span[^>]*style="display:none"[^>]*>(.*?)<\/span>/);
+                var result = match ? match[1].trim() : '';
+
+                // Define sort priority (failures first when ascending)
+                var order = {
+                    'FAILURE': 1,
+                    'ERROR': 2,
+                    'BROKEN': 3,
+                    'COMPROMISED': 4,
+                    'PENDING': 5,
+                    'IGNORED': 6,
+                    'SKIPPED': 7,
+                    'ABORTED': 8,
+                    'SUCCESS': 9
+                };
+
+                return order[result] || 99;
+            };
+
+            // Then modify your DataTable initialization
             $("#scenario-results").DataTable({
-                "order": [[0, "asc",], [3, "asc",]],
+                "order": [[0, "asc"], [1, "asc"], [2, "asc"]], // Keep your default sort order
                 "language": {
                     searchPlaceholder: "Filter",
                     search: ""
                 },
                 columnDefs: [
-                    {type: 'time-elapsed-dhms', targets: 4}
+                    {
+                        targets: 4, // Started column
+                        visible: false
+                    },
+                    {
+                        type: 'time-elapsed-dhms',
+                        targets: 5 // Total Duration column (adjusted from 6 to 5)
+                    },
+                    {
+                        type: 'test-result',
+                        targets: 6 // Result column (changed from 7 to 6)
+                    }
                 ]
             })
             $("#manual-scenario-results").DataTable({
@@ -229,7 +262,7 @@
             <a href="#"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 12-03-2024 07:14</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 08-01-2026 10:13</span>
     <br style="clear:left"/>
 </div>
 
@@ -329,39 +362,6 @@
                                                                     <tr>
                                                                         <td style="width:95%;" class="toc-title">
                                                                             <span class="orphan-scenario-toc-entry">
-                                                                                    <a href="#5bc814a72a8dc62fd896ae97a6920a5b59907be3a1e7b2aa10c0431b006ef3d1"
-                                                                                       title="View scenario details">
-                                                                                        <i class="bi bi-chat-dots"></i> Scenario: Game statistics can be retrieved for the current player
-                                                                                    </a>
-                                                                                </span>
-                                                                        </td>
-                                                                        <td>
-
-                                                                        </td>
-                                                                        <td style="width:5%;">
-                                                                            <table>
-                                                                                <tr>
-                                                                                    <td class="icons-bar">
-                                                                                        <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                           href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html"
-                                                                                           title="View test results">
-                                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                                            </a>
-
-
-                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                               href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html"
-                                                                                               title="View test results">
-                                                                                                <i class="bi bi-eyeglasses"></i>
-                                                                                            </a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="width:95%;" class="toc-title">
-                                                                            <span class="orphan-scenario-toc-entry">
                                                                                     <a href="#8378e5e07c028c319550f530831f2c02bc8fdcb4406477a5b8c722b109210b85"
                                                                                        title="View scenario details">
                                                                                         <i class="bi bi-chat-dots"></i> Scenario: Player statistics should appear in the leaderboard
@@ -392,6 +392,39 @@
                                                                             </table>
                                                                         </td>
                                                                     </tr>
+                                                                    <tr>
+                                                                        <td style="width:95%;" class="toc-title">
+                                                                            <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#5bc814a72a8dc62fd896ae97a6920a5b59907be3a1e7b2aa10c0431b006ef3d1"
+                                                                                       title="View scenario details">
+                                                                                        <i class="bi bi-chat-dots"></i> Scenario: Game statistics can be retrieved for the current player
+                                                                                    </a>
+                                                                                </span>
+                                                                        </td>
+                                                                        <td>
+
+                                                                        </td>
+                                                                        <td style="width:5%;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td class="icons-bar">
+                                                                                        <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                           href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html"
+                                                                                           title="View test results">
+                                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                                            </a>
+
+
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html"
+                                                                                               title="View test results">
+                                                                                                <i class="bi bi-eyeglasses"></i>
+                                                                                            </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
                                                     </table>
                                                 </div>
                                                 <!--- END OF TOC --->
@@ -401,7 +434,7 @@
                                             <div class="col-sm-12">
                                                 <h3>Scenarios</h3>
 
-                                                    <a name="c38cab4e-0c1b-4fae-b70c-411e882d472a"></a>
+                                                    <a name="32cd8a9a-3192-420c-b91c-112ffe59b7d9"></a>
                                                     <p class="rule-tags inline-tag">
                                                     </p>
 
@@ -427,8 +460,8 @@
 
                                                             </div>
                                                             <div class="scenario-docs card-body">
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/register</p>
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/login</p>
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/register</p>
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/login</p>
                                                                     <p>Create a new game with the word BLAND</p>
                                                                     <p>Play the words '{BEAST,BRAIN,BLAND}'</p>
                                                                     <p>Create a new game with the word QUEST</p>
@@ -436,43 +469,6 @@
                                                                     <p>Create a new game with the word BEAST</p>
                                                                     <p>Play the words '{CLEAN,QUEEN,QUEST,CRONE,CREST,CROWN}'</p>
                                                                     <p>Get the game history for the current player</p>
-                                                                <div class="examples">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="scenario-docs card" id="5bc814a72a8dc62fd896ae97a6920a5b59907be3a1e7b2aa10c0431b006ef3d1">
-                                                            <div class="scenario-docs card-header success"
-                                                                 style="min-height:1.5em;">
-                                                                <div>
-                                                                        <span class="scenario-heading">
-                                                                            <a href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html"
-                                                                               title="View test results">Scenario: Game statistics can be retrieved for the current player</a>
-                                                                        </span>
-
-                                                                        <span class="example-tags inline-tag">
-                                                                        </span>
-
-                                                                    <span class="scenario-result-icon">
-                                                                    
-
-                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                        </span>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="scenario-docs card-body">
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/register</p>
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/login</p>
-                                                                    <p>Create a new game with the word BLAND</p>
-                                                                    <p>Play the words '{BEAST,BRAIN,BLAND}'</p>
-                                                                    <p>Create a new game with the word QUEST</p>
-                                                                    <p>Play the words '{CLEAN,CLEAR,QUEEN,QUEST}'</p>
-                                                                    <p>Create a new game with the word BEAST</p>
-                                                                    <p>Play the words '{CLEAN,CLEAR,QUEEN,BEAST}'</p>
-                                                                    <p>Create a new game with the word BEAST</p>
-                                                                    <p>Play the words '{CLEAN,QUEEN,QUEST,CRONE,CREST,CROWN}'</p>
-                                                                    <p>Get the game statistics for the current player</p>
                                                                 <div class="examples">
                                                                 </div>
                                                             </div>
@@ -499,8 +495,8 @@
 
                                                             </div>
                                                             <div class="scenario-docs card-body">
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/register</p>
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/login</p>
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/register</p>
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/login</p>
                                                                     <p>Create a new game with the word BLAND</p>
                                                                     <p>Play the words '{BEAST,BRAIN,BLAND}'</p>
                                                                     <p>Create a new game with the word QUEST</p>
@@ -509,7 +505,44 @@
                                                                     <p>Play the words '{CLEAN,CLEAR,QUEEN,BEAST}'</p>
                                                                     <p>Create a new game with the word BEAST</p>
                                                                     <p>Play the words '{CLEAN,QUEEN,QUEST,CRONE,CREST,CROWN}'</p>
-                                                                    <p>GET http://localhost:38083/wordle/api/game/leaderboard</p>
+                                                                    <p>GET http://localhost:37655/wordle/api/game/leaderboard</p>
+                                                                <div class="examples">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="scenario-docs card" id="5bc814a72a8dc62fd896ae97a6920a5b59907be3a1e7b2aa10c0431b006ef3d1">
+                                                            <div class="scenario-docs card-header success"
+                                                                 style="min-height:1.5em;">
+                                                                <div>
+                                                                        <span class="scenario-heading">
+                                                                            <a href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html"
+                                                                               title="View test results">Scenario: Game statistics can be retrieved for the current player</a>
+                                                                        </span>
+
+                                                                        <span class="example-tags inline-tag">
+                                                                        </span>
+
+                                                                    <span class="scenario-result-icon">
+                                                                    
+
+                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                        </span>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="scenario-docs card-body">
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/register</p>
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/login</p>
+                                                                    <p>Create a new game with the word BLAND</p>
+                                                                    <p>Play the words '{BEAST,BRAIN,BLAND}'</p>
+                                                                    <p>Create a new game with the word QUEST</p>
+                                                                    <p>Play the words '{CLEAN,CLEAR,QUEEN,QUEST}'</p>
+                                                                    <p>Create a new game with the word BEAST</p>
+                                                                    <p>Play the words '{CLEAN,CLEAR,QUEEN,BEAST}'</p>
+                                                                    <p>Create a new game with the word BEAST</p>
+                                                                    <p>Play the words '{CLEAN,QUEEN,QUEST,CRONE,CREST,CROWN}'</p>
+                                                                    <p>Get the game statistics for the current player</p>
                                                                 <div class="examples">
                                                                 </div>
                                                             </div>
@@ -564,7 +597,7 @@
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>7s</td>
+                    <td>10s</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -574,7 +607,7 @@
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>189ms</td>
+                    <td>2s</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -585,30 +618,30 @@
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>2s</td>
+                    <td>7s</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>Mar 12, 2024 07:14:24</td>
+                    <td>Jan 08, 2026 10:13:34</td>
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
                     </td>
-                    <td>1s</td>
+                    <td>4s</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>Mar 12, 2024 07:14:31</td>
+                    <td>Jan 08, 2026 10:13:45</td>
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>3s</td>
+                    <td>13s</td>
                 </tr>
                 </tbody>
             </table>
@@ -640,24 +673,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>9</td>
-                                                                    <td>07:14:24</td>
-                                                                    <td>2s 646ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="084e4f8972d090c12eec1ef4da7e2128a31129973c8e8dcf57ee91d5d4210833.html">Game history and statistics</a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <a href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html">Game statistics can be retrieved for the current player</a>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>11</td>
-                                                                    <td>07:14:30</td>
-                                                                    <td>239ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:34</td>
+                                                                    <td>7s 771ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -670,9 +688,24 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>11</td>
-                                                                    <td>07:14:31</td>
-                                                                    <td>189ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:42</td>
+                                                                    <td>2s 667ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="084e4f8972d090c12eec1ef4da7e2128a31129973c8e8dcf57ee91d5d4210833.html">Game history and statistics</a>
+                                                                    </td>
+                                                                    <td>
+                                                                            <a href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html">Game statistics can be retrieved for the current player</a>
+                                                                    </td>
+                                                                    <td><span style="display:none"></span>
+                                                                    </td>
+                                                                    <td>11</td>
+                                                                    <td>10:13:42</td>
+                                                                    <td>2s 834ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                         </tbody>
@@ -722,7 +755,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="version">Serenity BDD version 4.1.3</span>
+                    <span class="version">Serenity BDD version 5.0.4</span>
                 </div>
             </div>
         </div>
@@ -1025,7 +1058,7 @@
             datasets: [{
                 label: 'Number of tests per duration',
                 fill: false,
-                data: ['2','1','0','0','0','0','0','0'],
+                data: ['0','3','0','0','0','0','0','0'],
                 backgroundColor: 'rgba(83, 146, 255,0.5)',
                 borderColor: 'rgba(83, 146, 255, 1)',
             }]

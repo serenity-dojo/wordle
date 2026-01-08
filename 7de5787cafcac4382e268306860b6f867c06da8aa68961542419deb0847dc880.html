@@ -27,14 +27,14 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
 <!-- JQuery -->
-<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><!-- Required Stylesheets -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
 <link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 
 <!-- Required Javascript -->
 <script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -72,11 +72,11 @@
     Chart.register(ChartDataLabels);
 </script>
 <!-- JQuery-UI -->
-<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
-<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="jquery-ui-1.14.1/jquery-ui.css" rel="Stylesheet" />
+<script type="text/javascript" src="jquery-ui-1.14.1/jquery-ui.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -108,14 +108,47 @@
     <script class="code" type="text/javascript">$(document).ready(function () {
 
 
+            $.fn.dataTable.ext.type.order['test-result-pre'] = function(data) {
+                // Extract the text from the hidden span (SUCCESS, FAILURE, etc.)
+                var match = data.match(/<span[^>]*style="display:none"[^>]*>(.*?)<\/span>/);
+                var result = match ? match[1].trim() : '';
+
+                // Define sort priority (failures first when ascending)
+                var order = {
+                    'FAILURE': 1,
+                    'ERROR': 2,
+                    'BROKEN': 3,
+                    'COMPROMISED': 4,
+                    'PENDING': 5,
+                    'IGNORED': 6,
+                    'SKIPPED': 7,
+                    'ABORTED': 8,
+                    'SUCCESS': 9
+                };
+
+                return order[result] || 99;
+            };
+
+            // Then modify your DataTable initialization
             $("#scenario-results").DataTable({
-                "order": [[0, "asc",], [3, "asc",]],
+                "order": [[0, "asc"], [1, "asc"], [2, "asc"]], // Keep your default sort order
                 "language": {
                     searchPlaceholder: "Filter",
                     search: ""
                 },
                 columnDefs: [
-                    {type: 'time-elapsed-dhms', targets: 4}
+                    {
+                        targets: 3, // Started column (Feature=0, Scenario=1, Steps=2, Started=3)
+                        visible: false
+                    },
+                    {
+                        type: 'time-elapsed-dhms',
+                        targets: 4 // Total Duration column
+                    },
+                    {
+                        type: 'test-result',
+                        targets: 5 // Result column
+                    }
                 ]
             })
             $("#manual-scenario-results").DataTable({
@@ -179,7 +212,7 @@
             <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 12-03-2024 07:14:35</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 08-01-2026 10:13:49</span>
     <br style="clear:left"/>
 </div>
     <div class="clr"></div>
@@ -247,48 +280,48 @@
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>Mar 12, 2024 07:14:18</td>
+                    <td>Jan 08, 2026 10:13:28</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>Mar 12, 2024 07:14:18</td>
+                    <td>Jan 08, 2026 10:13:28</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>239ms</td>
+                    <td>303ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>4ms</td>
+                    <td>13ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>160ms</td>
+                    <td>185ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
                     </td>
-                    <td>34ms</td>
+                    <td>67ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>216ms</td>
+                    <td>488ms</td>
                 </tr>
                 </tbody>
             </table>
@@ -396,30 +429,6 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                        <tr class="scenario-result SUCCESS">
-                                                            <td>
-                                                                    <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
-                                                            </td>
-                                                            <td><a href="033c9b97cb392e9627e3504c4e34efdd8ea544779d92e8fa9c41163c64d9d83a.html">If the player asks for another hint, all the hints should be shown</a>
-                                                            </td>
-                                                            <td>4</td>
-                                                            <td>07:14:18</td>
-                                                            <td>160ms</td>
-                                                            <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="scenario-result SUCCESS">
-                                                            <td>
-                                                                    <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
-                                                            </td>
-                                                            <td><a href="b88df411dd04d8a550e7aa6b8c1b0a286046ea9f38b3a7958a6a2b1af6211cdd.html">The word starts with a particular letter</a>
-                                                            </td>
-                                                            <td>3</td>
-                                                            <td>07:14:18</td>
-                                                            <td>029ms</td>
-                                                            <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                            </td>
-                                                        </tr>
                                                             <tr class="scenario-result SUCCESS">
                                                                 <td>
                                                                         <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
@@ -430,8 +439,8 @@
                                                                         <br/>Word=APPLE, Hint Type=Starts with letter, Hint Text=The word starts with the letter A
                                                                 </td>
                                                                 <td>3</td>
-                                                                <td>07:14:18</td>
-                                                                <td>012ms</td>
+                                                                <td>10:13:28</td>
+                                                                <td>013ms</td>
                                                                 <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                 </td>
                                                             </tr>
@@ -445,8 +454,8 @@
                                                                         <br/>Word=CREEK, Hint Type=Ends with letter, Hint Text=The word ends with the letter K
                                                                 </td>
                                                                 <td>3</td>
-                                                                <td>07:14:18</td>
-                                                                <td>020ms</td>
+                                                                <td>10:13:28</td>
+                                                                <td>025ms</td>
                                                                 <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                 </td>
                                                             </tr>
@@ -460,8 +469,8 @@
                                                                         <br/>Word=GROWL, Hint Type=Single vowel, Hint Text=The word contains 1 vowel
                                                                 </td>
                                                                 <td>3</td>
-                                                                <td>07:14:18</td>
-                                                                <td>008ms</td>
+                                                                <td>10:13:28</td>
+                                                                <td>043ms</td>
                                                                 <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                 </td>
                                                             </tr>
@@ -475,8 +484,8 @@
                                                                         <br/>Word=APPLE, Hint Type=Multiple vowels, Hint Text=The word contains 2 vowels
                                                                 </td>
                                                                 <td>3</td>
-                                                                <td>07:14:18</td>
-                                                                <td>004ms</td>
+                                                                <td>10:13:28</td>
+                                                                <td>020ms</td>
                                                                 <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                 </td>
                                                             </tr>
@@ -490,11 +499,35 @@
                                                                         <br/>Word=CRYPT, Hint Type=No vowels, Hint Text=The word contains no vowels
                                                                 </td>
                                                                 <td>3</td>
-                                                                <td>07:14:18</td>
-                                                                <td>005ms</td>
+                                                                <td>10:13:28</td>
+                                                                <td>185ms</td>
                                                                 <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                 </td>
                                                             </tr>
+                                                        <tr class="scenario-result SUCCESS">
+                                                            <td>
+                                                                    <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
+                                                            </td>
+                                                            <td><a href="033c9b97cb392e9627e3504c4e34efdd8ea544779d92e8fa9c41163c64d9d83a.html">If the player asks for another hint, all the hints should be shown</a>
+                                                            </td>
+                                                            <td>4</td>
+                                                            <td>10:13:28</td>
+                                                            <td>167ms</td>
+                                                            <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="scenario-result SUCCESS">
+                                                            <td>
+                                                                    <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
+                                                            </td>
+                                                            <td><a href="b88df411dd04d8a550e7aa6b8c1b0a286046ea9f38b3a7958a6a2b1af6211cdd.html">The word starts with a particular letter</a>
+                                                            </td>
+                                                            <td>3</td>
+                                                            <td>10:13:28</td>
+                                                            <td>021ms</td>
+                                                            <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                            </td>
+                                                        </tr>
                                                 </tbody>
                                             </table>
 
@@ -529,7 +562,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <span class="version">Serenity BDD version 4.1.3</span>
+            <span class="version">Serenity BDD version 5.0.4</span>
         </div>
     </div>
 </div>

@@ -24,14 +24,14 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
 <!-- JQuery -->
-<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><!-- Required Stylesheets -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
 <link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 
 <!-- Required Javascript -->
 <script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -69,11 +69,11 @@
     Chart.register(ChartDataLabels);
 </script>
 <!-- JQuery-UI -->
-<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
-<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="jquery-ui-1.14.1/jquery-ui.css" rel="Stylesheet" />
+<script type="text/javascript" src="jquery-ui-1.14.1/jquery-ui.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -107,14 +107,47 @@
 
         $(document).ready(function () {
 
+            $.fn.dataTable.ext.type.order['test-result-pre'] = function(data) {
+                // Extract the text from the hidden span (SUCCESS, FAILURE, etc.)
+                var match = data.match(/<span[^>]*style="display:none"[^>]*>(.*?)<\/span>/);
+                var result = match ? match[1].trim() : '';
+
+                // Define sort priority (failures first when ascending)
+                var order = {
+                    'FAILURE': 1,
+                    'ERROR': 2,
+                    'BROKEN': 3,
+                    'COMPROMISED': 4,
+                    'PENDING': 5,
+                    'IGNORED': 6,
+                    'SKIPPED': 7,
+                    'ABORTED': 8,
+                    'SUCCESS': 9
+                };
+
+                return order[result] || 99;
+            };
+
+            // Then modify your DataTable initialization
             $("#scenario-results").DataTable({
-                "order": [[0, "asc",], [3, "asc",]],
+                "order": [[0, "asc"], [1, "asc"], [2, "asc"]], // Keep your default sort order
                 "language": {
                     searchPlaceholder: "Filter",
                     search: ""
                 },
                 columnDefs: [
-                    {type: 'time-elapsed-dhms', targets: 4}
+                    {
+                        targets: 4, // Started column
+                        visible: false
+                    },
+                    {
+                        type: 'time-elapsed-dhms',
+                        targets: 5 // Total Duration column (adjusted from 6 to 5)
+                    },
+                    {
+                        type: 'test-result',
+                        targets: 6 // Result column (changed from 7 to 6)
+                    }
                 ]
             })
             $("#manual-scenario-results").DataTable({
@@ -154,7 +187,7 @@
             $("#requirements-tabs").tabs();
             $("#test-tabs").tabs();
 
-            var requirementsTree = [{"text":"Api","type":"capability","href":"5b0b500db2dfd98ccb3584eed6275bc7ba4d506665983d1b8fc2e8acb36c8678.html","nodes":[{"text":"Creating a new game","type":"feature","href":"d7e3c514de96f8913b6648ff41be310683c4ed936ab43e99d9728e57f71a5463.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e3 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e3 test cases\u003c/span\u003e"]},{"text":"Game history and statistics","type":"feature","href":"084e4f8972d090c12eec1ef4da7e2128a31129973c8e8dcf57ee91d5d4210833.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e3 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e3 test cases\u003c/span\u003e"]},{"text":"Getting hints","type":"feature","href":"6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e4 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e4 test cases\u003c/span\u003e"]},{"text":"Playing the game","type":"feature","href":"582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e14 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e14 test cases\u003c/span\u003e"]},{"text":"Registering a new user","type":"feature","href":"3896e12cff09404428da3fb87551301900e671665434b11ba0aa72242a7a7d45.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e8 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e8 test cases\u003c/span\u003e"]},{"text":"Wordle Status Check","type":"feature","href":"1586994ebf0a9b1ab462292efd432d53d54eba4d881eaa9270d4e7292f0785c5.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e1 scenario\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e1 test case\u003c/span\u003e"]}],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e6 features\u003c/span\u003e "]},{"text":"Wordle Rules","type":"capability","href":"9e5708f8af1fd9ffb89b89c093cfc8b5b8385cd0b7a5b3d4296b1b61f43e3876.html","nodes":[{"text":"Game Overview","type":"feature","href":"16dd455346d311e35258ca0a9d36cdfb7493a54635b11f0fb4e3d9ac9a1494cb.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e2 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e2 test cases\u003c/span\u003e"]},{"text":"Game Rules","type":"feature","href":"b866b4583665a3a94f5dad5b9ba8cec46fce99810943966a258f45a2d13f0245.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e7 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e11 test cases\u003c/span\u003e"]},{"text":"Hints","type":"feature","href":"b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e3 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e7 test cases\u003c/span\u003e"]}],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e3 features\u003c/span\u003e "]}];
+            var requirementsTree = [{"text":"Api","type":"capability","href":"5b0b500db2dfd98ccb3584eed6275bc7ba4d506665983d1b8fc2e8acb36c8678.html","nodes":[{"text":"Creating a new game","type":"feature","href":"d7e3c514de96f8913b6648ff41be310683c4ed936ab43e99d9728e57f71a5463.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e3 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e3 test cases\u003c/span\u003e"]},{"text":"Game history and statistics","type":"feature","href":"084e4f8972d090c12eec1ef4da7e2128a31129973c8e8dcf57ee91d5d4210833.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e3 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e3 test cases\u003c/span\u003e"]},{"text":"Getting hints","type":"feature","href":"6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e2 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e4 test cases\u003c/span\u003e"]},{"text":"Playing the game","type":"feature","href":"582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e10 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e14 test cases\u003c/span\u003e"]},{"text":"Registering a new user","type":"feature","href":"3896e12cff09404428da3fb87551301900e671665434b11ba0aa72242a7a7d45.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e8 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e8 test cases\u003c/span\u003e"]},{"text":"Wordle Status Check","type":"feature","href":"1586994ebf0a9b1ab462292efd432d53d54eba4d881eaa9270d4e7292f0785c5.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e1 scenario\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e1 test case\u003c/span\u003e"]}],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e6 features\u003c/span\u003e "]},{"text":"Wordle Rules","type":"capability","href":"9e5708f8af1fd9ffb89b89c093cfc8b5b8385cd0b7a5b3d4296b1b61f43e3876.html","nodes":[{"text":"Game Overview","type":"feature","href":"16dd455346d311e35258ca0a9d36cdfb7493a54635b11f0fb4e3d9ac9a1494cb.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e2 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e2 test cases\u003c/span\u003e"]},{"text":"Game Rules","type":"feature","href":"b866b4583665a3a94f5dad5b9ba8cec46fce99810943966a258f45a2d13f0245.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e7 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e11 test cases\u003c/span\u003e"]},{"text":"Hints","type":"feature","href":"b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e3 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e7 test cases\u003c/span\u003e"]}],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e3 features\u003c/span\u003e "]}];
 
             $('#tree').treeview({
                 data: requirementsTree,
@@ -226,7 +259,7 @@
             <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 12-03-2024 07:14</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 08-01-2026 10:13</span>
     <br style="clear:left"/>
 </div>
 
@@ -293,7 +326,7 @@
                     <td>
                         <i class="bi bi-card-checklist"></i> Number of Scenarios
                     </td>
-                    <td>45</td>
+                    <td>39</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -305,48 +338,48 @@
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>Mar 12, 2024 07:14:17</td>
+                    <td>Jan 08, 2026 10:13:28</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>Mar 12, 2024 07:14:33</td>
+                    <td>Jan 08, 2026 10:13:46</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>15s</td>
+                    <td>18s</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>4ms</td>
+                    <td>13ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>2s</td>
+                    <td>7s</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
                     </td>
-                    <td>309ms</td>
+                    <td>759ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>16s</td>
+                    <td>38s</td>
                 </tr>
                 </tbody>
             </table>
@@ -398,12 +431,12 @@
                     <td>
                         <i class="bi bi-card-checklist"></i> Number of Scenarios
                     </td>
-                    <td>45</td>
+                    <td>39</td>
                     <td>
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>15s</td>
+                    <td>18s</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -413,7 +446,7 @@
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>4ms</td>
+                    <td>13ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -424,30 +457,30 @@
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>2s</td>
+                    <td>7s</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>Mar 12, 2024 07:14:17</td>
+                    <td>Jan 08, 2026 10:13:28</td>
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
                     </td>
-                    <td>309ms</td>
+                    <td>759ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>Mar 12, 2024 07:14:33</td>
+                    <td>Jan 08, 2026 10:13:46</td>
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>16s</td>
+                    <td>38s</td>
                 </tr>
                 </tbody>
             </table>
@@ -479,9 +512,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>1</td>
-                                                                    <td>07:14:24</td>
-                                                                    <td>2s 238ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:42</td>
+                                                                    <td>050ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -494,9 +527,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>07:14:24</td>
-                                                                    <td>2s 653ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:34</td>
+                                                                    <td>5s 386ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -509,9 +542,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:25</td>
-                                                                    <td>1s 132ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:37</td>
+                                                                    <td>2s 752ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -524,9 +557,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>07:14:28</td>
-                                                                    <td>233ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:40</td>
+                                                                    <td>724ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -539,24 +572,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>9</td>
-                                                                    <td>07:14:24</td>
-                                                                    <td>2s 646ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="084e4f8972d090c12eec1ef4da7e2128a31129973c8e8dcf57ee91d5d4210833.html">Game history and statistics</a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <a href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html">Game statistics can be retrieved for the current player</a>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>11</td>
-                                                                    <td>07:14:30</td>
-                                                                    <td>239ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:34</td>
+                                                                    <td>7s 771ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -569,9 +587,24 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>11</td>
-                                                                    <td>07:14:31</td>
-                                                                    <td>189ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:42</td>
+                                                                    <td>2s 667ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="084e4f8972d090c12eec1ef4da7e2128a31129973c8e8dcf57ee91d5d4210833.html">Game history and statistics</a>
+                                                                    </td>
+                                                                    <td>
+                                                                            <a href="1e2cc1444bd0a781386eddf3425839046ad3ad36ab65f07a54d0469ca64ea48a.html">Game statistics can be retrieved for the current player</a>
+                                                                    </td>
+                                                                    <td><span style="display:none"></span>
+                                                                    </td>
+                                                                    <td>11</td>
+                                                                    <td>10:13:42</td>
+                                                                    <td>2s 834ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -584,9 +617,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>5</td>
-                                                                    <td>07:14:28</td>
-                                                                    <td>298ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:43</td>
+                                                                    <td>885ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -594,53 +627,17 @@
                                                                             <a href="6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html">Getting hints</a>
                                                                     </td>
                                                                     <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="dfae12ca904eb5badb12b7817197652184294801f55ffd954fc4951ebbbd6265.html">Hints should include "The word starts with the letter B"</a>
+                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="581d00794b86c49e334f60dda12bf9e2e70fbc76cdc985f231b565f71af2585d.html">requestingAnotherHint(String)</a>
                                                                             <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
+                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 3 passing test cases
                                                                                 <br/>
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>147ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html">Getting hints</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="0d2334d14900f9b595d53a8e0946db2a9dcdea12ddf2559666090e46f5eff00e.html">Hints should include "The word ends with the letter D"</a>
-                                                                            <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
-                                                                                <br/>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>339ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html">Getting hints</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="43eb05c0247d5dfcea6c056846ee98d6e1fa2891cf8f638347b9fe92f67d87f1.html">Hints should include "The word contains 1 vowel"</a>
-                                                                            <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
-                                                                                <br/>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>184ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:45</td>
+                                                                    <td>332ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -653,24 +650,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>07:14:29</td>
-                                                                    <td>296ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <a href="1762a19c4524593f3b52bf20483b887ea8713ad5e40bfdd5604486cb15de40c2.html">When we make a move, the move is recorded in the game history</a>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>5</td>
-                                                                    <td>07:14:29</td>
-                                                                    <td>312ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:40</td>
+                                                                    <td>653ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -683,9 +665,24 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>6</td>
-                                                                    <td>07:14:29</td>
-                                                                    <td>213ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:41</td>
+                                                                    <td>926ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
+                                                                    </td>
+                                                                    <td>
+                                                                            <a href="1762a19c4524593f3b52bf20483b887ea8713ad5e40bfdd5604486cb15de40c2.html">When we make a move, the move is recorded in the game history</a>
+                                                                    </td>
+                                                                    <td><span style="display:none"></span>
+                                                                    </td>
+                                                                    <td>5</td>
+                                                                    <td>10:13:42</td>
+                                                                    <td>634ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -698,24 +695,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>5</td>
-                                                                    <td>07:14:30</td>
-                                                                    <td>165ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <a href="92a79b9f64117ed736ee94cd5a2b701d6b0d48e4c81a8daa4b07c508355ae6e3.html">This is an example of a complete game played via the API</a>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>7</td>
-                                                                    <td>07:14:30</td>
-                                                                    <td>288ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:42</td>
+                                                                    <td>801ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -728,24 +710,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>07:14:30</td>
-                                                                    <td>268ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <a href="3e3395d8fe9dfe5bc1180a2bd8b039b7bd184311203eb0c058b01fcd27376c04.html">We make a move by posting a word to the with the /api/game/{id}/word end-point</a>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>4</td>
-                                                                    <td>07:14:31</td>
-                                                                    <td>211ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:43</td>
+                                                                    <td>588ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -758,9 +725,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>07:14:31</td>
-                                                                    <td>282ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:44</td>
+                                                                    <td>743ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -768,17 +735,14 @@
                                                                             <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
                                                                     </td>
                                                                     <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="70809409256eeded2d44d01f11d7dc410eb840cb70fadc2b73f1a423a180590e.html">[1] word=CRYPT, guess=CRYPT, cell1=GREEN, cell2=GREEN, cell3=GREEN, cell4=GREEN, cell5=GREEN</a>
-                                                                            <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
-                                                                                <br/>
+                                                                            <a href="92a79b9f64117ed736ee94cd5a2b701d6b0d48e4c81a8daa4b07c508355ae6e3.html">This is an example of a complete game played via the API</a>
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
-                                                                    <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>096ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>7</td>
+                                                                    <td>10:13:44</td>
+                                                                    <td>1s 032ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -786,17 +750,14 @@
                                                                             <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
                                                                     </td>
                                                                     <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="34d05067969bb847f55527bfb02d4df09a1f2302d0e36586b49dd665250e82c4.html">[2] word=CRYPT, guess=BOARD, cell1=GRAY, cell2=GRAY, cell3=GRAY, cell4=YELLOW, cell5=GRAY</a>
-                                                                            <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
-                                                                                <br/>
+                                                                            <a href="3e3395d8fe9dfe5bc1180a2bd8b039b7bd184311203eb0c058b01fcd27376c04.html">We make a move by posting a word to the with the /api/game/{id}/word end-point</a>
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
-                                                                    <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>157ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>4</td>
+                                                                    <td>10:13:44</td>
+                                                                    <td>414ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -804,17 +765,17 @@
                                                                             <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
                                                                     </td>
                                                                     <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="92a8892a7fc302e7fc3f2e45b66f572d5d9a5218fea4837680c4d6d08f16685e.html">[3] word=CRYPT, guess=CROWN, cell1=GREEN, cell2=GREEN, cell3=GRAY, cell4=GRAY, cell5=GRAY</a>
+                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="31828055bb05f7ff4559dfa19321da67b1094426f6a48cf71486b8dcf31054b8.html">Each cell should be rendered in the correct color</a>
                                                                             <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
+                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 3 passing test cases
                                                                                 <br/>
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>165ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:45</td>
+                                                                    <td>355ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -822,53 +783,17 @@
                                                                             <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
                                                                     </td>
                                                                     <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="b4bf9ec9f02da847abbd15ba2cb099321f738584425d78824194f7b9da104887.html">When the word is CRYPT and the guess is ORGAN, the row is GRAY, GREEN, GRAY, GRAY, GRAY</a>
+                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="52fee7fbd99d923120638c3ab771bd25c3a64df4447d5c033743455cf7e712f3.html">shouldShowRowOfColoredCells(String, String, String, String, String, String, String)</a>
                                                                             <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
+                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 3 passing test cases
                                                                                 <br/>
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>308ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="aca72693516c888cee30115c3722f3249a2935ab4ce6978e2f2d20d13e4570dd.html">When the word is CRYPT and the guess is BRACE, the row is GRAY, GREEN, GRAY, YELLOW, GRAY</a>
-                                                                            <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
-                                                                                <br/>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>186ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="582d578cb92b912433b3e424de41d5ec6648bdbe07e820914bea07902b8444a1.html">Playing the game</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="b44602556ebb22076983400fe4cd697d1ce1794f0f353ccd14a51742f032f186.html">When the word is CRYPT and the guess is CRYPT, the row is GREEN, GREEN, GREEN, GREEN, GREEN</a>
-                                                                            <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
-                                                                                <br/>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>230ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:45</td>
+                                                                    <td>485ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -881,9 +806,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>1</td>
-                                                                    <td>07:14:28</td>
-                                                                    <td>226ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:34</td>
+                                                                    <td>4s 045ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -896,9 +821,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>2</td>
-                                                                    <td>07:14:28</td>
-                                                                    <td>168ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:39</td>
+                                                                    <td>294ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -911,9 +836,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>2</td>
-                                                                    <td>07:14:29</td>
-                                                                    <td>135ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:39</td>
+                                                                    <td>453ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -926,9 +851,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>1</td>
-                                                                    <td>07:14:29</td>
-                                                                    <td>263ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:40</td>
+                                                                    <td>312ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -941,9 +866,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:29</td>
-                                                                    <td>247ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:40</td>
+                                                                    <td>578ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -956,9 +881,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>1</td>
-                                                                    <td>07:14:30</td>
-                                                                    <td>121ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:41</td>
+                                                                    <td>179ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -971,9 +896,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>2</td>
-                                                                    <td>07:14:30</td>
-                                                                    <td>305ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:41</td>
+                                                                    <td>254ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -986,9 +911,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>2</td>
-                                                                    <td>07:14:30</td>
-                                                                    <td>239ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:41</td>
+                                                                    <td>558ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1001,9 +926,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:17</td>
-                                                                    <td>196ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>178ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1019,24 +944,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>271ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="b866b4583665a3a94f5dad5b9ba8cec46fce99810943966a258f45a2d13f0245.html">Game Rules</a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <a href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html">Letters that are present but not in the right place</a>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>012ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>112ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1049,9 +959,24 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>028ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>025ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="b866b4583665a3a94f5dad5b9ba8cec46fce99810943966a258f45a2d13f0245.html">Game Rules</a>
+                                                                    </td>
+                                                                    <td>
+                                                                            <a href="ec1f3e326ba6344c7982e214a5e8b7c61f0f66f859fdb916e59cec7738af1378.html">Correctly placed letters</a>
+                                                                    </td>
+                                                                    <td><span style="display:none"></span>
+                                                                    </td>
+                                                                    <td>3</td>
+                                                                    <td>10:13:28</td>
+                                                                    <td>046ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1067,9 +992,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>093ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>108ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1077,14 +1002,14 @@
                                                                             <a href="b866b4583665a3a94f5dad5b9ba8cec46fce99810943966a258f45a2d13f0245.html">Game Rules</a>
                                                                     </td>
                                                                     <td>
-                                                                            <a href="ec1f3e326ba6344c7982e214a5e8b7c61f0f66f859fdb916e59cec7738af1378.html">Correctly placed letters</a>
+                                                                            <a href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html">Letters that are present but not in the right place</a>
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>007ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>024ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1097,39 +1022,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>015ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <a href="033c9b97cb392e9627e3504c4e34efdd8ea544779d92e8fa9c41163c64d9d83a.html">If the player asks for another hint, all the hints should be shown</a>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>4</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>160ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <a href="b88df411dd04d8a550e7aa6b8c1b0a286046ea9f38b3a7958a6a2b1af6211cdd.html">The word starts with a particular letter</a>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>029ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>023ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1145,9 +1040,39 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>027ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>300ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
+                                                                    </td>
+                                                                    <td>
+                                                                            <a href="033c9b97cb392e9627e3504c4e34efdd8ea544779d92e8fa9c41163c64d9d83a.html">If the player asks for another hint, all the hints should be shown</a>
+                                                                    </td>
+                                                                    <td><span style="display:none"></span>
+                                                                    </td>
+                                                                    <td>4</td>
+                                                                    <td>10:13:28</td>
+                                                                    <td>167ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
+                                                                    </td>
+                                                                    <td>
+                                                                            <a href="b88df411dd04d8a550e7aa6b8c1b0a286046ea9f38b3a7958a6a2b1af6211cdd.html">The word starts with a particular letter</a>
+                                                                    </td>
+                                                                    <td><span style="display:none"></span>
+                                                                    </td>
+                                                                    <td>3</td>
+                                                                    <td>10:13:28</td>
+                                                                    <td>021ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1160,9 +1085,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:17</td>
-                                                                    <td>210ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>232ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1175,9 +1100,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>221ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>190ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                         </tbody>
@@ -1203,7 +1128,7 @@
                             <div>
                                     <a href="3ce0557593d8474e32371d0b17beb9dda2592f8536d3313c16285189516e3537.html">
                                     <span class="tag-badge badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                        <i class="bi bi-tag-fill"></i> Integration&nbsp;&nbsp;&nbsp;16
+                                        <i class="bi bi-tag-fill"></i> Integration&nbsp;&nbsp;&nbsp;19
                                     </span>
                                     </a>
                                     <a href="0bc576ae3033042eca968fc80a826a88a1a4ce5301577c3002e02d401aca026b.html">
@@ -1213,7 +1138,7 @@
                                     </a>
                                     <a href="e82dc140fbf967398a6873e7c9929a29bf7dbdf2d2c8b06462a8ade89bd7ff99.html">
                                     <span class="tag-badge badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                        <i class="bi bi-tag-fill"></i> Gameplay&nbsp;&nbsp;&nbsp;8
+                                        <i class="bi bi-tag-fill"></i> Gameplay&nbsp;&nbsp;&nbsp;14
                                     </span>
                                     </a>
                                     <a href="9fd824864fa82a088687b2485f936c580e3476ae6fba2486efda080a5a84da08.html">
@@ -1228,7 +1153,7 @@
                                     </a>
                                     <a href="a2ced98df15f52d01b7b3d97588859b74704bc0f5096a5f7acc6ea086ff49afa.html">
                                     <span class="tag-badge badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                        <i class="bi bi-tag-fill"></i> Hints&nbsp;&nbsp;&nbsp;1
+                                        <i class="bi bi-tag-fill"></i> Hints&nbsp;&nbsp;&nbsp;4
                                     </span>
                                     </a>
                             </div>
@@ -1247,7 +1172,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="version">Serenity BDD version 4.1.3</span>
+                    <span class="version">Serenity BDD version 5.0.4</span>
                 </div>
             </div>
         </div>
@@ -1550,7 +1475,7 @@
             datasets: [{
                 label: 'Number of tests per duration',
                 fill: false,
-                data: ['49','4','0','0','0','0','0','0'],
+                data: ['46','7','0','0','0','0','0','0'],
                 backgroundColor: 'rgba(83, 146, 255,0.5)',
                 borderColor: 'rgba(83, 146, 255, 1)',
             }]

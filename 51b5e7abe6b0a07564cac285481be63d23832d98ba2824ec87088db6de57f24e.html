@@ -27,14 +27,14 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
 <!-- JQuery -->
-<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><!-- Required Stylesheets -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
 <link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 
 <!-- Required Javascript -->
 <script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -72,11 +72,11 @@
     Chart.register(ChartDataLabels);
 </script>
 <!-- JQuery-UI -->
-<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
-<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="jquery-ui-1.14.1/jquery-ui.css" rel="Stylesheet" />
+<script type="text/javascript" src="jquery-ui-1.14.1/jquery-ui.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -108,14 +108,47 @@
     <script class="code" type="text/javascript">$(document).ready(function () {
 
 
+            $.fn.dataTable.ext.type.order['test-result-pre'] = function(data) {
+                // Extract the text from the hidden span (SUCCESS, FAILURE, etc.)
+                var match = data.match(/<span[^>]*style="display:none"[^>]*>(.*?)<\/span>/);
+                var result = match ? match[1].trim() : '';
+
+                // Define sort priority (failures first when ascending)
+                var order = {
+                    'FAILURE': 1,
+                    'ERROR': 2,
+                    'BROKEN': 3,
+                    'COMPROMISED': 4,
+                    'PENDING': 5,
+                    'IGNORED': 6,
+                    'SKIPPED': 7,
+                    'ABORTED': 8,
+                    'SUCCESS': 9
+                };
+
+                return order[result] || 99;
+            };
+
+            // Then modify your DataTable initialization
             $("#scenario-results").DataTable({
-                "order": [[0, "asc",], [3, "asc",]],
+                "order": [[0, "asc"], [1, "asc"], [2, "asc"]], // Keep your default sort order
                 "language": {
                     searchPlaceholder: "Filter",
                     search: ""
                 },
                 columnDefs: [
-                    {type: 'time-elapsed-dhms', targets: 4}
+                    {
+                        targets: 3, // Started column (Feature=0, Scenario=1, Steps=2, Started=3)
+                        visible: false
+                    },
+                    {
+                        type: 'time-elapsed-dhms',
+                        targets: 4 // Total Duration column
+                    },
+                    {
+                        type: 'test-result',
+                        targets: 5 // Result column
+                    }
                 ]
             })
             $("#manual-scenario-results").DataTable({
@@ -182,7 +215,7 @@
             <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 12-03-2024 07:14:35</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 08-01-2026 10:13:48</span>
     <br style="clear:left"/>
 </div>
     <div class="clr"></div>
@@ -238,7 +271,7 @@
                     <td>
                         <i class="bi bi-card-checklist"></i> Number of Scenarios
                     </td>
-                    <td>4</td>
+                    <td>2</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -250,48 +283,48 @@
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>Mar 12, 2024 07:14:28</td>
+                    <td>Jan 08, 2026 10:13:43</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>Mar 12, 2024 07:14:33</td>
+                    <td>Jan 08, 2026 10:13:46</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>4s</td>
+                    <td>2s</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>147ms</td>
+                    <td>326ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>339ms</td>
+                    <td>885ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
                     </td>
-                    <td>242ms</td>
+                    <td>468ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>968ms</td>
+                    <td>1s</td>
                 </tr>
                 </tbody>
             </table>
@@ -336,12 +369,12 @@
                                                                         <div>
                                                                                 <a href="3ce0557593d8474e32371d0b17beb9dda2592f8536d3313c16285189516e3537.html">
                                                                                     <span class="badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                                                                        <i class="bi bi-tag"></i> Integration&nbsp;&nbsp;&nbsp;1
+                                                                                        <i class="bi bi-tag"></i> Integration&nbsp;&nbsp;&nbsp;4
                                                                                     </span>
                                                                                 </a>
                                                                                 <a href="a2ced98df15f52d01b7b3d97588859b74704bc0f5096a5f7acc6ea086ff49afa.html">
                                                                                     <span class="badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                                                                        <i class="bi bi-tag"></i> Hints&nbsp;&nbsp;&nbsp;1
+                                                                                        <i class="bi bi-tag"></i> Hints&nbsp;&nbsp;&nbsp;4
                                                                                     </span>
                                                                                 </a>
                                                                         </div>
@@ -375,7 +408,7 @@
                                                                                     <td>
                                                                                             <a href="6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html" > Getting hints</a>
                                                                                     </td>
-                                                                                    <td>4</td>
+                                                                                    <td>2</td>
                                                                                     <td>4</td>
                                                                                     <td>100%</td>
                                                                                     <td>
@@ -409,12 +442,12 @@
                             <div>
                                     <a href="3ce0557593d8474e32371d0b17beb9dda2592f8536d3313c16285189516e3537.html">
                                     <span class="tag-badge badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                        <i class="bi bi-tag-fill"></i> Integration&nbsp;&nbsp;&nbsp;1
+                                        <i class="bi bi-tag-fill"></i> Integration&nbsp;&nbsp;&nbsp;4
                                     </span>
                                     </a>
                                     <a href="a2ced98df15f52d01b7b3d97588859b74704bc0f5096a5f7acc6ea086ff49afa.html">
                                     <span class="tag-badge badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                        <i class="bi bi-tag-fill"></i> Hints&nbsp;&nbsp;&nbsp;1
+                                        <i class="bi bi-tag-fill"></i> Hints&nbsp;&nbsp;&nbsp;4
                                     </span>
                                     </a>
                             </div>
@@ -449,9 +482,9 @@
                                                             <td><a href="68d76a791b8f45c4e498f370cfe268b2a3cb94f508f9409c46f6fe76b5df5467.html">We can request a hint for the current game via GET /api/game/{id}/hint</a>
                                                             </td>
                                                             <td>5</td>
-                                                            <td>07:14:28</td>
-                                                            <td>298ms</td>
-                                                            <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                            <td>10:13:43</td>
+                                                            <td>885ms</td>
+                                                            <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                             </td>
                                                         </tr>
                                                             <tr class="scenario-result SUCCESS">
@@ -460,11 +493,11 @@
                                                                 </td>
                                                                 <td>
                                                                     <i class="bi bi-table" title="Data Driven Scenario"></i>
-                                                                    <a href="dfae12ca904eb5badb12b7817197652184294801f55ffd954fc4951ebbbd6265.html">Hints should include "The word starts with the letter B"</a>
+                                                                    <a href="581d00794b86c49e334f60dda12bf9e2e70fbc76cdc985f231b565f71af2585d.html">Hints should include ""The word starts with the letter B""</a>
                                                                 </td>
                                                                 <td>6</td>
-                                                                <td>07:14:32</td>
-                                                                <td>147ms</td>
+                                                                <td>10:13:45</td>
+                                                                <td>326ms</td>
                                                                 <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                 </td>
                                                             </tr>
@@ -474,11 +507,11 @@
                                                                 </td>
                                                                 <td>
                                                                     <i class="bi bi-table" title="Data Driven Scenario"></i>
-                                                                    <a href="0d2334d14900f9b595d53a8e0946db2a9dcdea12ddf2559666090e46f5eff00e.html">Hints should include "The word ends with the letter D"</a>
+                                                                    <a href="581d00794b86c49e334f60dda12bf9e2e70fbc76cdc985f231b565f71af2585d.html">Hints should include ""The word ends with the letter D""</a>
                                                                 </td>
                                                                 <td>6</td>
-                                                                <td>07:14:32</td>
-                                                                <td>339ms</td>
+                                                                <td>10:13:45</td>
+                                                                <td>331ms</td>
                                                                 <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                 </td>
                                                             </tr>
@@ -488,11 +521,11 @@
                                                                 </td>
                                                                 <td>
                                                                     <i class="bi bi-table" title="Data Driven Scenario"></i>
-                                                                    <a href="43eb05c0247d5dfcea6c056846ee98d6e1fa2891cf8f638347b9fe92f67d87f1.html">Hints should include "The word contains 1 vowel"</a>
+                                                                    <a href="581d00794b86c49e334f60dda12bf9e2e70fbc76cdc985f231b565f71af2585d.html">Hints should include ""The word contains 1 vowel""</a>
                                                                 </td>
                                                                 <td>6</td>
-                                                                <td>07:14:32</td>
-                                                                <td>184ms</td>
+                                                                <td>10:13:45</td>
+                                                                <td>332ms</td>
                                                                 <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                 </td>
                                                             </tr>
@@ -520,12 +553,12 @@
                             <div>
                                     <a href="3ce0557593d8474e32371d0b17beb9dda2592f8536d3313c16285189516e3537.html">
                                     <span class="tag-badge badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                        <i class="bi bi-tag-fill"></i> Integration&nbsp;&nbsp;&nbsp;1
+                                        <i class="bi bi-tag-fill"></i> Integration&nbsp;&nbsp;&nbsp;4
                                     </span>
                                     </a>
                                     <a href="a2ced98df15f52d01b7b3d97588859b74704bc0f5096a5f7acc6ea086ff49afa.html">
                                     <span class="tag-badge badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                        <i class="bi bi-tag-fill"></i> Hints&nbsp;&nbsp;&nbsp;1
+                                        <i class="bi bi-tag-fill"></i> Hints&nbsp;&nbsp;&nbsp;4
                                     </span>
                                     </a>
                             </div>
@@ -551,7 +584,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <span class="version">Serenity BDD version 4.1.3</span>
+            <span class="version">Serenity BDD version 5.0.4</span>
         </div>
     </div>
 </div>

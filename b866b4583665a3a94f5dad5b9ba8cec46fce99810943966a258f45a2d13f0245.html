@@ -24,14 +24,14 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
 <!-- JQuery -->
-<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><!-- Required Stylesheets -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
 <link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 
 <!-- Required Javascript -->
 <script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -69,11 +69,11 @@
     Chart.register(ChartDataLabels);
 </script>
 <!-- JQuery-UI -->
-<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
-<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="jquery-ui-1.14.1/jquery-ui.css" rel="Stylesheet" />
+<script type="text/javascript" src="jquery-ui-1.14.1/jquery-ui.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -107,14 +107,47 @@
 
         $(document).ready(function () {
 
+            $.fn.dataTable.ext.type.order['test-result-pre'] = function(data) {
+                // Extract the text from the hidden span (SUCCESS, FAILURE, etc.)
+                var match = data.match(/<span[^>]*style="display:none"[^>]*>(.*?)<\/span>/);
+                var result = match ? match[1].trim() : '';
+
+                // Define sort priority (failures first when ascending)
+                var order = {
+                    'FAILURE': 1,
+                    'ERROR': 2,
+                    'BROKEN': 3,
+                    'COMPROMISED': 4,
+                    'PENDING': 5,
+                    'IGNORED': 6,
+                    'SKIPPED': 7,
+                    'ABORTED': 8,
+                    'SUCCESS': 9
+                };
+
+                return order[result] || 99;
+            };
+
+            // Then modify your DataTable initialization
             $("#scenario-results").DataTable({
-                "order": [[0, "asc",], [3, "asc",]],
+                "order": [[0, "asc"], [1, "asc"], [2, "asc"]], // Keep your default sort order
                 "language": {
                     searchPlaceholder: "Filter",
                     search: ""
                 },
                 columnDefs: [
-                    {type: 'time-elapsed-dhms', targets: 4}
+                    {
+                        targets: 4, // Started column
+                        visible: false
+                    },
+                    {
+                        type: 'time-elapsed-dhms',
+                        targets: 5 // Total Duration column (adjusted from 6 to 5)
+                    },
+                    {
+                        type: 'test-result',
+                        targets: 6 // Result column (changed from 7 to 6)
+                    }
                 ]
             })
             $("#manual-scenario-results").DataTable({
@@ -229,7 +262,7 @@
             <a href="#"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 12-03-2024 07:14</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 08-01-2026 10:13</span>
     <br style="clear:left"/>
 </div>
 
@@ -304,7 +337,7 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                     <table class="table" id="toc-table">
                                                                 <tr>
                                                                     <td class="rule-toc-entry" colspan="2">
-                                                                        <a href="#e88b4c64-d796-4e59-9bd4-8555717479bd"
+                                                                        <a href="#1e46b53e-a512-4932-9428-869f129690b0"
                                                                            title="View scenario details for this rule">
                                                                             Rule: The player wins when they find the right word in 6 or less tries
                                                                     </td>
@@ -377,7 +410,7 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                     </tr>
                                                                 <tr>
                                                                     <td class="rule-toc-entry" colspan="2">
-                                                                        <a href="#556b2c51-64cf-4980-99f2-05d94568d9a1"
+                                                                        <a href="#cf529a0b-187c-42c3-a3d4-4ea0b006e700"
                                                                            title="View scenario details for this rule">
                                                                             Rule: Correctly placed letters appear in green
                                                                     </td>
@@ -451,47 +484,7 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                     </tr>
                                                                 <tr>
                                                                     <td class="rule-toc-entry" colspan="2">
-                                                                        <a href="#f204e62c-03f5-4ceb-a423-6f806272a6a1"
-                                                                           title="View scenario details for this rule">
-                                                                            Rule: Incorrectly placed letters appear in yellow
-                                                                    </td>
-                                                                </tr>
-                                                                    <tr>
-                                                                        <td style="width:95%;" class="toc-title">
-                                                                            <span class="scenario-toc-entry">
-                                                                                    <a href="#76bf5d622173dd0767974981550c2f393221d2029daf5c258e9ed1efec5df6f6"
-                                                                                       title="View scenario details">
-                                                                                        <i class="bi bi-chat-dots"></i> Scenario: Letters that are present but not in the right place
-                                                                                    </a>
-                                                                                </span>
-                                                                        </td>
-                                                                        <td>
-
-                                                                        </td>
-                                                                        <td style="width:5%;">
-                                                                            <table>
-                                                                                <tr>
-                                                                                    <td class="icons-bar">
-                                                                                        <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                           href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html"
-                                                                                           title="View test results">
-                                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                                            </a>
-
-
-                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                               href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html"
-                                                                                               title="View test results">
-                                                                                                <i class="bi bi-eyeglasses"></i>
-                                                                                            </a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
-                                                                <tr>
-                                                                    <td class="rule-toc-entry" colspan="2">
-                                                                        <a href="#c9e279b5-9230-4c7b-8167-c838a23f6c75"
+                                                                        <a href="#f8dc9343-66ac-4cfa-ba35-8bfff42fa884"
                                                                            title="View scenario details for this rule">
                                                                             Rule: Repeated letters in the wrong spot appear in grey
                                                                     </td>
@@ -563,6 +556,46 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                             </table>
                                                                         </td>
                                                                     </tr>
+                                                                <tr>
+                                                                    <td class="rule-toc-entry" colspan="2">
+                                                                        <a href="#150e2eba-1288-42d2-b9f0-42a594bfe9d9"
+                                                                           title="View scenario details for this rule">
+                                                                            Rule: Incorrectly placed letters appear in yellow
+                                                                    </td>
+                                                                </tr>
+                                                                    <tr>
+                                                                        <td style="width:95%;" class="toc-title">
+                                                                            <span class="scenario-toc-entry">
+                                                                                    <a href="#76bf5d622173dd0767974981550c2f393221d2029daf5c258e9ed1efec5df6f6"
+                                                                                       title="View scenario details">
+                                                                                        <i class="bi bi-chat-dots"></i> Scenario: Letters that are present but not in the right place
+                                                                                    </a>
+                                                                                </span>
+                                                                        </td>
+                                                                        <td>
+
+                                                                        </td>
+                                                                        <td style="width:5%;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td class="icons-bar">
+                                                                                        <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                           href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html"
+                                                                                           title="View test results">
+                                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                                            </a>
+
+
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html"
+                                                                                               title="View test results">
+                                                                                                <i class="bi bi-eyeglasses"></i>
+                                                                                            </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
                                                     </table>
                                                 </div>
                                                 <!--- END OF TOC --->
@@ -572,7 +605,7 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                             <div class="col-sm-12">
                                                 <h3>Scenarios</h3>
 
-                                                    <a name="e88b4c64-d796-4e59-9bd4-8555717479bd"></a>
+                                                    <a name="1e46b53e-a512-4932-9428-869f129690b0"></a>
                                                         <div class="rule-title">
                                                             Rule: The player wins when they find the right word in 6 or less tries</div>
                                                     <p class="rule-tags inline-tag">
@@ -684,7 +717,7 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    <a name="556b2c51-64cf-4980-99f2-05d94568d9a1"></a>
+                                                    <a name="cf529a0b-187c-42c3-a3d4-4ea0b006e700"></a>
                                                         <div class="rule-title">
                                                             Rule: Correctly placed letters appear in green</div>
                                                     <p class="rule-tags inline-tag">
@@ -776,63 +809,7 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    <a name="f204e62c-03f5-4ceb-a423-6f806272a6a1"></a>
-                                                        <div class="rule-title">
-                                                            Rule: Incorrectly placed letters appear in yellow</div>
-                                                    <p class="rule-tags inline-tag">
-                                                    </p>
-
-
-                                                        <div class="scenario-docs card" id="76bf5d622173dd0767974981550c2f393221d2029daf5c258e9ed1efec5df6f6">
-                                                            <div class="scenario-docs card-header success"
-                                                                 style="min-height:1.5em;">
-                                                                <div>
-                                                                        <span class="scenario-heading">
-                                                                            <a href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html"
-                                                                               title="View test results">Scenario: Letters that are present but not in the right place</a>
-                                                                        </span>
-
-                                                                        <span class="example-tags inline-tag">
-                                                                        </span>
-
-                                                                    <span class="scenario-result-icon">
-                                                                    
-
-                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                        </span>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="scenario-docs card-body">
-                                                                    <p><p>Given the target word is:</p>
-<table>
-<thead>
-<tr><th>B</th><th>L</th><th>A</th><th>N</th><th>D</th></tr>
-</thead>
-<tbody></tbody>
-</table>
-</p>
-                                                                    <p><p>When the player enters the following letters:</p>
-<table>
-<thead>
-<tr><th>B</th><th>R</th><th>A</th><th>I</th><th>N</th></tr>
-</thead>
-<tbody></tbody>
-</table>
-</p>
-                                                                    <p><p>Then the squares should be colored as follows:</p>
-<table>
-<thead>
-<tr><th>GREEN</th><th>GRAY</th><th>GREEN</th><th>GRAY</th><th>YELLOW</th></tr>
-</thead>
-<tbody></tbody>
-</table>
-</p>
-                                                                <div class="examples">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <a name="c9e279b5-9230-4c7b-8167-c838a23f6c75"></a>
+                                                    <a name="f8dc9343-66ac-4cfa-ba35-8bfff42fa884"></a>
                                                         <div class="rule-title">
                                                             Rule: Repeated letters in the wrong spot appear in grey</div>
                                                     <p class="rule-tags inline-tag">
@@ -931,6 +908,62 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    <a name="150e2eba-1288-42d2-b9f0-42a594bfe9d9"></a>
+                                                        <div class="rule-title">
+                                                            Rule: Incorrectly placed letters appear in yellow</div>
+                                                    <p class="rule-tags inline-tag">
+                                                    </p>
+
+
+                                                        <div class="scenario-docs card" id="76bf5d622173dd0767974981550c2f393221d2029daf5c258e9ed1efec5df6f6">
+                                                            <div class="scenario-docs card-header success"
+                                                                 style="min-height:1.5em;">
+                                                                <div>
+                                                                        <span class="scenario-heading">
+                                                                            <a href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html"
+                                                                               title="View test results">Scenario: Letters that are present but not in the right place</a>
+                                                                        </span>
+
+                                                                        <span class="example-tags inline-tag">
+                                                                        </span>
+
+                                                                    <span class="scenario-result-icon">
+                                                                    
+
+                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                        </span>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="scenario-docs card-body">
+                                                                    <p><p>Given the target word is:</p>
+<table>
+<thead>
+<tr><th>B</th><th>L</th><th>A</th><th>N</th><th>D</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+</p>
+                                                                    <p><p>When the player enters the following letters:</p>
+<table>
+<thead>
+<tr><th>B</th><th>R</th><th>A</th><th>I</th><th>N</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+</p>
+                                                                    <p><p>Then the squares should be colored as follows:</p>
+<table>
+<thead>
+<tr><th>GREEN</th><th>GRAY</th><th>GREEN</th><th>GRAY</th><th>YELLOW</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+</p>
+                                                                <div class="examples">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -981,7 +1014,7 @@ All of your guesses must be real words, according to a dictionary of five-letter
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>336ms</td>
+                    <td>349ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -991,7 +1024,7 @@ All of your guesses must be real words, according to a dictionary of five-letter
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>7ms</td>
+                    <td>17ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -1002,30 +1035,30 @@ All of your guesses must be real words, according to a dictionary of five-letter
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>196ms</td>
+                    <td>178ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>Mar 12, 2024 07:14:17</td>
+                    <td>Jan 08, 2026 10:13:28</td>
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
                     </td>
-                    <td>50ms</td>
+                    <td>44ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>Mar 12, 2024 07:14:18</td>
+                    <td>Jan 08, 2026 10:13:28</td>
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>622ms</td>
+                    <td>516ms</td>
                 </tr>
                 </tbody>
             </table>
@@ -1057,9 +1090,9 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:17</td>
-                                                                    <td>196ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>178ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1075,24 +1108,9 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>271ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="b866b4583665a3a94f5dad5b9ba8cec46fce99810943966a258f45a2d13f0245.html">Game Rules</a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <a href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html">Letters that are present but not in the right place</a>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>012ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>112ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1105,9 +1123,24 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>028ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>025ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="b866b4583665a3a94f5dad5b9ba8cec46fce99810943966a258f45a2d13f0245.html">Game Rules</a>
+                                                                    </td>
+                                                                    <td>
+                                                                            <a href="ec1f3e326ba6344c7982e214a5e8b7c61f0f66f859fdb916e59cec7738af1378.html">Correctly placed letters</a>
+                                                                    </td>
+                                                                    <td><span style="display:none"></span>
+                                                                    </td>
+                                                                    <td>3</td>
+                                                                    <td>10:13:28</td>
+                                                                    <td>046ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1123,9 +1156,9 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>093ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>108ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1133,14 +1166,14 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                             <a href="b866b4583665a3a94f5dad5b9ba8cec46fce99810943966a258f45a2d13f0245.html">Game Rules</a>
                                                                     </td>
                                                                     <td>
-                                                                            <a href="ec1f3e326ba6344c7982e214a5e8b7c61f0f66f859fdb916e59cec7738af1378.html">Correctly placed letters</a>
+                                                                            <a href="c3a4f407e8ae63e7064b1521b2d2654900e622781e9aaef6e44afc84ba46d9ec.html">Letters that are present but not in the right place</a>
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>007ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>024ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -1153,9 +1186,9 @@ All of your guesses must be real words, according to a dictionary of five-letter
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>015ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>023ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                         </tbody>
@@ -1184,7 +1217,7 @@ All of your guesses must be real words, according to a dictionary of five-letter
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="version">Serenity BDD version 4.1.3</span>
+                    <span class="version">Serenity BDD version 5.0.4</span>
                 </div>
             </div>
         </div>

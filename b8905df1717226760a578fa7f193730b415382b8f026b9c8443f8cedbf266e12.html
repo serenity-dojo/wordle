@@ -24,14 +24,14 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
 <!-- JQuery -->
-<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><!-- Required Stylesheets -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
 <link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 
 <!-- Required Javascript -->
 <script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -69,11 +69,11 @@
     Chart.register(ChartDataLabels);
 </script>
 <!-- JQuery-UI -->
-<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
-<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="jquery-ui-1.14.1/jquery-ui.css" rel="Stylesheet" />
+<script type="text/javascript" src="jquery-ui-1.14.1/jquery-ui.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -107,14 +107,47 @@
 
         $(document).ready(function () {
 
+            $.fn.dataTable.ext.type.order['test-result-pre'] = function(data) {
+                // Extract the text from the hidden span (SUCCESS, FAILURE, etc.)
+                var match = data.match(/<span[^>]*style="display:none"[^>]*>(.*?)<\/span>/);
+                var result = match ? match[1].trim() : '';
+
+                // Define sort priority (failures first when ascending)
+                var order = {
+                    'FAILURE': 1,
+                    'ERROR': 2,
+                    'BROKEN': 3,
+                    'COMPROMISED': 4,
+                    'PENDING': 5,
+                    'IGNORED': 6,
+                    'SKIPPED': 7,
+                    'ABORTED': 8,
+                    'SUCCESS': 9
+                };
+
+                return order[result] || 99;
+            };
+
+            // Then modify your DataTable initialization
             $("#scenario-results").DataTable({
-                "order": [[0, "asc",], [3, "asc",]],
+                "order": [[0, "asc"], [1, "asc"], [2, "asc"]], // Keep your default sort order
                 "language": {
                     searchPlaceholder: "Filter",
                     search: ""
                 },
                 columnDefs: [
-                    {type: 'time-elapsed-dhms', targets: 4}
+                    {
+                        targets: 4, // Started column
+                        visible: false
+                    },
+                    {
+                        type: 'time-elapsed-dhms',
+                        targets: 5 // Total Duration column (adjusted from 6 to 5)
+                    },
+                    {
+                        type: 'test-result',
+                        targets: 6 // Result column (changed from 7 to 6)
+                    }
                 ]
             })
             $("#manual-scenario-results").DataTable({
@@ -229,7 +262,7 @@
             <a href="#"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 12-03-2024 07:14</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 08-01-2026 10:13</span>
     <br style="clear:left"/>
 </div>
 
@@ -297,7 +330,48 @@ So that I can keep the game progressing and learn new words
                                                     <table class="table" id="toc-table">
                                                                 <tr>
                                                                     <td class="rule-toc-entry" colspan="2">
-                                                                        <a href="#fb6a869a-682b-453f-ae4e-10fe05225d3d"
+                                                                        <a href="#e87b7b75-feac-46b1-8545-2a669f375e69"
+                                                                           title="View scenario details for this rule">
+                                                                            Rule: Hints should be proposed based on the structure and content of the word
+                                                                    </td>
+                                                                </tr>
+                                                                    <tr>
+                                                                        <td style="width:95%;" class="toc-title">
+                                                                            <span class="scenario-toc-entry">
+                                                                                    <a href="#49d83b84df7529b2d909fc7cc9c7a0762be5016bfcb6456ca31c5f1341f6422a"
+                                                                                       title="View scenario details">
+                                                                                        <i class="bi bi-chat-dots"></i> Scenario Outline: Possible hints for a word
+                                                                                    </a>
+                                                                                        (5 examples)
+                                                                                </span>
+                                                                        </td>
+                                                                        <td>
+
+                                                                        </td>
+                                                                        <td style="width:5%;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td class="icons-bar">
+                                                                                        <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                           href="8fe73f96c0d62aa5f9f728f0701174d2d871f9cd4aef32779819bcb26e2f7883.html"
+                                                                                           title="View test results">
+                                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                                            </a>
+
+
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="8fe73f96c0d62aa5f9f728f0701174d2d871f9cd4aef32779819bcb26e2f7883.html"
+                                                                                               title="View test results">
+                                                                                                <i class="bi bi-eyeglasses"></i>
+                                                                                            </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                <tr>
+                                                                    <td class="rule-toc-entry" colspan="2">
+                                                                        <a href="#a7c8c4e5-7035-4949-87e1-95a840b6a726"
                                                                            title="View scenario details for this rule">
                                                                             Rule: A random hint should be proposed for a given word
                                                                     </td>
@@ -368,47 +442,6 @@ So that I can keep the game progressing and learn new words
                                                                             </table>
                                                                         </td>
                                                                     </tr>
-                                                                <tr>
-                                                                    <td class="rule-toc-entry" colspan="2">
-                                                                        <a href="#2d4ba4da-3982-4a1a-8cce-b5f05a397938"
-                                                                           title="View scenario details for this rule">
-                                                                            Rule: Hints should be proposed based on the structure and content of the word
-                                                                    </td>
-                                                                </tr>
-                                                                    <tr>
-                                                                        <td style="width:95%;" class="toc-title">
-                                                                            <span class="scenario-toc-entry">
-                                                                                    <a href="#49d83b84df7529b2d909fc7cc9c7a0762be5016bfcb6456ca31c5f1341f6422a"
-                                                                                       title="View scenario details">
-                                                                                        <i class="bi bi-chat-dots"></i> Scenario Outline: Possible hints for a word
-                                                                                    </a>
-                                                                                        (5 examples)
-                                                                                </span>
-                                                                        </td>
-                                                                        <td>
-
-                                                                        </td>
-                                                                        <td style="width:5%;">
-                                                                            <table>
-                                                                                <tr>
-                                                                                    <td class="icons-bar">
-                                                                                        <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                           href="8fe73f96c0d62aa5f9f728f0701174d2d871f9cd4aef32779819bcb26e2f7883.html"
-                                                                                           title="View test results">
-                                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                                            </a>
-
-
-                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                               href="8fe73f96c0d62aa5f9f728f0701174d2d871f9cd4aef32779819bcb26e2f7883.html"
-                                                                                               title="View test results">
-                                                                                                <i class="bi bi-eyeglasses"></i>
-                                                                                            </a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
                                                     </table>
                                                 </div>
                                                 <!--- END OF TOC --->
@@ -418,7 +451,42 @@ So that I can keep the game progressing and learn new words
                                             <div class="col-sm-12">
                                                 <h3>Scenarios</h3>
 
-                                                    <a name="fb6a869a-682b-453f-ae4e-10fe05225d3d"></a>
+                                                    <a name="e87b7b75-feac-46b1-8545-2a669f375e69"></a>
+                                                        <div class="rule-title">
+                                                            Rule: Hints should be proposed based on the structure and content of the word</div>
+                                                    <p class="rule-tags inline-tag">
+                                                    </p>
+
+
+                                                        <div class="scenario-docs card" id="49d83b84df7529b2d909fc7cc9c7a0762be5016bfcb6456ca31c5f1341f6422a">
+                                                            <div class="scenario-docs card-header success"
+                                                                 style="min-height:1.5em;">
+                                                                <div>
+                                                                        <span class="scenario-heading">
+                                                                            <a href="8fe73f96c0d62aa5f9f728f0701174d2d871f9cd4aef32779819bcb26e2f7883.html"
+                                                                               title="View test results">Scenario Outline: Possible hints for a word</a>
+                                                                        </span>
+
+                                                                        <span class="example-tags inline-tag">
+                                                                        </span>
+
+                                                                    <span class="scenario-result-icon">
+                                                                    
+
+                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                        </span>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="scenario-docs card-body">
+                                                                    <p>Given the target word is &quot;{Word}&quot;</p>
+                                                                    <p>When the player requests a hint</p>
+                                                                    <p>Then the proposed hints should include &quot;{Hint Text}&quot;</p>
+                                                                <div class="examples">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <a name="a7c8c4e5-7035-4949-87e1-95a840b6a726"></a>
                                                         <div class="rule-title">
                                                             Rule: A random hint should be proposed for a given word</div>
                                                     <p class="rule-tags inline-tag">
@@ -503,41 +571,6 @@ So that I can keep the game progressing and learn new words
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    <a name="2d4ba4da-3982-4a1a-8cce-b5f05a397938"></a>
-                                                        <div class="rule-title">
-                                                            Rule: Hints should be proposed based on the structure and content of the word</div>
-                                                    <p class="rule-tags inline-tag">
-                                                    </p>
-
-
-                                                        <div class="scenario-docs card" id="49d83b84df7529b2d909fc7cc9c7a0762be5016bfcb6456ca31c5f1341f6422a">
-                                                            <div class="scenario-docs card-header success"
-                                                                 style="min-height:1.5em;">
-                                                                <div>
-                                                                        <span class="scenario-heading">
-                                                                            <a href="8fe73f96c0d62aa5f9f728f0701174d2d871f9cd4aef32779819bcb26e2f7883.html"
-                                                                               title="View test results">Scenario Outline: Possible hints for a word</a>
-                                                                        </span>
-
-                                                                        <span class="example-tags inline-tag">
-                                                                        </span>
-
-                                                                    <span class="scenario-result-icon">
-                                                                    
-
-                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                        </span>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="scenario-docs card-body">
-                                                                    <p>Given the target word is &quot;{Word}&quot;</p>
-                                                                    <p>When the player requests a hint</p>
-                                                                    <p>Then the proposed hints should include &quot;{Hint Text}&quot;</p>
-                                                                <div class="examples">
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -588,7 +621,7 @@ So that I can keep the game progressing and learn new words
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>239ms</td>
+                    <td>303ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -598,7 +631,7 @@ So that I can keep the game progressing and learn new words
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>4ms</td>
+                    <td>13ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -609,30 +642,30 @@ So that I can keep the game progressing and learn new words
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>160ms</td>
+                    <td>185ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>Mar 12, 2024 07:14:18</td>
+                    <td>Jan 08, 2026 10:13:28</td>
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
                     </td>
-                    <td>34ms</td>
+                    <td>67ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>Mar 12, 2024 07:14:18</td>
+                    <td>Jan 08, 2026 10:13:28</td>
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>216ms</td>
+                    <td>488ms</td>
                 </tr>
                 </tbody>
             </table>
@@ -659,14 +692,32 @@ So that I can keep the game progressing and learn new words
                                                                             <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
                                                                     </td>
                                                                     <td>
+                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="8fe73f96c0d62aa5f9f728f0701174d2d871f9cd4aef32779819bcb26e2f7883.html">Possible hints for a word</a>
+                                                                            <br/>
+                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 5 passing test cases
+                                                                                <br/>
+                                                                    </td>
+                                                                    <td><span style="display:none"></span>
+                                                                    </td>
+                                                                    <td>3</td>
+                                                                    <td>10:13:28</td>
+                                                                    <td>300ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
+                                                                    </td>
+                                                                    <td>
                                                                             <a href="033c9b97cb392e9627e3504c4e34efdd8ea544779d92e8fa9c41163c64d9d83a.html">If the player asks for another hint, all the hints should be shown</a>
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>160ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>167ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -679,27 +730,9 @@ So that I can keep the game progressing and learn new words
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>029ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="b8905df1717226760a578fa7f193730b415382b8f026b9c8443f8cedbf266e12.html">Hints</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="8fe73f96c0d62aa5f9f728f0701174d2d871f9cd4aef32779819bcb26e2f7883.html">Possible hints for a word</a>
-                                                                            <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 5 passing test cases
-                                                                                <br/>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>3</td>
-                                                                    <td>07:14:18</td>
-                                                                    <td>027ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:28</td>
+                                                                    <td>021ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                         </tbody>
@@ -728,7 +761,7 @@ So that I can keep the game progressing and learn new words
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="version">Serenity BDD version 4.1.3</span>
+                    <span class="version">Serenity BDD version 5.0.4</span>
                 </div>
             </div>
         </div>

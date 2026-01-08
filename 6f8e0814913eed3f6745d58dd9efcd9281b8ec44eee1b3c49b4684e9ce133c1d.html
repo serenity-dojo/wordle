@@ -24,14 +24,14 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
 <!-- JQuery -->
-<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><!-- Required Stylesheets -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
 <link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 
 <!-- Required Javascript -->
 <script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -69,11 +69,11 @@
     Chart.register(ChartDataLabels);
 </script>
 <!-- JQuery-UI -->
-<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
-<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="jquery-ui-1.14.1/jquery-ui.css" rel="Stylesheet" />
+<script type="text/javascript" src="jquery-ui-1.14.1/jquery-ui.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -107,14 +107,47 @@
 
         $(document).ready(function () {
 
+            $.fn.dataTable.ext.type.order['test-result-pre'] = function(data) {
+                // Extract the text from the hidden span (SUCCESS, FAILURE, etc.)
+                var match = data.match(/<span[^>]*style="display:none"[^>]*>(.*?)<\/span>/);
+                var result = match ? match[1].trim() : '';
+
+                // Define sort priority (failures first when ascending)
+                var order = {
+                    'FAILURE': 1,
+                    'ERROR': 2,
+                    'BROKEN': 3,
+                    'COMPROMISED': 4,
+                    'PENDING': 5,
+                    'IGNORED': 6,
+                    'SKIPPED': 7,
+                    'ABORTED': 8,
+                    'SUCCESS': 9
+                };
+
+                return order[result] || 99;
+            };
+
+            // Then modify your DataTable initialization
             $("#scenario-results").DataTable({
-                "order": [[0, "asc",], [3, "asc",]],
+                "order": [[0, "asc"], [1, "asc"], [2, "asc"]], // Keep your default sort order
                 "language": {
                     searchPlaceholder: "Filter",
                     search: ""
                 },
                 columnDefs: [
-                    {type: 'time-elapsed-dhms', targets: 4}
+                    {
+                        targets: 4, // Started column
+                        visible: false
+                    },
+                    {
+                        type: 'time-elapsed-dhms',
+                        targets: 5 // Total Duration column (adjusted from 6 to 5)
+                    },
+                    {
+                        type: 'test-result',
+                        targets: 6 // Result column (changed from 7 to 6)
+                    }
                 ]
             })
             $("#manual-scenario-results").DataTable({
@@ -154,7 +187,7 @@
             $("#requirements-tabs").tabs();
             $("#test-tabs").tabs();
 
-            var requirementsTree = [{"text":"Getting hints","type":"feature","href":"6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e4 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e4 test cases\u003c/span\u003e"]}];
+            var requirementsTree = [{"text":"Getting hints","type":"feature","href":"6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027bi bi-check-circle-fill success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e2 scenarios\u003c/span\u003e, \u003cspan class\u003d\u0027feature-count\u0027\u003e4 test cases\u003c/span\u003e"]}];
 
             $('#tree').treeview({
                 data: requirementsTree,
@@ -229,7 +262,7 @@
             <a href="#"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 12-03-2024 07:14</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 08-01-2026 10:13</span>
     <br style="clear:left"/>
 </div>
 
@@ -329,11 +362,11 @@
                                                                     <tr>
                                                                         <td style="width:95%;" class="toc-title">
                                                                             <span class="orphan-scenario-toc-entry">
-                                                                                    <a href="#657eeb676300af5e8fba1ba297bd4d9903bf06454591b8972b7d4306c505fdef"
+                                                                                    <a href="#afed9ead02218662f1d7716a63abd363be3ee02d67543b87233ac056983b9e47"
                                                                                        title="View scenario details">
-                                                                                        <i class="bi bi-chat-dots"></i> Scenario Outline: Hints should include "The word starts with the letter B"
+                                                                                        <i class="bi bi-chat-dots"></i> Scenario Outline: requestingAnotherHint(String)
                                                                                     </a>
-                                                                                        (1 example)
+                                                                                        (3 examples)
                                                                                 </span>
                                                                         </td>
                                                                         <td>
@@ -344,82 +377,14 @@
                                                                                 <tr>
                                                                                     <td class="icons-bar">
                                                                                         <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                           href="dfae12ca904eb5badb12b7817197652184294801f55ffd954fc4951ebbbd6265.html"
+                                                                                           href="581d00794b86c49e334f60dda12bf9e2e70fbc76cdc985f231b565f71af2585d.html"
                                                                                            title="View test results">
                                                                                             <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                                             </a>
 
 
                                                                                             <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                               href="dfae12ca904eb5badb12b7817197652184294801f55ffd954fc4951ebbbd6265.html"
-                                                                                               title="View test results">
-                                                                                                <i class="bi bi-eyeglasses"></i>
-                                                                                            </a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="width:95%;" class="toc-title">
-                                                                            <span class="orphan-scenario-toc-entry">
-                                                                                    <a href="#ee502133496afe9f8ead3b298746dd0168182af16b624b310dd7c8030bb9e401"
-                                                                                       title="View scenario details">
-                                                                                        <i class="bi bi-chat-dots"></i> Scenario Outline: Hints should include "The word ends with the letter D"
-                                                                                    </a>
-                                                                                        (1 example)
-                                                                                </span>
-                                                                        </td>
-                                                                        <td>
-
-                                                                        </td>
-                                                                        <td style="width:5%;">
-                                                                            <table>
-                                                                                <tr>
-                                                                                    <td class="icons-bar">
-                                                                                        <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                           href="0d2334d14900f9b595d53a8e0946db2a9dcdea12ddf2559666090e46f5eff00e.html"
-                                                                                           title="View test results">
-                                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                                            </a>
-
-
-                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                               href="0d2334d14900f9b595d53a8e0946db2a9dcdea12ddf2559666090e46f5eff00e.html"
-                                                                                               title="View test results">
-                                                                                                <i class="bi bi-eyeglasses"></i>
-                                                                                            </a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="width:95%;" class="toc-title">
-                                                                            <span class="orphan-scenario-toc-entry">
-                                                                                    <a href="#ff7a51ebf247478c087bfe9a454c12672f6a703a04b05630f0d4559a6bdf6cf3"
-                                                                                       title="View scenario details">
-                                                                                        <i class="bi bi-chat-dots"></i> Scenario Outline: Hints should include "The word contains 1 vowel"
-                                                                                    </a>
-                                                                                        (1 example)
-                                                                                </span>
-                                                                        </td>
-                                                                        <td>
-
-                                                                        </td>
-                                                                        <td style="width:5%;">
-                                                                            <table>
-                                                                                <tr>
-                                                                                    <td class="icons-bar">
-                                                                                        <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                           href="43eb05c0247d5dfcea6c056846ee98d6e1fa2891cf8f638347b9fe92f67d87f1.html"
-                                                                                           title="View test results">
-                                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                                            </a>
-
-
-                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
-                                                                                               href="43eb05c0247d5dfcea6c056846ee98d6e1fa2891cf8f638347b9fe92f67d87f1.html"
+                                                                                               href="581d00794b86c49e334f60dda12bf9e2e70fbc76cdc985f231b565f71af2585d.html"
                                                                                                title="View test results">
                                                                                                 <i class="bi bi-eyeglasses"></i>
                                                                                             </a>
@@ -437,7 +402,7 @@
                                             <div class="col-sm-12">
                                                 <h3>Scenarios</h3>
 
-                                                    <a name="6262005a-d05b-4296-bab5-aa2f0965bb62"></a>
+                                                    <a name="4ccb36d9-a0a5-4c46-888c-0ec0440aa015"></a>
                                                     <p class="rule-tags inline-tag">
                                                     </p>
 
@@ -463,8 +428,8 @@
 
                                                             </div>
                                                             <div class="scenario-docs card-body">
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/register</p>
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/login</p>
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/register</p>
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/login</p>
                                                                     <p>Create a new game</p>
                                                                     <p>Create a new game with the word BLAND</p>
                                                                     <p>Request a hint</p>
@@ -473,13 +438,13 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="scenario-docs card" id="657eeb676300af5e8fba1ba297bd4d9903bf06454591b8972b7d4306c505fdef">
+                                                        <div class="scenario-docs card" id="afed9ead02218662f1d7716a63abd363be3ee02d67543b87233ac056983b9e47">
                                                             <div class="scenario-docs card-header success"
                                                                  style="min-height:1.5em;">
                                                                 <div>
                                                                         <span class="scenario-heading">
-                                                                            <a href="dfae12ca904eb5badb12b7817197652184294801f55ffd954fc4951ebbbd6265.html"
-                                                                               title="View test results">Scenario Outline: Hints should include "The word starts with the letter B"</a>
+                                                                            <a href="581d00794b86c49e334f60dda12bf9e2e70fbc76cdc985f231b565f71af2585d.html"
+                                                                               title="View test results">Scenario Outline: requestingAnotherHint(String)</a>
                                                                         </span>
 
                                                                         <span class="example-tags inline-tag">
@@ -494,72 +459,8 @@
 
                                                             </div>
                                                             <div class="scenario-docs card-body">
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/register</p>
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/login</p>
-                                                                    <p>Create a new game</p>
-                                                                    <p>Create a new game with the word BLAND</p>
-                                                                    <p>Request a hint</p>
-                                                                    <p>Request a hint</p>
-                                                                <div class="examples">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="scenario-docs card" id="ee502133496afe9f8ead3b298746dd0168182af16b624b310dd7c8030bb9e401">
-                                                            <div class="scenario-docs card-header success"
-                                                                 style="min-height:1.5em;">
-                                                                <div>
-                                                                        <span class="scenario-heading">
-                                                                            <a href="0d2334d14900f9b595d53a8e0946db2a9dcdea12ddf2559666090e46f5eff00e.html"
-                                                                               title="View test results">Scenario Outline: Hints should include "The word ends with the letter D"</a>
-                                                                        </span>
-
-                                                                        <span class="example-tags inline-tag">
-                                                                        </span>
-
-                                                                    <span class="scenario-result-icon">
-                                                                    
-
-                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                        </span>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="scenario-docs card-body">
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/register</p>
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/login</p>
-                                                                    <p>Create a new game</p>
-                                                                    <p>Create a new game with the word BLAND</p>
-                                                                    <p>Request a hint</p>
-                                                                    <p>Request a hint</p>
-                                                                <div class="examples">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="scenario-docs card" id="ff7a51ebf247478c087bfe9a454c12672f6a703a04b05630f0d4559a6bdf6cf3">
-                                                            <div class="scenario-docs card-header success"
-                                                                 style="min-height:1.5em;">
-                                                                <div>
-                                                                        <span class="scenario-heading">
-                                                                            <a href="43eb05c0247d5dfcea6c056846ee98d6e1fa2891cf8f638347b9fe92f67d87f1.html"
-                                                                               title="View test results">Scenario Outline: Hints should include "The word contains 1 vowel"</a>
-                                                                        </span>
-
-                                                                        <span class="example-tags inline-tag">
-                                                                        </span>
-
-                                                                    <span class="scenario-result-icon">
-                                                                    
-
-                                                                            <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
-                                                                        </span>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="scenario-docs card-body">
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/register</p>
-                                                                    <p>POST http://localhost:38083/wordle/api/auth/login</p>
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/register</p>
+                                                                    <p>POST http://localhost:37655/wordle/api/auth/login</p>
                                                                     <p>Create a new game</p>
                                                                     <p>Create a new game with the word BLAND</p>
                                                                     <p>Request a hint</p>
@@ -613,12 +514,12 @@
                     <td>
                         <i class="bi bi-card-checklist"></i> Number of Scenarios
                     </td>
-                    <td>4</td>
+                    <td>2</td>
                     <td>
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>4s</td>
+                    <td>2s</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -628,7 +529,7 @@
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>147ms</td>
+                    <td>326ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -639,30 +540,30 @@
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>339ms</td>
+                    <td>885ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>Mar 12, 2024 07:14:28</td>
+                    <td>Jan 08, 2026 10:13:43</td>
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
                     </td>
-                    <td>242ms</td>
+                    <td>468ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>Mar 12, 2024 07:14:33</td>
+                    <td>Jan 08, 2026 10:13:46</td>
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>968ms</td>
+                    <td>1s</td>
                 </tr>
                 </tbody>
             </table>
@@ -694,9 +595,9 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>5</td>
-                                                                    <td>07:14:28</td>
-                                                                    <td>298ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:43</td>
+                                                                    <td>885ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="scenario-result SUCCESS">
@@ -704,53 +605,17 @@
                                                                             <a href="6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html">Getting hints</a>
                                                                     </td>
                                                                     <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="dfae12ca904eb5badb12b7817197652184294801f55ffd954fc4951ebbbd6265.html">Hints should include "The word starts with the letter B"</a>
+                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="581d00794b86c49e334f60dda12bf9e2e70fbc76cdc985f231b565f71af2585d.html">requestingAnotherHint(String)</a>
                                                                             <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
+                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 3 passing test cases
                                                                                 <br/>
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>147ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html">Getting hints</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="0d2334d14900f9b595d53a8e0946db2a9dcdea12ddf2559666090e46f5eff00e.html">Hints should include "The word ends with the letter D"</a>
-                                                                            <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
-                                                                                <br/>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>339ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="scenario-result SUCCESS">
-                                                                    <td>
-                                                                            <a href="6f8e0814913eed3f6745d58dd9efcd9281b8ec44eee1b3c49b4684e9ce133c1d.html">Getting hints</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <i class="bi bi-table" title="Data Driven Scenario"> <a href="43eb05c0247d5dfcea6c056846ee98d6e1fa2891cf8f638347b9fe92f67d87f1.html">Hints should include "The word contains 1 vowel"</a>
-                                                                            <br/>
-                                                                                <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> 1 passing test case
-                                                                                <br/>
-                                                                    </td>
-                                                                    <td><span style="display:none"></span>
-                                                                    </td>
-                                                                    <td>6</td>
-                                                                    <td>07:14:32</td>
-                                                                    <td>184ms</td>
-                                                                    <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                                    <td>10:13:45</td>
+                                                                    <td>332ms</td>
+                                                                    <td class="test-result-cell"><span style="display:none">SUCCESS</span> <a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
                                                                     </td>
                                                                 </tr>
                                                         </tbody>
@@ -776,12 +641,12 @@
                             <div>
                                     <a href="3ce0557593d8474e32371d0b17beb9dda2592f8536d3313c16285189516e3537.html">
                                     <span class="tag-badge badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                        <i class="bi bi-tag-fill"></i> Integration&nbsp;&nbsp;&nbsp;1
+                                        <i class="bi bi-tag-fill"></i> Integration&nbsp;&nbsp;&nbsp;4
                                     </span>
                                     </a>
                                     <a href="a2ced98df15f52d01b7b3d97588859b74704bc0f5096a5f7acc6ea086ff49afa.html">
                                     <span class="tag-badge badge" style="background-color:#b0cf73; margin:1em;padding:4px;">
-                                        <i class="bi bi-tag-fill"></i> Hints&nbsp;&nbsp;&nbsp;1
+                                        <i class="bi bi-tag-fill"></i> Hints&nbsp;&nbsp;&nbsp;4
                                     </span>
                                     </a>
                             </div>
@@ -800,7 +665,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="version">Serenity BDD version 4.1.3</span>
+                    <span class="version">Serenity BDD version 5.0.4</span>
                 </div>
             </div>
         </div>
