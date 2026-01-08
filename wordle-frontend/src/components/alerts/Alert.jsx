@@ -17,21 +17,22 @@ export const Alert = ({
   )
 
   return (
-    <Transition
-      show={isOpen}
-      as={Fragment}
-      enter="ease-out duration-300 transition"
-      enterFrom="opacity-0"
-      enterTo="opacity-100"
-      leave="transition ease-in duration-100"
-      leaveFrom="opacity-100"
-      leaveTo="opacity-0"
-    >
-      <div className={classes}>
-        <div className="p-2">
-          <p className="text-center text-sm font-medium">{message}</p>
+      <Transition
+          show={isOpen}
+          as={Fragment}
+          enter="ease-out duration-300 transition"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+      >
+
+        <div className={classes}>
+          <div className="p-2">
+            <p className="text-center text-sm font-medium">{message}</p>
+          </div>
         </div>
-      </div>
-    </Transition>
+      </Transition>
   )
 }
